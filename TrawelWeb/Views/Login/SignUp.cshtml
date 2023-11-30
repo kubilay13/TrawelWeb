@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="limiter">
+    <div class="row container-login100">
+        <div class=" justify-content-center wrap-login100">
+
+            <form class="login200-form validate-form">
+                <span class="login100-form-title">
+                    Üye Ol
+                </span>
+                <div class="form-row">
+                    <div class="col-md-6 wrap-input100 validate-input" data-validate="Geçerli e-posta gereklidir: user@abc.com">
+                        <input class="input100" type="text" name="email" placeholder="Email">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="col-md-6 wrap-input100 validate-input" data-validate="Şifre gereklidir">
+                        <input class="input100" type="password" name="pass" placeholder="Şifre">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 wrap-input100 validate-input" data-validate="İsim gereklidir">
+                        <input class="input100" type="text" name="pass" placeholder="İsim">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="col-md-6 wrap-input100 validate-input" data-validate="Soyisim gereklidir">
+                        <input class="input100" type="text" name="pass" placeholder="Soyisim">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 wrap-input100 validate-input" data-validate="Adres gereklidir">
+                        <input class="input100" type="text" name="pass" placeholder="Açık Adres">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                </div>
+
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Üye Ol
+                    </button>
+                </div>
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" href="/Login/Index">
+                        Hesabın var mı?
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                    <br />
+                    <a class="txt2" href="/Home/Index">
+                        AnaSayfa
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
