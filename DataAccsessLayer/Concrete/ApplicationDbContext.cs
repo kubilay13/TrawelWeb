@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Entity
+namespace DataAccsessLayer.Concrete
 {
-    public class ApplicationDbContext : IdentityDbContext<AppUser,AppRole,int>
+    public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -18,7 +20,7 @@ namespace Entity
 
         // Tablo Modelleri
 
-        public DbSet<Cars> Cars{ get; set; }
+        public DbSet<Cars> Cars { get; set; }
 
 
     }
