@@ -21,6 +21,7 @@
                     </div>
                     <div class="col-md-6 wrap-input100 validate-input">
                         <input class="input100" id="UserName" type="text" name="username" placeholder="Kullanıcı Adı">
+                        <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
@@ -29,6 +30,7 @@
                 <div class="form-row">              
                     <div class="col-md-6 wrap-input100 validate-input">
                         <input class="input100" id="Password" type="password" name="pass" placeholder="Şifre">
+                        <i class="fa fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword('Password')"></i>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -36,10 +38,12 @@
                     </div>
                     <div class="col-md-6 wrap-input100 validate-input">
                         <input class="input100" id="ConfirmPassword" type="password" name="confirmpass" placeholder="Şifreyi tekrar giriniz">
+                        <i class="fa fa-eye" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword('ConfirmPassword')"></i>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
+                      
                     </div>
                 </div>
                 <div class="form-row">
@@ -97,6 +101,17 @@
         </div>
     </div>
 </div>
+<script>
+    function togglePassword(inputId) {
+        var x = document.getElementById(inputId);
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+</script>
+
 <script src="~/js/loginscript.js"></script>
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/jquery-3.3.1.min.js"></script>

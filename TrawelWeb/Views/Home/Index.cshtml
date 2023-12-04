@@ -332,3 +332,33 @@
     <!-- //grids -->
 </section>
 <!-- //testimonials -->
+<script>
+    $('.counter').countUp();
+</script>
+<!-- script for tesimonials carousel slider -->
+<script>
+    $(document).ready(function () {
+        $("#owl-demo1").owlCarousel({
+            loop: true,
+            margin: 20,
+            nav: false,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                1000: {
+                    items: 1,
+                    nav: false,
+                    loop: true
+                }
+            }
+        })
+    })
+</script>
+<!-- //script for tesimonials carousel slider -->

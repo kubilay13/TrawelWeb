@@ -58,17 +58,17 @@
             contentType: false,
             success: function (data) {
                 debugger
-                    swal.fire({
-                        title: "Başarılı!",
-                        text: data,
-                        type: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Tamam!",
-                        confirmButtonClass: "btn btn-brand"
-                    }).then(function (result) {
-                        if (result.value) {                      
-                        }
-                    });
+                swal.fire({
+                    title: "Başarılı!",
+                    text: data,
+                    type: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                    }
+                });
             },
             error: function (request, status, error) {
                 swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");

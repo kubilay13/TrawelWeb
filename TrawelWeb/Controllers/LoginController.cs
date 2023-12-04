@@ -47,7 +47,7 @@ namespace TrawelWeb.Controllers
                 if (result.Succeeded)
                 {
                     MimeMessage mimeMessage = new MimeMessage();
-                    MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "mailigönderecekmail");
+                    MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "mailigönderenin maili gelecek");
                     MailboxAddress mailboxAddressTo = new MailboxAddress("User", appUser.Email);
 
                     mimeMessage.From.Add(mailboxAddressFrom);
@@ -62,7 +62,7 @@ namespace TrawelWeb.Controllers
                     SmtpClient smtpClient = new SmtpClient();
 
                     smtpClient.Connect("smtp.gmail.com", 587, false);
-                    smtpClient.Authenticate("mailgelecek", "şifregelecek");
+                    smtpClient.Authenticate("mailigönderenin maili gelecek", "mailigönderenin mail şifresi gelecek");
                     smtpClient.Send(mimeMessage);
 
                     return RedirectToAction("Index", "ConfirmMail");

@@ -21,6 +21,7 @@ namespace DataAccsessLayer.Concrete
         // Tablo Modelleri
 
         public DbSet<Cars> Cars { get; set; }
+        public DbSet<ContactUser> ContactUsers { get; set; }
 
 
     }
