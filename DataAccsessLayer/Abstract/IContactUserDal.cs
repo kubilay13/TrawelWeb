@@ -2,7 +2,7 @@
 
 namespace DataAccsessLayer.Abstract
 {
-    public interface IContactUserDal: IGenericDal<ContactUser>
+    public interface IContactUserDal : IGenericDal<ContactUser>
     {
     }
 }

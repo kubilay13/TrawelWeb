@@ -7,30 +7,35 @@ namespace BusinessLayer.Concrete
     public class ContactUserManager : IContactUserService
     {
         private readonly IContactUserDal _contactUserDal;
-       
+
+        public ContactUserManager(IContactUserDal contactUserDal)
+        {
+            _contactUserDal = contactUserDal;
+        }
+
         public void TDelete(ContactUser t)
         {
-            throw new NotImplementedException();
+            _contactUserDal.Delete(t);
         }
 
         public List<ContactUser> TGetAll()
         {
-            throw new NotImplementedException();
+            return _contactUserDal.GetAll();
         }
 
         public ContactUser TGetByID(int id)
         {
-            throw new NotImplementedException();
+            return _contactUserDal.GetByID(id);
         }
 
         public void TInsert(ContactUser t)
         {
-            throw new NotImplementedException();
+            _contactUserDal.Insert(t);
         }
 
         public void TUpdate(ContactUser t)
         {
-            throw new NotImplementedException();
+            _contactUserDal.Update(t);
         }
     }
 }
