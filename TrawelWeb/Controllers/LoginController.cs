@@ -35,7 +35,7 @@ namespace TrawelWeb.Controllers
                     UserName = appUserSignUpDto.UserName,
                     Email = appUserSignUpDto.Email,                  
                     Adress = appUserSignUpDto.Adress,
-                    //PhoneNumber = appUserSignUpDto.Phone,
+                    PhoneNumber = appUserSignUpDto.PhoneNumber,
                 };
                 var result = await _userManager.CreateAsync(appUser, appUserSignUpDto.Password);
                 if(result.Succeeded)

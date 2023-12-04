@@ -19,25 +19,39 @@
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </div>
-
-                    <div class="col-md-6 wrap-input100 validate-input" data-validate="Şifre gereklidir">
+                    <div class="col-md-6 wrap-input100 validate-input">
+                        <input class="input100" id="UserName" type="text" name="username" placeholder="Kullanıcı Adı">
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                </div> 
+                <div class="form-row">              
+                    <div class="col-md-6 wrap-input100 validate-input">
                         <input class="input100" id="Password" type="password" name="pass" placeholder="Şifre">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                     </div>
+                    <div class="col-md-6 wrap-input100 validate-input">
+                        <input class="input100" id="ConfirmPassword" type="password" name="confirmpass" placeholder="Şifreyi tekrar giriniz">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-row">
-                    <div class="col-md-6 wrap-input100 validate-input" data-validate="İsim gereklidir">
-                        <input class="input100" id="FirstName" type="text" name="pass" placeholder="İsim">
+                    <div class="col-md-6 wrap-input100 validate-input">
+                        <input class="input100" id="FirstName" type="text" name="firstname" placeholder="İsim">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <div class="col-md-6 wrap-input100 validate-input" data-validate="Soyisim gereklidir">
-                        <input class="input100" id="LastName" type="text" name="pass" placeholder="Soyisim">
+                    <div class="col-md-6 wrap-input100 validate-input">
+                        <input class="input100" id="LastName" type="text" name="lastname" placeholder="Soyisim">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
@@ -45,20 +59,21 @@
                     </div>
                 </div>            
                 <div class="form-row">
-                    <div class="col-md-7 wrap-input100 validate-input" data-validate="Adres gereklidir">
-                        <input class="input100" id="Adress" type="text" name="pass" placeholder="Açık Adres">
+                    <div class="col-md-7 wrap-input100 validate-input">
+                        <input class="input100" id="Adress" type="text" name="adress" placeholder="Açık Adres">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                         </span>
                     </div>   
-                    <div class="col-md-5 wrap-input100 validate-input" data-validate="Kullanıcı adı gereklidir">
-                        <input class="input100" id="UserName" type="text" name="pass" placeholder="Kullanıcı Adı">
+                    <div class="col-md-5 wrap-input100 validate-input">
+                        <input class="input100" id="PhoneNumber" type="text" name="phone" placeholder="Telefon">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
-                    </div>
+                    </div>   
+               
 
                 </div>
                 <div class="container-login100-form-btn">
@@ -86,3 +101,4 @@
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/jquery-3.3.1.min.js"></script>
 <script src="~/js/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
