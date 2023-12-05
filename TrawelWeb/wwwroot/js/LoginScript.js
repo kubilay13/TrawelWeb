@@ -41,7 +41,7 @@
     else if (PhoneNumber == "") {
         swal.fire("Hata!", "Telefon Numarası Giriniz!", "error");
     }
-    else if (/^\d+$/.test(inputValue)) {
+    else if (/^\d+$/.test(PhoneValue)) {
         swal.fire("Hata!", "Geçerli Telefon Numarası Giriniz!", "error");
     }
     else {
