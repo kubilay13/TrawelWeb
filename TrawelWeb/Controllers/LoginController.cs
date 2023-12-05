@@ -46,6 +46,7 @@ namespace TrawelWeb.Controllers
                 var result = await _userManager.CreateAsync(appUser, appUserSignUpDto.Password);
                 if (result.Succeeded)
                 {
+                    
                     MimeMessage mimeMessage = new MimeMessage();
                     MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "proje123x@gmail.com");
                     MailboxAddress mailboxAddressTo = new MailboxAddress("User", appUser.Email);
@@ -65,6 +66,8 @@ namespace TrawelWeb.Controllers
                     smtpClient.Authenticate("proje123x@gmail.com", "ovhjcdvgywmjmjqr");
                     smtpClient.Send(mimeMessage);
                     smtpClient.Disconnect(true);
+
+                    TempData["Mail"] = appUserSignUpDto.Email;
 
                     return RedirectToAction("Index", "ConfirmMail");
                 }
