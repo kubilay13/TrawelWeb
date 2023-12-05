@@ -2,7 +2,7 @@
 {
     public class ConfirmMailViewModel
     {
-        public string Email { get; set; }
+        public int Id { get; set; }
         public int ConfirmCode { get; set; }
 
     }

@@ -8,6 +8,7 @@
     var ConfirmPassword = $('#ConfirmPassword ').val().trim();
     var Adress = $('#Adress').val().trim();
     var PhoneNumber = $('#PhoneNumber').val().trim();
+    var PhoneValue = PhoneNumber.value;
     var UserName = $('#UserName').val();
     var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
     var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
@@ -38,7 +39,10 @@
         swal.fire("Hata!", "Adres Giriniz!", "error");
     }
     else if (PhoneNumber == "") {
-        swal.fire("Hata!", "Telefon Giriniz!", "error");
+        swal.fire("Hata!", "Telefon Numarası Giriniz!", "error");
+    }
+    else if (/^\d+$/.test(inputValue)) {
+        swal.fire("Hata!", "Geçerli Telefon Numarası Giriniz!", "error");
     }
     else {
         debugger
@@ -67,6 +71,7 @@
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
                     if (result.value) {
+                        window.location.href = "/ConfirMail/Index";
                     }
                 });
             },
