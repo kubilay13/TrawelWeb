@@ -69,11 +69,9 @@
                     buttonsStyling: false,
                     confirmButtonText: "Tamam!",
                     confirmButtonClass: "btn btn-brand"
-                }).then(function (result) {
-                    if (result.value) {
-                        window.location.href = "/ConfirMail/Index";
-                    }
-                });
+                })
+                setTimeout(() => { window.location.href = "/ConfirmMail/Index"; },3000)
+               
             },
             error: function (request, status, error) {
                 swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
