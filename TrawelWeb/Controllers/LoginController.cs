@@ -9,6 +9,7 @@ namespace TrawelWeb.Controllers
 {
     public class LoginController : Controller
     {
+       
         private readonly UserManager<AppUser> _userManager;
 
         public LoginController(UserManager<AppUser> userManager)
@@ -28,6 +29,7 @@ namespace TrawelWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(AppUserSignUpDto appUserSignUpDto)
         {
+
             if (ModelState.IsValid)
             {
                 Random random = new Random();
@@ -69,7 +71,7 @@ namespace TrawelWeb.Controllers
 
                     TempData["Mail"] = appUserSignUpDto.Email;
 
-                    return RedirectToAction("Index", "ConfirmMail");
+                    return Ok(true);
                 }
                 else
                 {

@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Dtos\AppRoleDtos\" />
-    <Folder Include="Dtos\CarsDtos\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +21,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccsessLayer\DataAccsessLayer.csproj" />
   </ItemGroup>
 
 </Project>
