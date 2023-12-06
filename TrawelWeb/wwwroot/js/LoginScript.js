@@ -62,15 +62,7 @@
             contentType: false,
             success: function (data) {
                 debugger
-                swal.fire({
-                    title: "Başarılı!",
-                    text: data,
-                    type: "success",
-                    buttonsStyling: false,
-                    confirmButtonText: "Tamam!",
-                    confirmButtonClass: "btn btn-brand"
-                })
-                setTimeout(() => { window.location.href = "/ConfirmMail/Index"; },3000)
+                window.location.href = "/ConfirmMail/Index";
                
             },
             error: function (request, status, error) {

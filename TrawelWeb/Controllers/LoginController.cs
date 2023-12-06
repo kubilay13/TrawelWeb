@@ -9,7 +9,7 @@ namespace TrawelWeb.Controllers
 {
     public class LoginController : Controller
     {
-       
+
         private readonly UserManager<AppUser> _userManager;
 
         public LoginController(UserManager<AppUser> userManager)
@@ -48,7 +48,7 @@ namespace TrawelWeb.Controllers
                 var result = await _userManager.CreateAsync(appUser, appUserSignUpDto.Password);
                 if (result.Succeeded)
                 {
-                    
+
                     MimeMessage mimeMessage = new MimeMessage();
                     MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "proje123x@gmail.com");
                     MailboxAddress mailboxAddressTo = new MailboxAddress("User", appUser.Email);
@@ -57,7 +57,7 @@ namespace TrawelWeb.Controllers
                     mimeMessage.To.Add(mailboxAddressTo);
 
                     var bodyBuilder = new BodyBuilder();
-                    bodyBuilder.TextBody = "Kayıt işlemini gerçekleştirmek için onay kodunuz: " + code;
+                    bodyBuilder.TextBody = "Sayın " + appUserSignUpDto.FirstName + " " + appUserSignUpDto.LastName + " Kayıt işlemini gerçekleştirmek için onay kodunuz: " + code;
                     mimeMessage.Body = bodyBuilder.ToMessageBody();
 
                     mimeMessage.Subject = "TravelWeb Onay Kodu";
@@ -71,7 +71,8 @@ namespace TrawelWeb.Controllers
 
                     TempData["Mail"] = appUserSignUpDto.Email;
 
-                    return Ok(true);
+                    //return Ok(true);
+                    return RedirectToAction("Index","ConfirmMail");
                 }
                 else
                 {

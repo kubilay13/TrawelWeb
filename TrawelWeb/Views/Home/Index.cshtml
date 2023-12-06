@@ -1,4 +1,4 @@
-﻿@model List<CarsDto>
+﻿@model List<Cars>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -72,10 +72,10 @@
                                     </div>
                                     <div class="col-sm-7 subject-content mt-sm-0 mt-4">
                                         <h4>@item.Brand</h4>
-                                        <p>3Days, 4 Nights</p>
+                                        <p>@item.CaseType, @item.Color, @item.GearType</p>
                                         <div class="dst-btm">
-                                            <h6 class=""> Start From </h6>
-                                            <span>$1650</span>
+                                            <h6 class=""> @item.EnginePower  </h6>
+                                            <span>@item.Year</span>
                                         </div>
                                         <p class="sub-para">Per person on twin sharing</p>
                                     </div>

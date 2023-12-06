@@ -5,6 +5,7 @@ using Entity;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using System.Drawing.Text;
 
@@ -21,7 +22,8 @@ namespace TrawelWeb.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Cars> carsList = _context.Cars.ToList();
+            return View(carsList);
         }
         public IActionResult Contact()
         {
