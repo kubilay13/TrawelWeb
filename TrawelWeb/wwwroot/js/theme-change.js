@@ -11,12 +11,31 @@ if (currentTheme) {
 
 function switchTheme(e) {
     if (e.target.checked) {
+        var logoElement = document.getElementById("logo");
         document.documentElement.setAttribute('data-theme', 'dark');
         localStorage.setItem('theme', 'dark');
+        logoElement.src = "/images/logo1.png";
     }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
+    else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        var logoElement = document.getElementById("logo");
+        localStorage.setItem('theme', 'light');
+        logoElement.src = "/images/logo2.png";
+       
     }    
 }
-
 toggleSwitch.addEventListener('change', switchTheme, false);
+
+function ReloadLogo() {
+    debugger
+    if (currentTheme == 'dark') {
+        var logoElement = document.getElementById("logo");
+        logoElement.src = "/images/logo1.png";
+    }
+    else {
+        debugger
+        var logoElement = document.getElementById("logo");
+        logoElement.src = "/images/logo2.png";
+
+    }
+}
