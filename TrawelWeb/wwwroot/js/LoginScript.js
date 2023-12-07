@@ -8,7 +8,6 @@
     var ConfirmPassword = $('#ConfirmPassword ').val().trim();
     var Adress = $('#Adress').val().trim();
     var PhoneNumber = $('#PhoneNumber').val().trim();
-    var PhoneValue = PhoneNumber.value;
     var UserName = $('#UserName').val();
     var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
     var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
@@ -41,11 +40,7 @@
     else if (PhoneNumber == "") {
         swal.fire("Hata!", "Telefon Numarası Giriniz!", "error");
     }
-    else if (/^\d+$/.test(PhoneValue)) {
-        swal.fire("Hata!", "Geçerli Telefon Numarası Giriniz!", "error");
-    }
     else {
-        debugger
         var formData = new FormData();
         formData.append('FirstName', FirstName);
         formData.append('LastName', LastName);
@@ -62,8 +57,19 @@
             contentType: false,
             success: function (data) {
                 debugger
-                window.location.href = "/ConfirmMail/Index";
-               
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Kayıt işleminiz gerçekleşti.Lütfen emailinizi onaylayınız.",
+                    type: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        window.location.href = "/ConfirmMail/Index";     
+
+                    }
+                });
             },
             error: function (request, status, error) {
                 swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");

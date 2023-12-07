@@ -71,8 +71,8 @@ namespace TrawelWeb.Controllers
 
                     TempData["Mail"] = appUserSignUpDto.Email;
 
-                    //return Ok(true);
-                    return RedirectToAction("Index","ConfirmMail");
+                    return Ok(true);
+                    //return RedirectToAction("Index","ConfirmMail");
                 }
                 else
                 {
