@@ -69,7 +69,7 @@ namespace TrawelWeb.Controllers
                     smtpClient.Send(mimeMessage);
                     smtpClient.Disconnect(true);
 
-                    TempData["Mail"] = appUserSignUpDto.Email;
+                    TempData["Mail"] = appUser.Email;
 
                     return Ok(true);
                     //return RedirectToAction("Index","ConfirmMail");

@@ -1,4 +1,6 @@
-﻿function SignUp() {
+﻿const { intl } = require("modernizr");
+
+function SignUp() {
     debugger
     var FirstName = $('#FirstName').val();
     var LastName = $('#LastName').val();
@@ -67,6 +69,47 @@
                 }).then(function (result) {
                     if (result.value) {
                         window.location.href = "/ConfirmMail/Index";     
+
+                    }
+                });
+            },
+            error: function (request, status, error) {
+                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            }
+        });
+    }
+};
+function ConfirmCode() {
+    debugger
+    var ConfirmeCode = parseInt($('#ConfirmeCode').val());
+    var Email = $('#Email').val();
+
+    if (ConfirmeCode == "") {
+        swal.fire("Hata!", "Onay kodunuzu giriniz!", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('ConfirmeCode', ConfirmeCode);
+        formData.append('Email', Email);
+
+        $.ajax({
+            type: "POST",
+            url: '/ConfirmMail/Index',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Onay işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        window.location.href = "/User/Index";     
 
                     }
                 });
