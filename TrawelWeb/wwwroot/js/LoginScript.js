@@ -59,9 +59,9 @@
                 debugger
                 swal.fire({
                     title: "Başarılı!",
-                    text: "Kayıt işleminiz gerçekleşti.Lütfen emailinizi onaylayınız.",
-                    type: "success",
-                    buttonsStyling: false,
+                    text: "Kayıt işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
                     confirmButtonText: "Tamam!",
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
