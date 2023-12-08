@@ -83,6 +83,7 @@ function ConfirmCode() {
     debugger
     var ConfirmeCode = parseInt($('#ConfirmeCode').val());
     var Email = $('#Email').val();
+    var Id = $('#UserId').val();
 
     if (ConfirmeCode == "") {
         swal.fire("Hata!", "Onay kodunuzu giriniz!", "error");
@@ -91,6 +92,7 @@ function ConfirmCode() {
         var formData = new FormData();
         formData.append('ConfirmeCode', ConfirmeCode);
         formData.append('Email', Email);
+        formData.append('Id', Id);
 
         $.ajax({
             type: "POST",

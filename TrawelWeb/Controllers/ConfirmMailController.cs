@@ -18,13 +18,16 @@ namespace TrawelWeb.Controllers
         public IActionResult Index()
         {
             var value = TempData["Mail"];
+            var valuex = TempData["Id"];
             ViewBag.v=value;
+            ViewBag.v2= valuex;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Index(ConfirmMailViewModel confirmMailViewModel)
         {
-            var user = await _userManager.FindByEmailAsync(confirmMailViewModel.Email);
+            var email=confirmMailViewModel.Email;
+            var user = await _userManager.FindByIdAsync(confirmMailViewModel.Id);
             if (user.ConfirmCode == confirmMailViewModel.ConfirmeCode)
             {
                 user.EmailConfirmed = true;
