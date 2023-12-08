@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginViewModel
+@{
 	Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
@@ -14,26 +15,27 @@
 					Üye Girişi
 				</span>
 
-				<div class="wrap-input100 validate-input" data-validate="Geçerli e-posta gereklidir: user@abc.com">
-					<input class="input100" type="text" name="email" placeholder="Email">
+				<div class="wrap-input100 validate-input" data-validate="">
+					<input class="input100" id="UserName" type="text" name="username" placeholder="KullanıcıAdı">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-envelope" aria-hidden="true"></i>
 					</span>
 				</div>
 
-				<div class="wrap-input100 validate-input" data-validate="Şifre gereklidir">
-					<input class="input100" type="password" name="pass" placeholder="Şifre">
+				<div class="wrap-input100 validate-input" data-validate="">
+					<input class="input100" id="Password" type="password" name="Password" placeholder="**********">
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-lock" aria-hidden="true"></i>
 					</span>
 				</div>
-
+				<div class="text-left pl-3">
+					<input type="checkbox" id="brand1">
+					<label class="" style=" font-size: 12px;" for="brand1"><span></span>Beni Hatırla</label>
+				</div>
 				<div class="container-login100-form-btn">
-					<button class="login100-form-btn">
-						Giriş
-					</button>
+					<a class="btn btn-style btn-success" style="color:white;" onclick="SignIn()">Onayla</a>
 				</div>
 
 				<div class="text-center p-t-12">
@@ -60,3 +62,7 @@
 		</div>
 	</div>
 </div>
+<script src="~/js/loginscript.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/jquery.js"></script>

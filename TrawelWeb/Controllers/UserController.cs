@@ -7,6 +7,11 @@ namespace TrawelWeb.Controllers
         public IActionResult Index()
         {
             return View();
+        } 
+        public IActionResult AdminIndex()
+        {
+            return View();
         }
+
     }
 }

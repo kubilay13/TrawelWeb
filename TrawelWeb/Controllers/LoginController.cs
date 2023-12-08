@@ -1,9 +1,11 @@
-﻿using DTOLayer.Dtos.AppUserDtos;
+﻿using DataAccsessLayer.Concrete;
+using DTOLayer.Dtos.AppUserDtos;
 using Entity;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MimeKit;
+using TrawelWeb.Models;
 
 namespace TrawelWeb.Controllers
 {
@@ -11,14 +13,36 @@ namespace TrawelWeb.Controllers
     {
 
         private readonly UserManager<AppUser> _userManager;
-
-        public LoginController(UserManager<AppUser> userManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly ApplicationDbContext _Context;
+        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
+            _Context = context;
         }
-
+        [HttpGet]
         public IActionResult Index()
         {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> SignIn(LoginViewModel loginViewModel)
+        {
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName,loginViewModel.Password,false,true);
+            if (result.Succeeded)
+            {
+                var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
+                if (user.EmailConfirmed == true)
+                {
+                    return Ok("Giriş Başarılı.");
+                }
+                
+            }
+            else
+            {
+                return BadRequest("Şifre ve ya Kullanıcı Adı Yanlış.");
+            }
             return View();
         }
         [HttpGet]

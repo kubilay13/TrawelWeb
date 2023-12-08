@@ -32,7 +32,7 @@ namespace TrawelWeb.Controllers
             {
                 user.EmailConfirmed = true;
                 await _userManager.UpdateAsync(user);
-                return Ok(true);
+                return Ok("Mail Onaylama Başarılı");
             }
             return View();
 

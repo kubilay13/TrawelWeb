@@ -1,5 +1,4 @@
-﻿const { intl } = require("modernizr");
-
+﻿
 function SignUp() {
     debugger
     var FirstName = $('#FirstName').val();
@@ -96,7 +95,50 @@ function ConfirmCode() {
 
         $.ajax({
             type: "POST",
-            url: '/ConfirmMail/Index',
+            url: '/Login/SignIn',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: data,
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        window.location.href = "/User/Index";     
+
+                    }
+                });
+            },
+            error: function (request, status, error) {
+                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            }
+        });
+    }
+};
+function SignIn() {
+    debugger
+    var UserName = $('#UserName').val();
+    var Password = $('#Password').val();
+
+    if (UserName == "") {
+        swal.fire("Hata!", "Kullanıcı adınızı giriniz!", "error");
+    }
+    else if (Password == "") {
+        swal.fire("Hata!", "Şifrenizi giriniz.", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('UserName', UserName);
+        formData.append('Password', Password);
+        $.ajax({
+            type: "POST",
+            url: '/Login/SignIn',
             data: formData,
             processData: false,
             contentType: false,
