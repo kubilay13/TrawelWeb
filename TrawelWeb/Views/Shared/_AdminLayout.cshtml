@@ -1,165 +1,243 @@
 ﻿<!DOCTYPE html>
-<html class="loading" lang="en" data-textdirection="ltr">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Chameleon Admin is a modern Bootstrap 4 webapp &amp; admin dashboard html template with a large number of components, elegant design, clean and organized code.">
-    <meta name="keywords" content="admin template, Chameleon admin template, dashboard template, gradient admin template, responsive admin template, webapp, eCommerce dashboard, analytic dashboard">
-    <meta name="author" content="ThemeSelect">
-    <title>Dashboard - Chameleon Admin - Modern Bootstrap 4 WebApp & Dashboard HTML Template + UI Kit</title>
-    <link rel="apple-touch-icon" href="theme-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="theme-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i%7CComfortaa:300,400,700" rel="stylesheet">
-    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
-    <!-- BEGIN VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/vendors.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/vendors/css/charts/chartist.css">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN CHAMELEON  CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/app-lite.css">
-    <!-- END CHAMELEON  CSS-->
-    <!-- BEGIN Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/core/menu/menu-types/vertical-menu.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="theme-assets/css/pages/dashboard-ecommerce.css">
-    <!-- END Page Level CSS-->
-    <!-- BEGIN Custom CSS-->
-    <!-- END Custom CSS-->
-</head>
-<body class="vertical-layout vertical-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-color="bg-chartbg" data-col="2-columns">
 
-    <!-- fixed-top-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-light">
-        <div class="navbar-wrapper">
-            <div class="navbar-container content">
-                <div class="collapse navbar-collapse show" id="navbar-mobile">
-                    <ul class="nav navbar-nav mr-auto float-left">
-                        <li class="nav-item d-block d-md-none"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
-                        <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
-                        <li class="nav-item dropdown navbar-search">
-                            <a class="nav-link dropdown-toggle hide" data-toggle="dropdown" href="#"><i class="ficon ft-search"></i></a>
-                            <ul class="dropdown-menu">
-                                <li class="arrow_box">
-                                    <form>
-                                        <div class="input-group search-box">
-                                            <div class="position-relative has-icon-right full-width">
-                                                <input class="form-control" id="search" type="text" placeholder="Search here...">
-                                                <div class="form-control-position navbar-search-close"><i class="ft-x">   </i></div>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/sneat-1.0.0/assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+          rel="stylesheet" />
+
+    <!-- Icons. Uncomment required icon fonts -->
+    <link href="~/admin/fonts/boxicons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-<hash-değer>" crossorigin="anonymous" />
+    <!-- Core CSS -->
+    <link href="~/admin/css/demo.css" rel="stylesheet" />
+    <link href="~/admin/css/theme-default.css" rel="stylesheet" />
+    <link href="~/admin/css/core.css" rel="stylesheet" />
+    <!-- Vendors CSS -->
+    <link href="~/admin/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" />
+
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script src="~/admin/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/admin/js/config.js"></script>
+</head>
+<body>
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+                <div class="app-brand demo">
+                    <a href="index.html" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <svg width="25"
+                                 viewBox="0 0 25 42"
+                                 version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <defs>
+                                    <path d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
+                                          id="path-1"></path>
+                                    <path d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
+                                          id="path-3"></path>
+                                    <path d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
+                                          id="path-4"></path>
+                                    <path d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
+                                          id="path-5"></path>
+                                </defs>
+                                <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
+                                        <g id="Icon" transform="translate(27.000000, 15.000000)">
+                                            <g id="Mask" transform="translate(0.000000, 8.000000)">
+                                                <mask id="mask-2" fill="white">
+                                                    <use xlink:href="#path-1"></use>
+                                                </mask>
+                                                <use fill="#696cff" xlink:href="#path-1"></use>
+                                                <g id="Path-3" mask="url(#mask-2)">
+                                                    <use fill="#696cff" xlink:href="#path-3"></use>
+                                                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                                                </g>
+                                                <g id="Path-4" mask="url(#mask-2)">
+                                                    <use fill="#696cff" xlink:href="#path-4"></use>
+                                                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                                                </g>
+                                            </g>
+                                            <g id="Triangle"
+                                               transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
+                                                <use fill="#696cff" xlink:href="#path-5"></use>
+                                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                        <span class="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                    </a>
+
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
+                </div>
+
+                <div class="menu-inner-shadow"></div>
+
+                <ul class="menu-inner py-1">
+                    <!-- Dashboard -->
+                    <li class="menu-item">
+                        <a href="index.html" class="menu-link">
+                            <i class="fas fa-home m-2"></i>
+                            <div data-i18n="Analytics">AnaSayfa</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/Home/Index" class="menu-link">
+                            <i class="fas fa-arrow-left m-2"></i>
+                            <div data-i18n="Analytics">Siteye Dön</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="index.html" class="menu-link">
+                            <i class="fas fa-sign-out-alt m-2"></i>
+                            <div data-i18n="Analytics">Çıkış Yap</div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+            <div class="layout-page">
+
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+                     id="layout-navbar">
+                    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+                        <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+                            <i class="bx bx-menu bx-sm"></i>
+                        </a>
+                    </div>
+
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <!-- Search -->
+                        <div class="navbar-nav align-items-center">
+                            <div class="nav-item d-flex align-items-center">
+                                <i class="bx bx-search fs-4 lh-0"></i>
+                              
+                            </div>
+                        </div>
+                        <!-- /Search -->
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">                       
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <img src="~/sneat-1.0.0/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+                                                        <img src="~/sneat-1.0.0/assets/img/avatars/1.png"  class="w-px-40 h-auto rounded-circle" />
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block">John Doe</span>
+                                                    <small class="text-muted">Admin</small>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav float-right">
-                        <li class="dropdown dropdown-language nav-item">
-                            <a class="dropdown-toggle nav-link" id="dropdown-flag" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language"></span></a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown-flag">
-                                <div class="arrow_box"><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> Chinese</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-ru"></i> Russian</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="#"><i class="flag-icon flag-icon-es"></i> Spanish</a></div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/User/MyProfil">
+                                            <i class="fas fa-user me-2"></i>
+                                            <span class="align-middle">Profilim</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="auth-login-basic.html">
+                                            <i class="fas fa-sign-out-alt me-2"></i>
+                                            <span class="align-middle">Çıkış Yap</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--/ User -->
+                        </ul>
+                    </div>
+                </nav>
+
+                <div class="content-wrapper">
+                    <div class="container-xxl flex-grow-1 container-p-y">
+
+                        @RenderBody()
+                    </div>
+
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                ©
+                                <script>document.write(new Date().getFullYear());</script>
+                                
+                                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
                             </div>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav float-right">
-                        <li class="dropdown dropdown-notification nav-item">
-                            <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-mail">             </i></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="arrow_box_right"><a class="dropdown-item" href="#"><i class="ft-book"></i> Read Mail</a><a class="dropdown-item" href="#"><i class="ft-bookmark"></i> Read Later</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Mark all Read       </a></div>
+                            <div>
+                                <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                                   target="_blank"
+                                   class="footer-link me-4">Documentation</a>
+
+                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                                   target="_blank"
+                                   class="footer-link me-4">Support</a>
                             </div>
-                        </li>
-                        <li class="dropdown dropdown-user nav-item">
-                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             <span class="avatar avatar-online"><img src="theme-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <div class="arrow_box_right">
-                                    <a class="dropdown-item" href="#"><span class="avatar avatar-online"><img src="theme-assets/images/portrait/small/avatar-s-19.png" alt="avatar"><span class="user-name text-bold-700 ml-1">John Doe</span></span></a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-user"></i> Edit Profile</a><a class="dropdown-item" href="#"><i class="ft-mail"></i> My Inbox</a><a class="dropdown-item" href="#"><i class="ft-check-square"></i> Task</a><a class="dropdown-item" href="#"><i class="ft-message-square"></i> Chats</a>
-                                    <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i class="ft-power"></i> Logout</a>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </footer>
+
+                    <div class="content-backdrop fade"></div>
                 </div>
             </div>
         </div>
-    </nav>
 
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
-
-
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="index.html">
-                        <img class="brand-logo" alt="Chameleon admin logo" src="theme-assets/images/logo/logo.png" />
-                        <h3 class="brand-text">Chameleon</h3>
-                    </a>
-                </li>
-                <li class="nav-item d-md-none"><a class="nav-link close-navbar"><i class="ft-x"></i></a></li>
-            </ul>
-        </div>
-        <div class="main-menu-content">
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class="active">
-                    <a href="index.html"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="charts.html"><i class="ft-pie-chart"></i><span class="menu-title" data-i18n="">Charts</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="icons.html"><i class="ft-droplet"></i><span class="menu-title" data-i18n="">Icons</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="cards.html"><i class="ft-layers"></i><span class="menu-title" data-i18n="">Cards</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="buttons.html"><i class="ft-box"></i><span class="menu-title" data-i18n="">Buttons</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="typography.html"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Typography</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="tables.html"><i class="ft-credit-card"></i><span class="menu-title" data-i18n="">Tables</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="form-elements.html"><i class="ft-layout"></i><span class="menu-title" data-i18n="">Form Elements</span></a>
-                </li>
-                <li class=" nav-item">
-                    <a href="https://themeselection.com/demo/chameleon-admin-template/documentation"><i class="ft-book"></i><span class="menu-title" data-i18n="">Documentation</span></a>
-                </li>
-            </ul>
-        </div><a class="btn btn-danger btn-block btn-glow btn-upgrade-pro mx-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank">Download PRO!</a>
-        <div class="navigation-background"></div>
+        <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <script src="~/admin/jquery/jquery.js"></script>
+    <script src="~/admin/popper/popper.js"></script>
+    <script src="~/admin/js/bootstrap.js"></script>
+    <script src="~/admin/perfect-scrollbar/perfect-scrollbar.js"></script>
+    
+    <script src="~/admin/js/menu.js"></script>
+    <!-- endbuild -->
+    <!-- Vendors JS -->
 
-     @RenderBody()
-    <!-- ////////////////////////////////////////////////////////////////////////////-->
+    <!--  JS -->
+    <script src="~/js/userscript.js"></script>
+    <!-- /JS -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+    <!-- Main JS -->
+    <script src="~/admin/js/main.js"></script>
 
-    <footer class="footer footer-static footer-light navbar-border navbar-shadow">
-        <div class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-            <span class="float-md-left d-block d-md-inline-block">2018  &copy; Copyright <a class="text-bold-800 grey darken-2" href="https://themeselection.com" target="_blank">ThemeSelection</a></span>
-            <ul class="list-inline float-md-right d-block d-md-inline-blockd-none d-lg-block mb-0">
-                <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/" target="_blank"> More themes</a></li>
-                <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/support" target="_blank"> Support</a></li>
-                <li class="list-inline-item"><a class="my-1" href="https://themeselection.com/products/chameleon-admin-modern-bootstrap-webapp-dashboard-html-template-ui-kit/" target="_blank"> Purchase</a></li>
-            </ul>
-        </div>
-    </footer>
-
-    <!-- BEGIN VENDOR JS-->
-    <script src="theme-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <script src="theme-assets/vendors/js/charts/chartist.min.js" type="text/javascript"></script>
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN CHAMELEON  JS-->
-    <script src="theme-assets/js/core/app-menu-lite.js" type="text/javascript"></script>
-    <script src="theme-assets/js/core/app-lite.js" type="text/javascript"></script>
-    <!-- END CHAMELEON  JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <script src="theme-assets/js/scripts/pages/dashboard-lite.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL JS-->
+    <!-- Page JS -->
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 </html>

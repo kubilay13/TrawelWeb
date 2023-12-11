@@ -15,6 +15,7 @@ namespace TrawelWeb.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ApplicationDbContext _Context;
+
         public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -36,11 +37,11 @@ namespace TrawelWeb.Controllers
                 if (user.EmailConfirmed == true)
                 {
                     return Ok("Giriş Başarılı.");
-                }
-                
+                }   
             }
             else
             {
+
                 return BadRequest("Şifre ve ya Kullanıcı Adı Yanlış.");
             }
             return View();

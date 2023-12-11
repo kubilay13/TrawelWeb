@@ -89,7 +89,6 @@ function ConfirmCode() {
     }
     else {
         var formData = new FormData();
-        formData.append('ConfirmeCode', ConfirmeCode);
         formData.append('Email', Email);
         formData.append('Id', Id);
 
@@ -153,7 +152,7 @@ function SignIn() {
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
                     if (result.value) {
-                        window.location.href = "/User/Index";     
+                        window.location.href = "/User/AdminIndex";     
 
                     }
                 });
