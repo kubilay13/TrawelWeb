@@ -94,7 +94,7 @@ function ConfirmCode() {
 
         $.ajax({
             type: "POST",
-            url: '/Login/SignIn',
+            url: '/ConfirmMail/Index',
             data: formData,
             processData: false,
             contentType: false,
@@ -102,14 +102,14 @@ function ConfirmCode() {
                 debugger
                 swal.fire({
                     title: "Başarılı!",
-                    text: data,
+                    text: "Mail Onaylama Başarılı",
                     icon: "success",
                     buttonsStyling: true,
                     confirmButtonText: "Tamam!",
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
                     if (result.value) {
-                        window.location.href = "/User/Index";     
+                        window.location.href = "/Login/Index";     
 
                     }
                 });
