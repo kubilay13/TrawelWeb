@@ -145,21 +145,35 @@ function SignIn() {
                 debugger
                 swal.fire({
                     title: "Başarılı!",
-                    text: "Onay işleminiz gerçekleşti.",
+                    text: "Giriş işleminiz gerçekleşti.",
                     icon: "success",
                     buttonsStyling: true,
                     confirmButtonText: "Tamam!",
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
-                    if (result.value) {
-                        window.location.href = "/User/AdminIndex";     
+                    debugger
+                    if (data == "Admin") {
+                        window.location.href = "/User/AdminIndex/";
 
+                    }
+                    else {
+                        window.location.href = "/User/Index/";
                     }
                 });
             },
-            error: function (request, status, error) {
-                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
-            }
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
+
+                swal.fire("Hata!", errorMessage, "error");            }
         });
     }
 };

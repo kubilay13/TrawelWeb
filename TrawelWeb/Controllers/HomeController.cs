@@ -1,13 +1,7 @@
 ﻿using DataAccsessLayer.Concrete;
-using DTOLayer.Dtos.AppUserDtos;
 using DTOLayer.Dtos.ContactUserDtos;
 using Entity;
-using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MimeKit;
-using System.Drawing.Text;
 
 namespace TrawelWeb.Controllers
 {

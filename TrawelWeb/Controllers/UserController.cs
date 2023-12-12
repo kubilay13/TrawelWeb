@@ -1,6 +1,7 @@
 ﻿using DataAccsessLayer.Concrete;
 using DTOLayer.Dtos.AppUserDtos;
 using Entity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -18,21 +19,24 @@ namespace TrawelWeb.Controllers
             _db = db;
         }
 
-
+        [Authorize(Roles = "User")]
         public IActionResult Index()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminIndex()
         {
             return View();
         }
+        [Authorize(Roles = "Admin,User,Moderator")]
         [HttpGet]
         public  IActionResult MyProfil()
         {
 
             return View();
-        }  
+        }
+        [Authorize(Roles = "Admin,User,Moderator")]
         [HttpGet]
         public async Task<IActionResult> GetMyProfil()
         {
@@ -46,6 +50,7 @@ namespace TrawelWeb.Controllers
             appUserEditDto.Email = value.Email;
             return Ok(value);
         }
+        [Authorize(Roles = "Admin,User,Moderator")]
         [HttpPost]
         public async Task<IActionResult> SaveProfile(AppUserEditDto appUserEditDto)
         {

@@ -25,6 +25,8 @@
 
 				<div class="wrap-input100 validate-input" data-validate="">
 					<input class="input100" id="Password" type="password" name="Password" placeholder="**********">
+					<i class="fa fa-eye" id="eyeIcon" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword('Password')"></i>
+
 					<span class="focus-input100"></span>
 					<span class="symbol-input100">
 						<i class="fa fa-lock" aria-hidden="true"></i>
@@ -62,6 +64,20 @@
 		</div>
 	</div>
 </div>
+<script>
+	function togglePassword(inputId) {
+		var x = document.getElementById(inputId);
+		var eyeIcon = document.getElementById('eyeIcon');
+
+		if (x.type === "password") {
+			x.type = "text";
+			eyeIcon.className = 'fa fa-eye-slash'; // Kapalı göz ikonu
+		} else {
+			x.type = "password";
+			eyeIcon.className = 'fa fa-eye'; // Açık göz ikonu
+		}
+	}
+</script>
 <script src="~/js/loginscript.js"></script>
 <script src="~/js/jquery.min.js"></script>
 <script src="~/js/jquery-3.3.1.min.js"></script>

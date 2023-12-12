@@ -4,6 +4,7 @@ using Entity;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using TrawelWeb.Models;
 
@@ -14,13 +15,15 @@ namespace TrawelWeb.Controllers
 
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly ApplicationDbContext _Context;
 
-        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context)
+        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _Context = context;
+            _roleManager = roleManager;
         }
         [HttpGet]
         public IActionResult Index()
@@ -30,21 +33,43 @@ namespace TrawelWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> SignIn(LoginViewModel loginViewModel)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName,loginViewModel.Password,false,true);
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false, true);
             if (result.Succeeded)
             {
                 var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
-                if (user.EmailConfirmed == true)
+                if (user != null)
                 {
-                    return Ok("Giriş Başarılı.");
-                }   
+                    var userRoles = await _Context.UserRoles.Where(q => q.UserId == user.Id).FirstOrDefaultAsync();
+                    if (userRoles != null)
+                    {
+                        var RolesID = userRoles.RoleId;
+                        var roles = await _Context.Roles.FindAsync(RolesID);
+                        if (roles != null)
+                        {
+                            var roleName = roles.Name;
+                            var roleId=roles.Id;
+
+                            if (user.EmailConfirmed == true && roleName=="Admin")
+                            {
+                                return Ok("Admin");
+                            }
+                            else if (user.EmailConfirmed == true && roleName == "User")
+                            {
+                                return Ok("User");
+                            }
+                        }
+                    }
+
+                }
+
             }
             else
             {
 
-                return BadRequest("Şifre ve ya Kullanıcı Adı Yanlış.");
+                return BadRequest(new { error = "Şifre ve ya Kullanıcı Adı Yanlış!" });
             }
-            return View();
+            var resultx = "Tekrar Deneyiniz..";
+            return View(resultx);
         }
         [HttpGet]
         public IActionResult SignUp()
@@ -73,32 +98,46 @@ namespace TrawelWeb.Controllers
                 var result = await _userManager.CreateAsync(appUser, appUserSignUpDto.Password);
                 if (result.Succeeded)
                 {
+                    var role = await _roleManager.FindByNameAsync("User");//Burada kayıt atanlar normal kullanıcı.
+                    if (role != null)
+                    {
+                        // UserRoles tablosuna kaydı ekle
+                        var userRole = new AppUserRoles
+                        {
+                            RoleId = role.Id,
+                            UserId = appUser.Id
+                        };
 
-                    MimeMessage mimeMessage = new MimeMessage();
-                    MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "proje123x@gmail.com");
-                    MailboxAddress mailboxAddressTo = new MailboxAddress("User", appUser.Email);
+                        _Context.UserRoles.Add(userRole);
+                        _Context.SaveChanges();
 
-                    mimeMessage.From.Add(mailboxAddressFrom);
-                    mimeMessage.To.Add(mailboxAddressTo);
+                        MimeMessage mimeMessage = new MimeMessage();
+                        MailboxAddress mailboxAddressFrom = new MailboxAddress("TravelWeb Admin", "proje123x@gmail.com");
+                        MailboxAddress mailboxAddressTo = new MailboxAddress("User", appUser.Email);
 
-                    var bodyBuilder = new BodyBuilder();
-                    bodyBuilder.TextBody = "Sayın " + appUserSignUpDto.FirstName + " " + appUserSignUpDto.LastName + " Kayıt işlemini gerçekleştirmek için onay kodunuz: " + code;
-                    mimeMessage.Body = bodyBuilder.ToMessageBody();
+                        mimeMessage.From.Add(mailboxAddressFrom);
+                        mimeMessage.To.Add(mailboxAddressTo);
 
-                    mimeMessage.Subject = "TravelWeb Onay Kodu";
+                        var bodyBuilder = new BodyBuilder();
+                        bodyBuilder.TextBody = "Sayın " + appUserSignUpDto.FirstName + " " + appUserSignUpDto.LastName + " Kayıt işlemini gerçekleştirmek için onay kodunuz: " + code;
+                        mimeMessage.Body = bodyBuilder.ToMessageBody();
 
-                    SmtpClient smtpClient = new SmtpClient();
+                        mimeMessage.Subject = "TravelWeb Onay Kodu";
 
-                    smtpClient.Connect("smtp.gmail.com", 587, false);
-                    smtpClient.Authenticate("proje123x@gmail.com", "ovhjcdvgywmjmjqr");
-                    smtpClient.Send(mimeMessage);
-                    smtpClient.Disconnect(true);
+                        SmtpClient smtpClient = new SmtpClient();
 
-                    TempData["Mail"] = appUserSignUpDto.Email;
-                    TempData["Id"] = appUser.Id;
+                        smtpClient.Connect("smtp.gmail.com", 587, false);
+                        smtpClient.Authenticate("proje123x@gmail.com", "ovhjcdvgywmjmjqr");
+                        smtpClient.Send(mimeMessage);
+                        smtpClient.Disconnect(true);
 
-                    return Ok(true);
-                    //return RedirectToAction("Index","ConfirmMail");
+                        TempData["Mail"] = appUserSignUpDto.Email;
+                        TempData["Id"] = appUser.Id;
+
+                        return Ok(true);
+                        //return RedirectToAction("Index","ConfirmMail");
+                    }
+
                 }
                 else
                 {
