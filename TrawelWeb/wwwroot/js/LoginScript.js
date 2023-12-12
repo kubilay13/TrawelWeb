@@ -177,3 +177,27 @@ function SignIn() {
         });
     }
 };
+
+function SignOut() {
+    $.ajax({
+        type: "GET",
+        url: '/Login/Logout',
+        success: function (data) {
+            swal.fire({
+                title: "Çıkış Başarılı!",
+                text: "Güvenli bir şekilde çıkış yaptınız.",
+                icon: "success",
+                buttonsStyling: true,
+                confirmButtonText: "Tamam!",
+                confirmButtonClass: "btn btn-brand"
+            }).then(function () {
+                debugger
+                // Çıkış işlemi başarılı olduğunda yönlendirme yapabilirsiniz
+                window.location.href = "/Login/Index"; // Örneğin, ana sayfaya yönlendir
+            });
+        },
+        error: function (request, status, error) {
+            swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+        }
+    });
+}

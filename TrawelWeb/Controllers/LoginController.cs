@@ -2,6 +2,9 @@
 using DTOLayer.Dtos.AppUserDtos;
 using Entity;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -26,11 +29,12 @@ namespace TrawelWeb.Controllers
             _roleManager = roleManager;
         }
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(LoginViewModel loginView)
         {
             return View();
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> SignIn(LoginViewModel loginViewModel)
         {
             var result = await _signInManager.PasswordSignInAsync(loginViewModel.UserName, loginViewModel.Password, false, true);
@@ -51,10 +55,12 @@ namespace TrawelWeb.Controllers
 
                             if (user.EmailConfirmed == true && roleName=="Admin")
                             {
+                                HttpContext.Session.SetString("username", loginViewModel.UserName);
                                 return Ok("Admin");
                             }
                             else if (user.EmailConfirmed == true && roleName == "User")
                             {
+                                HttpContext.Session.SetString("username", loginViewModel.UserName);
                                 return Ok("User");
                             }
                         }
@@ -70,6 +76,15 @@ namespace TrawelWeb.Controllers
             }
             var resultx = "Tekrar Deneyiniz..";
             return View(resultx);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            // Kullanıcının oturumunu kapat
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // İsterseniz başka bir sayfaya yönlendirebilirsiniz
+            return RedirectToAction("Index", "Login");
         }
         [HttpGet]
         public IActionResult SignUp()
@@ -149,6 +164,6 @@ namespace TrawelWeb.Controllers
             }
             return View();
         }
-
+     
     }
 }
