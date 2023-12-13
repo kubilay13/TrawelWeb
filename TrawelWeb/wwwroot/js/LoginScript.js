@@ -1,4 +1,8 @@
-﻿
+﻿function isValidEmail(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
 function SignUp() {
     debugger
     var FirstName = $('#FirstName').val();
@@ -14,7 +18,7 @@ function SignUp() {
     var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
 
 
-    if (Email == "") {
+    if (Email == "" || !isValidEmail(Email)) {
         swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
     }
     else if (UserName == "") {
@@ -67,7 +71,7 @@ function SignUp() {
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
                     if (result.value) {
-                        window.location.href = "/ConfirmMail/Index";     
+                        window.location.href = "/ConfirmMail/Index";
 
                     }
                 });
@@ -109,7 +113,7 @@ function ConfirmCode() {
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
                     if (result.value) {
-                        window.location.href = "/Login/Index";     
+                        window.location.href = "/Login/Index";
 
                     }
                 });
@@ -153,12 +157,16 @@ function SignIn() {
                 }).then(function (result) {
                     debugger
                     if (data == "Admin") {
-                        window.location.href = "/User/AdminIndex/";
+                        window.location.href = "/Admin/Index/";
+                    }
+                    else if (data == "Moderator") {
+                        window.location.href = "/Admin/Index/";
+                    }
+                    else if (data == "User") {
+                        window.location.href = "/User/Index/";
 
                     }
-                    else {
-                        window.location.href = "/User/Index/";
-                    }
+                  
                 });
             },
             error: function (xhr, status, error) {
@@ -173,7 +181,8 @@ function SignIn() {
                     // JSON hatası varsa varsayılan hatayı kullan
                 }
 
-                swal.fire("Hata!", errorMessage, "error");            }
+                swal.fire("Hata!", errorMessage, "error");
+            }
         });
     }
 };

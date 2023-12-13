@@ -4,7 +4,6 @@ using Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TrawelWeb.Controllers
 {
@@ -26,16 +25,10 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminIndex()
-        {
-            return View();
-        }
         [Authorize(Roles = "Admin,User,Moderator")]
         [HttpGet]
         public  IActionResult MyProfil()
         {
-
             return View();
         }
         [Authorize(Roles = "Admin,User,Moderator")]
@@ -70,9 +63,6 @@ namespace TrawelWeb.Controllers
                 return Ok();
             }
             return View();
-
-
         }
-
     }
 }

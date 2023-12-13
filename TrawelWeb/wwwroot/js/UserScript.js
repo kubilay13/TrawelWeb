@@ -11,6 +11,7 @@
             $('#Email').val(data['email']);
             $('#PhoneNumber').val(data['phoneNumber']);
             $('#Adress').val(data['adress']);
+            $('#FullName').text(data['firstName'] + ' ' +data['lastName']);
         },
         error: function (request, status, error) {
             swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");

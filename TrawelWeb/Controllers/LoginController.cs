@@ -62,6 +62,11 @@ namespace TrawelWeb.Controllers
                             {
                                 HttpContext.Session.SetString("username", loginViewModel.UserName);
                                 return Ok("User");
+                            } 
+                            else if (user.EmailConfirmed == true && roleName == "Moderator")
+                            {
+                                HttpContext.Session.SetString("username", loginViewModel.UserName);
+                                return Ok("Moderator");
                             }
                         }
                     }
