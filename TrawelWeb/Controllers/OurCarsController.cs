@@ -2,6 +2,7 @@
 
 namespace TrawelWeb.Controllers
 {
+    [ServiceFilter(typeof(SessionFilter))]
     public class OurCarsController : Controller
     {
         public IActionResult Index()

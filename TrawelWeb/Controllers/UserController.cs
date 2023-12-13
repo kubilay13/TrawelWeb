@@ -8,6 +8,8 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TrawelWeb.Controllers
 {
+    [ServiceFilter(typeof(SessionFilter))]
+
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;

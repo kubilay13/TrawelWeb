@@ -1,7 +1,9 @@
 using DataAccsessLayer.Concrete;
 using Entity;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using TrawelWeb;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,15 +12,16 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContext<ApplicationDbContext>();
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddSession();
 builder.Services.AddMvcCore();
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(x =>
-    {
-        x.LoginPath = "/Login/Index";
-    });
+builder.Services.AddScoped<SessionFilter>();
+builder.Services.AddAuthentication("YourAuthenticationScheme")
+        .AddCookie("YourAuthenticationScheme", options =>
+        {
+            // Cookie konfigürasyonlarý
+        });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

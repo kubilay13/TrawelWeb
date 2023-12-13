@@ -80,11 +80,12 @@ namespace TrawelWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            // Kullanıcının oturumunu kapat
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-
-            // İsterseniz başka bir sayfaya yönlendirebilirsiniz
-            return RedirectToAction("Index", "Login");
+            await HttpContext.SignOutAsync("YourAuthenticationScheme"); // AuthenticationScheme'ini belirtin
+            foreach (var cookieKey in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookieKey);
+            }//Önbelleği silme işlemi. Url ile çıkış yapılan yere yönlendirmemesi için.
+            return Ok("Çıkış Yapıldı");
         }
         [HttpGet]
         public IActionResult SignUp()
