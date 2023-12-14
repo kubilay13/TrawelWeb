@@ -27,13 +27,11 @@ function switchTheme(e) {
 toggleSwitch.addEventListener('change', switchTheme, false);
 
 function ReloadLogo() {
-    debugger
     if (currentTheme == 'dark') {
         var logoElement = document.getElementById("logo");
         logoElement.src = "/images/logo1.png";
     }
     else {
-        debugger
         var logoElement = document.getElementById("logo");
         logoElement.src = "/images/logo2.png";
 

@@ -1,10 +1,10 @@
 ﻿
-function GetAdmin() {
+function GetModaretor() {
     debugger
-    var table = $('#kt_table_AdminList');
+    var table = $('#kt_table_ModaretorList');
     var t = table.DataTable({
         ajax: {
-            url: '/Admin/GetAdmin',
+            url: '/Admin/GetModaretor',
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -18,7 +18,24 @@ function GetAdmin() {
         'stripeClasses': ['stripe1', 'stripe2'],
         dom: `<'row'<'col-sm-3 text-left'f><'col-sm-9 text-right'B>>
 			<'row'<'col-sm-12'tr>>
-			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'lp>>`,
+			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'l>>`,
+        language: {
+            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "info": "_PAGE_ / _PAGES_",
+            "infoEmpty": "Gösterilecek kayıt yok",
+            "infoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)",
+            "search": "Ara:",
+            "paginate": {
+                "first": "İlk",
+                "previous": "Önceki",
+                "next": "Sonraki",
+                "last": "Son"
+            },
+            "sInfo": "Toplam _TOTAL_ kayıttan _START_ ile _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoEmpty": "Toplam 0 kayıt",
+            "sInfoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)"
+        },
 
 
         columns: [
@@ -50,6 +67,10 @@ function GetAdmin() {
                 className: 'font-weight-bold ',
             },
             {
+                data: 'Adress',
+                className: 'font-weight-bold ',
+            },
+            {
                 data: 'İşlemler',
             },
         ],
@@ -66,7 +87,6 @@ function GetAdmin() {
             {
                 targets: 1,
                 render: function (data, type, full, meta) {
-                    debugger
                     var result = full['firstName'];
                     return result;
                 }
@@ -74,7 +94,6 @@ function GetAdmin() {
             {
                 targets:2,
                 render: function (data, type, full, meta) {
-                    debugger
                     var result = full['lastName'];
                     return result;
                 }
@@ -82,7 +101,6 @@ function GetAdmin() {
             {
                 targets: 3,
                 render: function (data, type, full, meta) {
-                    debugger
                     var result = full['numberPhone'];
                     return result;
                 }
@@ -90,7 +108,6 @@ function GetAdmin() {
             {
                 targets: 4,
                 render: function (data, type, full, meta) {
-                    debugger
                     var result = full['userName'];
                     return result;
                 }
@@ -98,8 +115,15 @@ function GetAdmin() {
             {
                 targets: 5,
                 render: function (data, type, full, meta) {
-                    debugger
                     var result = full['email'];
+                    return result;
+                }
+            },
+            {
+                targets: 6,
+                render: function (data, type, full, meta) {
+                    debugger
+                    var result = full['adress'];
                     return result;
                 }
             },
@@ -107,40 +131,248 @@ function GetAdmin() {
                 targets: -1,
                 title: 'İşlemler',
                 orderable: false,
-                "width": "30%",
+                "width": "20%",
                 render: function (data, type, full, meta) {
-                        result = `<a onclick="EditUser(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle" data-bs-target="#EditUserModal" data-bs-toggle="modal">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black"></path>
-                                            <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black"></path>
-                                        </svg>
-                                     </span>
+                    debugger
+                    result = `<a onclick="EditModaretor(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle" data-bs-target="#EditUserModal" data-bs-toggle="modal">
+                                  <span class="fas fa-pencil-alt fa-2x"></span>
                                   </a>
-                                  <a onclick="DeleteUser(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
-                                            <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
-                                            <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
-                                        </svg>
-                                     </span>
+                                  <a onclick="DeleteModaretor(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <span class="fas fa-trash-alt fa-2x"></span>
                                    </a>`;
                     return result;
                 }
             },
         ],
         order: [[1, 'asc']],
-        responsive: false,
+        responsive: true,
         "scrollX": true,
         orderCellsTop: true,
         "destroy": true,
     });
     t.on('draw.dt', function () {
-        var PageInfo = $('#kt_table_AdminList').DataTable().page.info();
+        var PageInfo = $('#kt_table_ModaretorList').DataTable().page.info();
         t.column(0, { page: 'current' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1 + PageInfo.start;
         });
     });
 
 };
+function AddModaretor() {
+    debugger
+    var FirstName = $('#AddUserModal #FirstName').val().trim();
+    var LastName = $('#AddUserModal #LastName').val().trim();
+    var UserName = $('#AddUserModal #UserName').val().trim();
+    var Email = $('#AddUserModal #Email').val().trim();
+    var Password = $('#AddUserModal #Password').val().trim();
+    var Passwordlenght = Password.length;//Metin uzunluğu sorgulama
+    var PhoneNumber = $('#AddUserModal #PhoneNumber').val();
+    var Adress = $('#AddUserModal #Adress').val();
+    var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
+    var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
+
+    if (FirstName == "") {
+        swal.fire("Hata!", "İsmin Giriniz!", "error");
+    }
+    else if (LastName == "") {
+        swal.fire("Hata!", "Soyisim Giriniz.", "error");
+    }
+    else if (UserName == "") {
+        swal.fire("Hata!", "Kullanıcı Adı Giriniz.", "error");
+    }
+    else if (Email == "") {
+        swal.fire("Hata!", "Email Giriniz.", "error");
+    }
+    else if (PhoneNumber == "") {
+        swal.fire("Hata!", "Telefon Numarası Giriniz.", "error");
+    }
+    else if (Adress == "") {
+        swal.fire("Hata!", "Adres Giriniz.", "error");
+    }
+    else if (Passwordlenght < 6 || !hasLowerCase || !hasUpperCase || !Password.includes('!', '.', ',', ';', ':', '?')) {//includes ile noktalama işaretlerini sorguladık.
+        swal.fire("Hata!", "Şifrede büyük,küçük harf ve uzunluğa dikkat ediniz!", "error");
+    }
+    else if (Password == "") {
+        swal.fire("Hata!", "Şifre Giriniz.", "error");
+    }
+    else if (ConfirmPassword != Password) {
+        swal.fire("Hata!", "Şifreler eşleşmiyor!", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('FirstName', FirstName);
+        formData.append('LastName', LastName);
+        formData.append('UserName', UserName);
+        formData.append('Email', Email);
+        formData.append('Password', Password);
+        formData.append('ConfirmPassword', ConfirmPassword);
+        formData.append('PhoneNumber', PhoneNumber);
+        formData.append('Adress', Adress);
+        $.ajax({
+            type: "POST",
+            url: '/Admin/AddModaretor',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Ekleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand",
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload();
+                    }
+                });
+            },
+            error: function (request, status, error) {
+                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            }
+        });
+    }
+};
+
+function EditModaretor(userId) {
+    debugger
+    $.ajax({
+        type: "GET",
+        url: '/Admin/EditModaretor/?userId=' + userId,
+        success: function (data) {
+            debugger
+            $('#EditUserModal #ID').val(data['data'][0]['userId']);
+            $('#EditUserModal #FirstName').val(data['data'][0]['firstName']);
+            $('#EditUserModal #LastName').val(data['data'][0]['lastName']);
+            $('#EditUserModal #UserName').val(data['data'][0]['userName']);
+            $('#EditUserModal #Email').val(data['data'][0]['email']);
+            $('#EditUserModal #NumberPhone').val(data['data'][0]['numberPhone']);
+            $('#EditUserModal #Adress').val(data['data'][0]['adress']);
+            $('#EditUserModal').modal();
+
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText); // Hata detayları
+            console.log(status); // Hata durumu
+            console.log(error); // Hata nesnesi
+            swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+        }
+    });
+};
+function UpdateModaretor() {
+    debugger
+    var UserId = $('UserId').val().trim();
+    var FirstName = $('#FirstName').val().trim();
+    var LastName = $('#LastName').val().trim();
+    var UserName = $('#UserName').val().trim();
+    var Email = $('#Email').val().trim();
+    var Password = $('#Password').val().trim();
+    var Passwordlenght = Password.length;//Metin uzunluğu sorgulama
+    var PhoneNumber = $('#PhoneNumber').val().trim();
+    var Adress = $('#Adress').val();
+    var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
+    var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
+
+    if (FirstName == "") {
+        swal.fire("Hata!", "İsmin Giriniz!", "error");
+    }
+    else if (LastName == "") {
+        swal.fire("Hata!", "Soyisim Giriniz.", "error");
+    }
+    else if (UserName == "") {
+        swal.fire("Hata!", "Kullanıcı Adı Giriniz.", "error");
+    }
+    else if (Email == "") {
+        swal.fire("Hata!", "Email Giriniz.", "error");
+    }
+    else if (Password == "") {
+        swal.fire("Hata!", "Şifre Giriniz.", "error");
+    }
+    else if (Passwordlenght < 6 || !hasLowerCase || !hasUpperCase || !Password.includes('!', '.', ',', ';', ':', '?')) {//includes ile noktalama işaretlerini sorguladık.
+        swal.fire("Hata!", "Şifrede büyük,küçük harf ve uzunluğa dikkat ediniz!", "error");
+    }
+    else if (ConfirmPassword != Password) {
+        swal.fire("Hata!", "Şifreler eşleşmiyor!", "error");
+    }
+    else if (PhoneNumber == "") {
+        swal.fire("Hata!", "Telefon Numarası Giriniz.", "error");
+    }
+    else if (Adress == "") {
+        swal.fire("Hata!", "Adres Giriniz.", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('UserId', UserId);
+        formData.append('FirstName', FirstName);
+        formData.append('LastName', LastName);
+        formData.append('UserName', UserName);
+        formData.append('Email', Email);
+        formData.append('Password', Password);
+        formData.append('ConfirmPassword', ConfirmPassword);
+        formData.append('PhoneNumber', PhoneNumber);
+        formData.append('Adress', Adress);
+        $.ajax({
+            type: "POST",
+            url: '/Admin/UpdateModaretor',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Güncelleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload();
+                    }
+                });
+            },
+            error: function (request, status, error) {
+                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            }
+        });
+    }
+};
+function DeleteModaretor(userId) {
+    // SweetAlert2 ile onay mesajı gösterme
+    swal.fire({
+        title: "Emin misiniz?",
+        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Evet, Sil",
+        cancelButtonText: "Hayır"
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            // Kullanıcı evet dediyse silme işlemini başlat
+            $.ajax({
+                type: "POST",
+                url: '/Admin/DeleteModaretor/' + userId,
+                success: function (data) {
+                    swal.fire({
+                        title: "Başarılı!",
+                        text: "Silme işlemi başarılı.",
+                        icon: "success",
+                        buttonsStyling: true,
+                        confirmButtonText: "Tamam!",
+                        confirmButtonClass: "btn btn-brand"
+                    }).then(function () {
+                        window.location.reload();
+                    });
+                },
+                error: function (request, status, error) {
+                    swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+                }
+            });
+        }
+    });
+}
