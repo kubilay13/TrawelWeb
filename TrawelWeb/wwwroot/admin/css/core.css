@@ -427,6 +427,9 @@ legend + * {
   -webkit-appearance: textfield;
 }
 
+.dataTables_filter label input{
+    margin-left:5px;
+}
 /* rtl:raw:
 [type="tel"],
 [type="url"],
@@ -436,7 +439,7 @@ legend + * {
 }
 */
 ::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 ::-webkit-color-swatch-wrapper {

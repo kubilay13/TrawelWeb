@@ -30,16 +30,16 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
+
+
+        //--StartModerator--
+
         [Authorize(Roles = "Admin")]
         public IActionResult ModaretorManagement()
         {
             return View();
         }
-        [Authorize(Roles = "Moderator,Admin")]
-        public IActionResult UserManagement()
-        {
-            return View();
-        }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetModaretor()
         {
@@ -53,7 +53,7 @@ namespace TrawelWeb.Controllers
                            UserId = User.Id,
                            FirstName = User.FirstName,
                            LastName = User.LastName,
-                           NumberPhone = User.PhoneNumber,
+                           PhoneNumber = User.PhoneNumber,
                            UserName = User.UserName,
                            Email = User.Email,
                            Adress = User.Adress
@@ -64,6 +64,8 @@ namespace TrawelWeb.Controllers
             return Json(list);
 
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> EditModaretor(int userId)
         {
@@ -83,6 +85,7 @@ namespace TrawelWeb.Controllers
             };
             return Json(list);
         }
+
         [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddModaretor(ModaretorViewModel modaretorViewModel)
@@ -149,6 +152,9 @@ namespace TrawelWeb.Controllers
             }
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete]
         public async Task<IActionResult> DeleteModaretor(string userId)
         {
             if (userId != null)
@@ -181,6 +187,118 @@ namespace TrawelWeb.Controllers
 
             return View();
         }
+
+        //--EndModaretor--
+
+        //--StartUser--
+
+        [Authorize(Roles = "Moderator,Admin")]
+        public IActionResult UserManagement()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetUser()
+        {
+            var list = new
+            {
+                data = from UserRoles in _db.UserRoles.Where(q => q.RoleId == 3)
+                       join User in _db.Users
+                       on UserRoles.UserId equals User.Id
+                       select new
+                       {
+                           UserId = User.Id,
+                           FirstName = User.FirstName,
+                           LastName = User.LastName,
+                           PhoneNumber = User.PhoneNumber,
+                           UserName = User.UserName,
+                           Email = User.Email,
+                           Adress = User.Adress
+                       }
+
+            };
+
+            return Json(list);
+
+        }
+
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> EditUser(int userId)
+        {
+            var list = new
+            {
+                data = from User in _db.Users.Where(q => q.Id == userId)
+                       select new
+                       {
+                           UserId = User.Id,
+                           FirstName = User.FirstName,
+                           LastName = User.LastName,
+                           PhoneNumber = User.PhoneNumber,
+                           UserName = User.UserName,
+                           Email = User.Email,
+                           Adress = User.Adress,
+                       }
+            };
+            return Json(list);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateUser(UserViewModel userViewModel, string userId)
+        {
+            if (userViewModel.Password == userViewModel.ConfirmPassword)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                user.FirstName = userViewModel.FirstName;
+                user.LastName = userViewModel.LastName;
+                user.Adress = userViewModel.Adress;
+                user.PhoneNumber = userViewModel.PhoneNumber;
+                user.UserName = userViewModel.UserName;
+                user.Email = userViewModel.Email;
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, userViewModel.Password);
+                await _userManager.UpdateAsync(user);
+                return Ok();
+            }
+            return View();
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(string userId)
+        {
+            if (userId != null)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    var role = await _db.UserRoles.FirstOrDefaultAsync(q => q.UserId == user.Id);
+                    if (role != null)
+                    {
+                        _db.UserRoles.Remove(role);
+                        await _db.SaveChangesAsync();
+                        await _userManager.DeleteAsync(user);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest("Silme işlemi başarısız!");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Aradığınız kullanıcı bulunamadı!");
+                }
+            }
+            else
+            {
+                return BadRequest("Hata! Tekrar deneyiniz.");
+            }
+
+            return View();
+        }
+
+        //--EndUser--
 
     }
 

@@ -5,28 +5,26 @@ using Entity;
 
 namespace TrawelWeb
 {
-    public class SessionFilter : IActionFilter
+    public class SessionFilter : IAsyncActionFilter
     {
         private readonly UserManager<AppUser> _userManager;
-
         public SessionFilter(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
-
-        public async void OnActionExecuting(ActionExecutingContext context)
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
             var userId = _userManager.GetUserId(context.HttpContext.User);
 
             if (userId == null)
             {
-                context.Result = new RedirectResult("/Login/Index");
+                context.Result = new RedirectResult("/Login/Index/");
+                return;
             }
-        }
 
-        public void OnActionExecuted(ActionExecutedContext context)
-        {
-            // Action çalıştırıldıktan sonra yapılacak işlemler
+            // Action'ı devam ettir
+            var resultContext = await next();
         }
+ 
     }
 }

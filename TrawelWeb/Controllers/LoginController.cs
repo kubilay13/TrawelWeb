@@ -3,7 +3,6 @@ using DTOLayer.Dtos.AppUserDtos;
 using Entity;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +19,6 @@ namespace TrawelWeb.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly ApplicationDbContext _Context;
-
         public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
@@ -89,18 +87,19 @@ namespace TrawelWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync("YourAuthenticationScheme"); // AuthenticationScheme'ini belirtin
-            foreach (var cookieKey in Request.Cookies.Keys)
-            {
-                Response.Cookies.Delete(cookieKey);
-            }//Önbelleği silme işlemi. Url ile çıkış yapılan yere yönlendirmemesi için.
+            await _signInManager.SignOutAsync();
+            // Temizleme işlemleri
+            await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            HttpContext.Session.Clear(); // Session'ı temizle
             return Ok("Çıkış Yapıldı");
         }
+        [Authorize(Roles = " ")]
         [HttpGet]
         public IActionResult SignUp()
         {
             return View();
         }
+        [Authorize(Roles = " ")]
         [HttpPost]
         public async Task<IActionResult> SignUp(AppUserSignUpDto appUserSignUpDto)
         {
