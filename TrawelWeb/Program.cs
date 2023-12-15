@@ -21,6 +21,10 @@ builder.Services.AddAuthentication("YourAuthenticationScheme")
         {
             // Cookie konfigürasyonlarý
         });
+builder.Services.Configure<SecurityStampValidatorOptions>(options =>
+{
+    options.ValidationInterval = TimeSpan.FromMinutes(5); // Oturum zaman aþýmý süresi (örnekte 30 dakika)
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
