@@ -1,4 +1,7 @@
-﻿
+﻿function isValidEmail(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 function GetModaretor() {
     debugger
     var table = $('#kt_table_ModaretorList');
@@ -158,6 +161,7 @@ function GetModaretor() {
     });
 
 };
+
 function AddModaretor() {
     debugger
     var FirstName = $('#AddUserModal #FirstName').val().trim();
@@ -166,6 +170,7 @@ function AddModaretor() {
     var Email = $('#AddUserModal #Email').val().trim();
     var Password = $('#AddUserModal #Password').val().trim();
     var Passwordlenght = Password.length;//Metin uzunluğu sorgulama
+    var ConfirmPassword = $('#AddUserModal #ConfirmPassword').val().trim();
     var PhoneNumber = $('#AddUserModal #PhoneNumber').val();
     var Adress = $('#AddUserModal #Adress').val();
     var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
@@ -183,17 +188,20 @@ function AddModaretor() {
     else if (Email == "") {
         swal.fire("Hata!", "Email Giriniz.", "error");
     }
+    else if (!isValidEmail(Email)) {
+        swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
+    }
     else if (PhoneNumber == "") {
         swal.fire("Hata!", "Telefon Numarası Giriniz.", "error");
     }
     else if (Adress == "") {
         swal.fire("Hata!", "Adres Giriniz.", "error");
     }
-    else if (Passwordlenght < 6 || !hasLowerCase || !hasUpperCase || !Password.includes('!', '.', ',', ';', ':', '?')) {//includes ile noktalama işaretlerini sorguladık.
-        swal.fire("Hata!", "Şifrede büyük,küçük harf ve uzunluğa dikkat ediniz!", "error");
-    }
     else if (Password == "") {
         swal.fire("Hata!", "Şifre Giriniz.", "error");
+    }
+    else if (Passwordlenght < 6 || !hasLowerCase || !hasUpperCase || !Password.includes('!', '.', ',', ';', ':', '?')) {//includes ile noktalama işaretlerini sorguladık.
+        swal.fire("Hata!", "Şifrede büyük,küçük harf ve uzunluğa dikkat ediniz!", "error");
     }
     else if (ConfirmPassword != Password) {
         swal.fire("Hata!", "Şifreler eşleşmiyor!", "error");
@@ -229,8 +237,19 @@ function AddModaretor() {
                     }
                 });
             },
-            error: function (request, status, error) {
-                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
+
+                swal.fire("Hata!", errorMessage, "error");
             }
         });
     }
@@ -243,35 +262,46 @@ function EditModaretor(userId) {
         url: '/Admin/EditModaretor/?userId=' + userId,
         success: function (data) {
             debugger
-            $('#EditUserModal #ID').val(data['data'][0]['userId']);
+            $('#EditUserModal #UserID').val(data['data'][0]['userId']);
             $('#EditUserModal #FirstName').val(data['data'][0]['firstName']);
             $('#EditUserModal #LastName').val(data['data'][0]['lastName']);
             $('#EditUserModal #UserName').val(data['data'][0]['userName']);
             $('#EditUserModal #Email').val(data['data'][0]['email']);
-            $('#EditUserModal #NumberPhone').val(data['data'][0]['numberPhone']);
+            $('#EditUserModal #PhoneNumber').val(data['data'][0]['phoneNumber']);
             $('#EditUserModal #Adress').val(data['data'][0]['adress']);
             $('#EditUserModal').modal();
 
         },
-        error: function (request, status, error) {
-            console.log(request.responseText); // Hata detayları
-            console.log(status); // Hata durumu
-            console.log(error); // Hata nesnesi
-            swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+        error: function (xhr, status, error) {
+            var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+            try {
+                var response = JSON.parse(xhr.responseText);
+                if (response && response.error) {
+                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                }
+            } catch (e) {
+                // JSON hatası varsa varsayılan hatayı kullan
+            }
+
+            swal.fire("Hata!", errorMessage, "error");
         }
+
     });
 };
+
 function UpdateModaretor() {
     debugger
-    var UserId = $('UserId').val().trim();
-    var FirstName = $('#FirstName').val().trim();
-    var LastName = $('#LastName').val().trim();
-    var UserName = $('#UserName').val().trim();
-    var Email = $('#Email').val().trim();
-    var Password = $('#Password').val().trim();
+    var UserId = $('#EditUserModal #UserID').val();
+    var FirstName = $('#EditUserModal #FirstName').val().trim();
+    var LastName = $('#EditUserModal #LastName').val().trim();
+    var UserName = $('#EditUserModal #UserName').val().trim();
+    var Email = $('#EditUserModal #Email').val().trim();
+    var Password = $('#EditUserModal #EditPassword').val().trim();
     var Passwordlenght = Password.length;//Metin uzunluğu sorgulama
-    var PhoneNumber = $('#PhoneNumber').val().trim();
-    var Adress = $('#Adress').val();
+    var ConfirmPassword = $('#EditUserModal #EditConfirmPassword').val().trim();
+    var PhoneNumber = $('#EditUserModal #PhoneNumber').val();
+    var Adress = $('#EditUserModal #Adress').val();
     var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
     var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
 
@@ -287,6 +317,15 @@ function UpdateModaretor() {
     else if (Email == "") {
         swal.fire("Hata!", "Email Giriniz.", "error");
     }
+    else if (!isValidEmail(Email)) {
+        swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
+    }
+    else if (PhoneNumber == "") {
+        swal.fire("Hata!", "Telefon Numarası Giriniz.", "error");
+    }
+    else if (Adress == "") {
+        swal.fire("Hata!", "Adres Giriniz.", "error");
+    }
     else if (Password == "") {
         swal.fire("Hata!", "Şifre Giriniz.", "error");
     }
@@ -295,12 +334,6 @@ function UpdateModaretor() {
     }
     else if (ConfirmPassword != Password) {
         swal.fire("Hata!", "Şifreler eşleşmiyor!", "error");
-    }
-    else if (PhoneNumber == "") {
-        swal.fire("Hata!", "Telefon Numarası Giriniz.", "error");
-    }
-    else if (Adress == "") {
-        swal.fire("Hata!", "Adres Giriniz.", "error");
     }
     else {
         var formData = new FormData();
@@ -334,14 +367,25 @@ function UpdateModaretor() {
                     }
                 });
             },
-            error: function (request, status, error) {
-                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
+
+                swal.fire("Hata!", errorMessage, "error");
             }
         });
     }
 };
+
 function DeleteModaretor(userId) {
-    // SweetAlert2 ile onay mesajı gösterme
     swal.fire({
         title: "Emin misiniz?",
         text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
@@ -356,7 +400,7 @@ function DeleteModaretor(userId) {
             // Kullanıcı evet dediyse silme işlemini başlat
             $.ajax({
                 type: "POST",
-                url: '/Admin/DeleteModaretor/' + userId,
+                url: '/Admin/DeleteModaretor/?userId=' + userId,
                 success: function (data) {
                     swal.fire({
                         title: "Başarılı!",
@@ -369,10 +413,22 @@ function DeleteModaretor(userId) {
                         window.location.reload();
                     });
                 },
-                error: function (request, status, error) {
-                    swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+                error: function (xhr, status, error) {
+                    var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response && response.error) {
+                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                        }
+                    } catch (e) {
+                        // JSON hatası varsa varsayılan hatayı kullan
+                    }
+
+                    swal.fire("Hata!", errorMessage, "error");
                 }
             });
         }
     });
 }
+

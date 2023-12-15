@@ -18,7 +18,10 @@ function SignUp() {
     var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
 
 
-    if (Email == "" || !isValidEmail(Email)) {
+    if (Email == "") {
+        swal.fire("Hata!", "G Email giriniz!", "error");
+    }
+    else if (!isValidEmail(Email)) {
         swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
     }
     else if (UserName == "") {

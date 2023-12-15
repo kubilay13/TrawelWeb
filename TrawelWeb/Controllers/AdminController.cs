@@ -75,7 +75,7 @@ namespace TrawelWeb.Controllers
                            UserId = User.Id,
                            FirstName = User.FirstName,
                            LastName = User.LastName,
-                           NumberPhone = User.PhoneNumber,
+                           PhoneNumber = User.PhoneNumber,
                            UserName = User.UserName,
                            Email = User.Email,
                            Adress = User.Adress,
@@ -85,7 +85,7 @@ namespace TrawelWeb.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task<IActionResult> AddProfile(ModaretorViewModel modaretorViewModel)
+        public async Task<IActionResult> AddModaretor(ModaretorViewModel modaretorViewModel)
         {
             if (modaretorViewModel.Password == modaretorViewModel.ConfirmPassword)
             {
@@ -123,11 +123,66 @@ namespace TrawelWeb.Controllers
                 }
                 else
                 {
-                    return BadRequest();
+                    return BadRequest("Ekleme işlemi başarısız.");
                 }
 
             }
             return View();
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateModaretor(ModaretorViewModel modaretorViewModel, string userId)
+        {
+            if (modaretorViewModel.Password == modaretorViewModel.ConfirmPassword)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                user.FirstName = modaretorViewModel.FirstName;
+                user.LastName = modaretorViewModel.LastName;
+                user.Adress = modaretorViewModel.Adress;
+                user.PhoneNumber = modaretorViewModel.PhoneNumber;
+                user.UserName = modaretorViewModel.UserName;
+                user.Email = modaretorViewModel.Email;
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, modaretorViewModel.Password);
+                await _userManager.UpdateAsync(user);
+                return Ok();
+            }
+            return View();
+        }
+        public async Task<IActionResult> DeleteModaretor(string userId)
+        {
+            if (userId != null)
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    var role = await _db.UserRoles.FirstOrDefaultAsync(q => q.UserId == user.Id);
+                    if (role != null)
+                    {
+                        _db.UserRoles.Remove(role);
+                        await _db.SaveChangesAsync();
+                        await _userManager.DeleteAsync(user);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest("Silme işlemi başarısız!");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Aradığınız kullanıcı bulunamadı!");
+                }
+            }
+            else
+            {
+                return BadRequest("Hata! Tekrar deneyiniz.");
+            }
+
+            return View();
+        }
+
     }
+
+
 }

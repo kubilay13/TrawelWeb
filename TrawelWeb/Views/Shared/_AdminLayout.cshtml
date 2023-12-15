@@ -9,8 +9,6 @@
     var userRole = _db.UserRoles.Where(q=>q.UserId==user.Id).FirstOrDefault();
     var a =  userRole.RoleId.ToString(); 
     var roles = await roleManager.FindByIdAsync(a);
-
-
 }
 <html>
 <head>

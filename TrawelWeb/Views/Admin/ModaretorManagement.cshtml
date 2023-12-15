@@ -1,11 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<style>
-    .custom-modal-content {
-        z-index: 700; /* İstediğiniz bir değeri seçebilirsiniz */
-    }
-</style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     @*begin::Toolbar*@
     <div class="toolbar py-2" id="kt_toolbar">
@@ -149,7 +144,7 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" id="NumberPhone" name="NumberPhone" class="form-control form-control-solid" required />
+                            <input type="tel" id="PhoneNumber" name="PhoneNumber" pattern="[0-9]{11}" maxlength="11" class="form-control form-control-solid" required />
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -173,7 +168,11 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" id="Password" name="Password" class="form-control form-control-solid" required />
+
+                            <div style="position: relative;">
+                                <input type="password" id="Password" name="Password" class="form-control form-control-solid" required />
+                                <i class="fa fa-eye" id="eyeIcon" onclick="togglePassword('Password')" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px;"></i>
+                            </div>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -185,7 +184,11 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" id="ConfirmPassword" name="Password" class="form-control form-control-solid" required />
+                        
+                            <div style="position: relative;">
+                                <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control form-control-solid" required />
+                                <i class="fa fa-eye" id="eyeIconx" onclick="togglePasswordx('ConfirmPassword')" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px;"></i>
+                            </div>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -261,18 +264,6 @@
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
-                                <span class="required">Telefon</span>
-                            </label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <input type="text" id="NumberPhone" name="NumberPhone" class="form-control form-control-solid" required />
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-7">
-                            <!--begin::Label-->
-                            <label class="fs-6 fw-bold mb-2">
                                 <span class="required">Kullanıcı Adı</span>
                             </label>
                             <!--end::Label-->
@@ -297,6 +288,18 @@
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
                             <label class="fs-6 fw-bold mb-2">
+                                <span class="required">Telefon</span>
+                            </label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" id="PhoneNumber" name="NumberPhone" pattern="[0-9]{11}" maxlength="11" class="form-control form-control-solid" required />
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="fs-6 fw-bold mb-2">
                                 <span class="required">Adres</span>
                             </label>
                             <!--end::Label-->
@@ -313,7 +316,10 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" id="Password" name="Password" class="form-control form-control-solid" required />
+                            <div style="position: relative;">
+                                <input type="password" id="EditPassword" name="EditPassword" class="form-control form-control-solid" required />
+                                <i class="fa fa-eye" id="eyeIcon2" onclick="editTogglePassword('EditPassword')" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px;"></i>
+                            </div>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->        
@@ -326,7 +332,10 @@
                             </label>
                             <!--end::Label-->
                             <!--begin::Input-->
-                            <input type="text" id="ConfirmPassword" name="Password" class="form-control form-control-solid" required />
+                            <div style="position: relative;">
+                                <input type="password" id="EditConfirmPassword" name="EditConfirmPassword" class="form-control form-control-solid" required />
+                                <i class="fa fa-eye" id="eyeIcon2x" onclick="editTogglePasswordx('EditConfirmPassword')" style="position: absolute; top: 50%; transform: translateY(-50%); right: 10px;"></i>
+                            </div>
                             <!--end::Input-->
                         </div>
                         <!--end::Input group-->
@@ -340,7 +349,7 @@
                     <button type="button" class="btn btn-light me-3" onclick="closeModal()">Vazgeç</button>
                     <!--end::Button-->
                     <!--begin::Button-->
-                    <a onclick="UpdateModerator" class="btn btn-primary">
+                    <a onclick="UpdateModaretor()" class="btn btn-primary">
                         <span class="indicator-label" data-dismiss="modal">Kaydet</span>
                     </a>
                     <!--end::Button-->
@@ -365,5 +374,58 @@
     });
     function closeModal() {
         $('.modal').modal('hide');
+    }
+</script>
+<script>
+    function togglePassword(inputId) {
+        var x = document.getElementById(inputId);
+        var eyeIcon = document.getElementById('eyeIcon');
+
+        if (x.type === "password") {
+            x.type = "text";
+            eyeIcon.className = 'fa fa-eye-slash'; // Kapalı göz ikonu
+        } else {
+            x.type = "password";
+            eyeIcon.className = 'fa fa-eye'; // Açık göz ikonu
+        }
+    }
+    function togglePasswordx(inputId) {
+        var x = document.getElementById(inputId);
+        var eyeIconx = document.getElementById('eyeIconx');
+
+        if (x.type === "password") {
+            x.type = "text";
+            eyeIconx.className = 'fa fa-eye-slash'; // Kapalı göz ikonu
+        } else {
+            x.type = "password";
+            eyeIconx.className = 'fa fa-eye'; // Açık göz ikonu
+        }
+    }
+</script>
+<script>
+    function editTogglePassword(inputId) {
+        debugger
+        var x = document.getElementById(inputId);
+        var eyeIcon2 = document.getElementById('eyeIcon2');
+
+        if (x.type === "password") {
+            x.type = "text";
+            eyeIcon2.className = 'fa fa-eye-slash'; // Kapalı göz ikonu
+        } else {
+            x.type = "password";
+            eyeIcon2.className = 'fa fa-eye'; // Açık göz ikonu
+        }
+    }
+    function editTogglePasswordx(inputId) {
+        var x = document.getElementById(inputId);
+        var eyeIcon2x = document.getElementById('eyeIcon2x');
+
+        if (x.type === "password") {
+            x.type = "text";
+            eyeIcon2x.className = 'fa fa-eye-slash'; // Kapalı göz ikonu
+        } else {
+            x.type = "password";
+            eyeIcon2x.className = 'fa fa-eye'; // Açık göz ikonu
+        }
     }
 </script>

@@ -1,4 +1,8 @@
-﻿function GetMyProfile() {
+﻿function isValidEmail(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+function GetMyProfile() {
     debugger
     $.ajax({
         type: "GET",
@@ -44,6 +48,9 @@ function SaveProfile() {
     }
     else if (Email == "") {
         swal.fire("Hata!", "Emailinizi Giriniz.", "error");
+    }
+    else if (!isValidEmail(Email)) {
+        swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
     }
     else if (Password == "") {
         swal.fire("Hata!", "Şifrenizi Giriniz.", "error");
