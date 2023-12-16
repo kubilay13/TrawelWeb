@@ -208,9 +208,9 @@ namespace DataAccsessLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "db1f33af-e0a7-401f-96e7-ce5088f3c356", "Admin", "ADMIN" },
-                    { 2, "26187392-01ad-41b8-bdee-04aebf684ada", "Moderator", "MODERATOR" },
-                    { 3, "2c730a37-1a1d-482c-b4e6-4d1b0267771c", "User", "USER" }
+                    { 1, "1ab3f13e-8bc0-455c-a559-03ea504a81e9", "Admin", "ADMIN" },
+                    { 2, "c1860b39-4119-4e6f-9bcf-4d9ffd66d922", "Moderator", "MODERATOR" },
+                    { 3, "31731f95-f6e3-4b65-991e-fb127006fc6f", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -93,13 +93,11 @@ namespace TrawelWeb.Controllers
             HttpContext.Session.Clear(); // Session'ı temizle
             return Ok("Çıkış Yapıldı");
         }
-        [Authorize(Roles = " ")]
         [HttpGet]
         public IActionResult SignUp()
         {
             return View();
         }
-        [Authorize(Roles = " ")]
         [HttpPost]
         public async Task<IActionResult> SignUp(AppUserSignUpDto appUserSignUpDto)
         {

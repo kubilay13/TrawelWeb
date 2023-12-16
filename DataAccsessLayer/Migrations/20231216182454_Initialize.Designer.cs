@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231212083942_Initialize")]
+    [Migration("20231216182454_Initialize")]
     partial class Initialize
     {
         /// <inheritdoc />
@@ -58,21 +58,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "db1f33af-e0a7-401f-96e7-ce5088f3c356",
+                            ConcurrencyStamp = "1ab3f13e-8bc0-455c-a559-03ea504a81e9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "26187392-01ad-41b8-bdee-04aebf684ada",
+                            ConcurrencyStamp = "c1860b39-4119-4e6f-9bcf-4d9ffd66d922",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "2c730a37-1a1d-482c-b4e6-4d1b0267771c",
+                            ConcurrencyStamp = "31731f95-f6e3-4b65-991e-fb127006fc6f",
                             Name = "User",
                             NormalizedName = "USER"
                         });
