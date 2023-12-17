@@ -300,6 +300,75 @@ namespace TrawelWeb.Controllers
 
         //--EndUser--
 
+        //--StartOrder--
+        [Authorize(Roles = "Moderator,Admin")]
+        public IActionResult Order()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetOrder()
+        {
+            var list = new
+            {
+                data = from Cars in _db.Cars
+                       select new
+                       {
+                           Id=Cars.ID,
+                           Brand = Cars.Brand,
+                           Model = Cars.Model,
+                           FuelType = Cars.FuelType,
+                           GearType = Cars.GearType,
+                           KM = Cars.KM,
+                           CaseType = Cars.CaseType,
+                           EnginePower = Cars.EnginePower,
+                           EngineCapacity = Cars.EngineCapacity,
+                           Color = Cars.Color,
+                           ModaretorId = Cars.ModaretorId,
+                           Year = Cars.Year,
+                       }
+            };
+
+            return Json(list);
+
+        }
+        public async Task<IActionResult> AddOrder(CarsViewModel carsViewModel)
+        {
+
+            var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (Modaretor != null)
+            {
+                Cars cars = new Cars()
+                {
+                    ModaretorId = Modaretor.Id,
+                    Brand = carsViewModel.Brand,
+                    CaseType = carsViewModel.CaseType,
+                    Color = carsViewModel.Color,
+                    EngineCapacity = carsViewModel.EngineCapacity,
+                    EnginePower = carsViewModel.EnginePower,
+                    FuelType = carsViewModel.FuelType,
+                    GearType = carsViewModel.GearType,
+                    KM = carsViewModel.KM,
+                    Model = carsViewModel.Model,
+                    Year = carsViewModel.Year,
+
+                };
+                _db.Cars.Add(cars);
+                _db.SaveChanges();
+                return Ok("İlan ekleme işlemi başarılı");
+            }
+
+            else
+            {
+                return BadRequest("İlan ekleme işlemi başarısız.");
+            }
+
+            return View();
+        }
+
+
+        //--EndOrder--
     }
 
 
