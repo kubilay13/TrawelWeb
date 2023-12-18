@@ -831,27 +831,19 @@ function GetOrder() {
                 className: 'dt-center ml-3',
             },
             {
-                data: 'FirstName',
+                data: 'Brand',
                 className: 'font-weight-bold ',
             },
             {
-                data: 'LastName',
+                data: 'Model',
                 className: 'font-weight-bold ',
             },
             {
-                data: 'PhoneNumber',
+                data: 'Year',
                 className: 'font-weight-bold ',
             },
             {
-                data: 'UserName',
-                className: 'font-weight-bold ',
-            },
-            {
-                data: 'Email',
-                className: 'font-weight-bold ',
-            },
-            {
-                data: 'Adress',
+                data: 'Color',
                 className: 'font-weight-bold ',
             },
             {
@@ -871,43 +863,28 @@ function GetOrder() {
             {
                 targets: 1,
                 render: function (data, type, full, meta) {
-                    var result = full['firstName'];
+                    var result = full['brand'];
                     return result;
                 }
             },
             {
                 targets: 2,
                 render: function (data, type, full, meta) {
-                    var result = full['lastName'];
+                    var result = full['model'];
                     return result;
                 }
             },
             {
                 targets: 3,
                 render: function (data, type, full, meta) {
-                    var result = full['phoneNumber'];
+                    var result = full['year'];
                     return result;
                 }
             },
             {
                 targets: 4,
                 render: function (data, type, full, meta) {
-                    var result = full['userName'];
-                    return result;
-                }
-            },
-            {
-                targets: 5,
-                render: function (data, type, full, meta) {
-                    var result = full['email'];
-                    return result;
-                }
-            },
-            {
-                targets: 6,
-                render: function (data, type, full, meta) {
-                    debugger
-                    var result = full['adress'];
+                    var result = full['color'];
                     return result;
                 }
             },
@@ -918,10 +895,10 @@ function GetOrder() {
                 "width": "20%",
                 render: function (data, type, full, meta) {
                     debugger
-                    result = `<a href="EditCar(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
+                    result = `<a href="EditOrder(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
                                   <span class="fas fa-pencil-alt fa-2x"></span>
                                   </a>
-                                  <a onclick="DeleteCar(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <a onclick="DeleteOrder(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
                                   <span class="fas fa-trash-alt fa-2x"></span>
                                    </a>`;
                     return result;
@@ -1150,6 +1127,292 @@ function DeleteOrder(userId) {
     });
 }
 
-
-
 //End--Order--
+
+//Start--OrderCategory--
+function GetOrderCategory() {
+    debugger
+    var table = $('#kt_table_OrderCategoryList');
+    var t = table.DataTable({
+        ajax: {
+            url: '/Admin/GetOrderCategory',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            data: {
+                pagination: {
+                    perpage: 50,
+                },
+            },
+        },
+        "pageLength": 50,
+        'stripeClasses': ['stripe1', 'stripe2'],
+        dom: `<'row'<'col-sm-3 text-left'f'><'col-sm-9 text-right'B>>
+			<'row'<'col-sm-12'tr>>
+			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'l>>`,
+        language: {
+            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "info": "_PAGE_ / _PAGES_",
+            "infoEmpty": "Gösterilecek kayıt yok",
+            "infoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)",
+            "search": "Ara:",
+            "paginate": {
+                "first": "İlk",
+                "previous": "Önceki",
+                "next": "Sonraki",
+                "last": "Son"
+            },
+            "sInfo": "Toplam _TOTAL_ kayıttan _START_ ile _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoEmpty": "Toplam 0 kayıt",
+            "sInfoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)"
+        },
+
+
+        columns: [
+            {
+                data: 'SN',
+                searchable: false,
+                orderable: false,
+                width: '4%',
+                className: 'dt-center ml-3',
+            },
+            {
+                data: 'OrderCategory',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'İşlemler',
+            },
+        ],
+
+        columnDefs: [
+            {
+                targets: 0,
+                render: function (data, type, full, meta) {
+                    debugger
+                    result = ``;
+                    return result;
+                }
+            },
+            {
+                targets: 1,
+                render: function (data, type, full, meta) {
+                    var result = full['orderCategory'];
+                    return result;
+                }
+            },
+            {
+                targets: -1,
+                title: 'İşlemler',
+                orderable: false,
+                "width": "20%",
+                render: function (data, type, full, meta) {
+                    debugger
+                    result = `<a onclick="EditOrderCategory(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle" data-bs-target="#EditCategoryModal" data-bs-toggle="modal">
+                                  <span class="fas fa-pencil-alt fa-2x"></span>
+                                  </a>
+                                  <a onclick="DeleteOrderCategory(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <span class="fas fa-trash-alt fa-2x"></span>
+                                   </a>`;
+                    return result;
+                }
+            },
+        ],
+        order: [[1, 'asc']],
+        responsive: true,
+        "scrollX": true,
+        orderCellsTop: true,
+        "destroy": true,
+    });
+    t.on('draw.dt', function () {
+        var PageInfo = $('#kt_table_OrderCategoryList').DataTable().page.info();
+        t.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        });
+    });
+
+};
+
+function AddOrderCategory() {
+    debugger
+    var OrderCategory = $('#OrderCategory').val();
+
+    if (OrderCategory == "") {
+        swal.fire("Hata!", "Kategori Giriniz!", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('OrderCategory', OrderCategory);
+
+        $.ajax({
+            type: "POST",
+            url: '/Admin/AddOrderCategory',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Ekleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand",
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload();
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
+
+                swal.fire("Hata!", errorMessage, "error");
+            }
+        });
+    }
+};
+
+function EditOrderCategory(categoryId) {
+    debugger
+    $.ajax({
+        type: "GET",
+        url: '/Admin/EditOrderCategory/?categoryId=' + categoryId,
+        success: function (data) {
+            debugger
+            $('#EditCategoryModal #ID').val(data['data'][0]['id']);
+            $('#EditCategoryModal #Category').val(data['data'][0]['orderCategory']);
+            $('#EditCategoryModal').modal();
+
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+            try {
+                var response = JSON.parse(xhr.responseText);
+                if (response && response.error) {
+                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                }
+            } catch (e) {
+                // JSON hatası varsa varsayılan hatayı kullan
+            }
+
+            swal.fire("Hata!", errorMessage, "error");
+        }
+
+    });
+};
+
+function UpdateOrderCategory() {
+    debugger
+    var Id = $('#EditCategoryModal #ID').val();
+    var Category = $('#EditCategoryModal #Category').val().trim();
+    
+
+    if (Category == "") {
+        swal.fire("Hata!", "Kategori Giriniz!", "error");
+    }
+
+    else {
+        var formData = new FormData();
+        formData.append('Id', Id);
+        formData.append('Category', Category);
+      
+        $.ajax({
+            type: "POST",
+            url: '/Admin/UpdateOrderCategory',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Güncelleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        location.reload();
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
+
+                swal.fire("Hata!", errorMessage, "error");
+            }
+        });
+    }
+};
+
+function DeleteOrderCategory(categoryId) {
+    swal.fire({
+        title: "Emin misiniz?",
+        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Evet, Sil",
+        cancelButtonText: "Hayır"
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            // Kullanıcı evet dediyse silme işlemini başlat
+            $.ajax({
+                type: "DELETE",
+                url: '/Admin/DeleteOrderCategory/?categoryId=' + categoryId,
+                success: function (data) {
+                    swal.fire({
+                        title: "Başarılı!",
+                        text: "Silme işlemi başarılı.",
+                        icon: "success",
+                        buttonsStyling: true,
+                        confirmButtonText: "Tamam!",
+                        confirmButtonClass: "btn btn-brand"
+                    }).then(function () {
+                        window.location.reload();
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response && response.error) {
+                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                        }
+                    } catch (e) {
+                        // JSON hatası varsa varsayılan hatayı kullan
+                    }
+
+                    swal.fire("Hata!", errorMessage, "error");
+                }
+            });
+        }
+    });
+}
+
+//End--OrderCategory--

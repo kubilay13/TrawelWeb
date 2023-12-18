@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dtos\AppRoleDtos\" />
+    <Compile Remove="Dtos\AppRoleDtos\**" />
+    <EmbeddedResource Remove="Dtos\AppRoleDtos\**" />
+    <None Remove="Dtos\AppRoleDtos\**" />
   </ItemGroup>
 
   <ItemGroup>

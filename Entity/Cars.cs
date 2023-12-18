@@ -14,6 +14,5 @@ namespace Entity
         public int EnginePower { get; set; } //Motor Gücü
         public int EngineCapacity { get; set; } //Motor Hacmi
         public string Color { get; set; } //Renk
-        public int ModaretorId { get; set; }//Hangi kullanıcının eklediğiyse
     }
 }

@@ -4,6 +4,7 @@ using DataAccsessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231218083831_Order-OrderType")]
+    partial class OrderOrderType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,21 +58,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "63b50502-06e7-45cd-91b8-d015e13cb96d",
+                            ConcurrencyStamp = "516928e8-1052-4c2b-bb20-6e4776148ab9",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "ea04460a-2c7d-4b53-9456-38b8a4d10c54",
+                            ConcurrencyStamp = "7163dfb8-7285-45af-a730-3bcf70107889",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "3ef88a23-9a3d-4ef8-9bda-b4d82136993b",
+                            ConcurrencyStamp = "6914bc51-57a5-4a39-b8f9-dac259e68dee",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -278,7 +281,7 @@ namespace DataAccsessLayer.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("Entity.OrderCategory", b =>
+            modelBuilder.Entity("Entity.OrderType", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -292,7 +295,7 @@ namespace DataAccsessLayer.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("OrderCategory");
+                    b.ToTable("OrderType");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
