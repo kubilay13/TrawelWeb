@@ -895,10 +895,10 @@ function GetCarOrder() {
                 "width": "20%",
                 render: function (data, type, full, meta) {
                     debugger
-                    result = `<a href="EditOrder(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
+                    result = `<a href="EditCarOrder(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
                                   <span class="fas fa-pencil-alt fa-2x"></span>
                                   </a>
-                                  <a onclick="DeleteOrder(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <a onclick="DeleteCarOrder(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
                                   <span class="fas fa-trash-alt fa-2x"></span>
                                    </a>`;
                     return result;
@@ -994,7 +994,7 @@ function AddCarOrder() {
                     confirmButtonClass: "btn btn-brand",
                 }).then(function (result) {
                     if (result.value) {
-                        location.reload();
+                        window.location.href = "/Admin/CarOrder";
                     }
                 });
             },
@@ -1015,6 +1015,53 @@ function AddCarOrder() {
         });
     }
 };
+
+function DeleteCarOrder(Id) {
+    swal.fire({
+        title: "Emin misiniz?",
+        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Evet, Sil",
+        cancelButtonText: "Hayır"
+    }).then(function (result) {
+        if (result.isConfirmed) {
+            // Kullanıcı evet dediyse silme işlemini başlat
+            $.ajax({
+                type: "DELETE",
+                url: '/Admin/DeleteCarOrder/?Id=' + Id,
+                success: function (data) {
+                    swal.fire({
+                        title: "Başarılı!",
+                        text: "Silme işlemi başarılı.",
+                        icon: "success",
+                        buttonsStyling: true,
+                        confirmButtonText: "Tamam!",
+                        confirmButtonClass: "btn btn-brand"
+                    }).then(function () {
+                        window.location.reload();
+                    });
+                },
+                error: function (xhr, status, error) {
+                    var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+                    try {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response && response.error) {
+                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                        }
+                    } catch (e) {
+                        // JSON hatası varsa varsayılan hatayı kullan
+                    }
+
+                    swal.fire("Hata!", errorMessage, "error");
+                }
+            });
+        }
+    });
+}
 
 
 //End--CarOrder--
@@ -1109,51 +1156,6 @@ function AddCarOrder() {
 //    }
 //};
 
-//function DeleteOrderCategory(categoryId) {
-//    swal.fire({
-//        title: "Emin misiniz?",
-//        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
-//        icon: "warning",
-//        showCancelButton: true,
-//        confirmButtonColor: "#3085d6",
-//        cancelButtonColor: "#d33",
-//        confirmButtonText: "Evet, Sil",
-//        cancelButtonText: "Hayır"
-//    }).then(function (result) {
-//        if (result.isConfirmed) {
-//            // Kullanıcı evet dediyse silme işlemini başlat
-//            $.ajax({
-//                type: "DELETE",
-//                url: '/Admin/DeleteOrderCategory/?categoryId=' + categoryId,
-//                success: function (data) {
-//                    swal.fire({
-//                        title: "Başarılı!",
-//                        text: "Silme işlemi başarılı.",
-//                        icon: "success",
-//                        buttonsStyling: true,
-//                        confirmButtonText: "Tamam!",
-//                        confirmButtonClass: "btn btn-brand"
-//                    }).then(function () {
-//                        window.location.reload();
-//                    });
-//                },
-//                error: function (xhr, status, error) {
-//                    var errorMessage = "Bir sorun ile karşılaşıldı!";
 
-//                    try {
-//                        var response = JSON.parse(xhr.responseText);
-//                        if (response && response.error) {
-//                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
-//                        }
-//                    } catch (e) {
-//                        // JSON hatası varsa varsayılan hatayı kullan
-//                    }
-
-//                    swal.fire("Hata!", errorMessage, "error");
-//                }
-//            });
-//        }
-//    });
-//}
 
 //End--OrderCategory--

@@ -337,7 +337,6 @@ namespace TrawelWeb.Controllers
                            Color = Order.Color,
                            ModaretorId = Order.ModaretorId,
                            Type = Order.Type,
-
                        }
 
             };
@@ -416,7 +415,48 @@ namespace TrawelWeb.Controllers
 
             return View();
         }
+        public async Task<IActionResult> DeleteCarOrder(int Id)
+        {
+            if (Id != null)
+            {
+                var order = await _db.Order.FindAsync(Id);
+                if (order != null)
+                {
+                    var orderCategory = await _db.OrderCategory.FirstOrDefaultAsync(q => q.OrderId == order.ID);
+                    if (orderCategory != null)
+                    {
+                        var car = await _db.Cars.FirstOrDefaultAsync(q => q.ID == orderCategory.ProductId);
 
+                        if(car != null)
+                        {
+                            _db.Order.Remove(order);
+                            _db.OrderCategory.Remove(orderCategory);
+                            _db.Cars.Remove(car);
+                            await _db.SaveChangesAsync();
+                            return Ok();
+                        }
+                        else
+                        {
+                            return BadRequest("Silme işlemi başarısız!");
+                        }
+                    }
+                    else
+                    {
+                        return BadRequest("Silme işlemi başarısız!");
+                    }
+                }
+                else
+                {
+                    return BadRequest("Aradığınız kullanıcı bulunamadı!");
+                }
+            }
+            else
+            {
+                return BadRequest("Hata! Tekrar deneyiniz.");
+            }
+
+            return View();
+        }
         //--EndCarOrder--
     }
 

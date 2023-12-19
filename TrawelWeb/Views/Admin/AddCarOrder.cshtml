@@ -5,21 +5,33 @@
     <!-- Content types section start -->
     <section id="content-types">
         <div class="row justify-content-center">
-            <div class="col-12 col-xl-8 col-md-8 mt-3 mb-1">
-                <h4 class="text-uppercase">Content Types</h4>
-                <p>
-                    Cards support a wide variety of content, including images, text, list groups, links, and more. Mix and match multiple
-                    content types to create the card you need.
-                </p>
+            <div class="toolbar py-2" id="kt_toolbar">
+                <!--begin::Container-->
+                <div id="kt_toolbar_container" class="container-fluid d-flex align-items-center">
+                    <!--begin::Page title-->
+                    <div class="flex-grow-1 flex-shrink-0 me-5">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">
+                                İlan Ekle
+                            </h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                    </div>
+                    <!--end::Page title-->
+                </div>
+                <!--end::Container-->
             </div>
 
-            <div class="col-12 col-xl-10 col-md-10">
+            <div class="col-12 col-xl-12 col-md-12">
                 <div class="card">
                     <div class="card-content table align-middle table-row-dashed fs-6 gy-5" style="align-items: center;">
-                        <div class="card-body">
+                       @*  <div class="card-body">
                             <h4 class="card-title">Contact Form</h4>
                             <h6 class="card-subtitle text-muted">Support card subtitle</h6>
-                        </div>
+                        </div> *@
                         <div class="card-body">
                             <form class="form">
                                 <div class="row">
@@ -83,7 +95,7 @@
                                         <p class="mb-4">Motor Gücü :</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="EnginePower" placeholder="MotorGücü">
+                                        <input type="number" class="form-control" id="EnginePower" placeholder="MotorGücü">
                                     </div>
                                 </div> 
                                 <div class="row">
@@ -91,7 +103,7 @@
                                         <p class="mb-4">Motor Hacmi :</p>
                                     </div>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="EngineCapacity" placeholder="MotorHacmi">
+                                        <input type="number" class="form-control" id="EngineCapacity" placeholder="MotorHacmi">
                                     </div>
                                 </div>
                                 <div class="row">
