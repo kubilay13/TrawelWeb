@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace DataAccsessLayer.Concrete
 {
@@ -29,6 +30,8 @@ namespace DataAccsessLayer.Concrete
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<OrderCategory>()
+            .HasKey(oc => new { oc.OrderId, oc.ProductId }); // Anahtar olarak OrderId ve CategoryId kullan
 
             // Rollerinizi burada ekleyin
             builder.Entity<AppRole>().HasData(

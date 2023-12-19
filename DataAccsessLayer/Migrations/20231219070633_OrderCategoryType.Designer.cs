@@ -4,6 +4,7 @@ using DataAccsessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231219070633_OrderCategoryType")]
+    partial class OrderCategoryType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,21 +58,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "222bf3b4-d9fb-4790-9281-f72461bd85e1",
+                            ConcurrencyStamp = "8cad8443-8f47-49c4-96b1-a75ed7a948ba",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "ac7e1bb4-d263-4b18-9bcf-2c9ca55eb0e8",
+                            ConcurrencyStamp = "551dda4a-b8ce-45e9-948e-bb83395d407f",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "ca76500e-5416-40c0-978c-f2bd5681d7e2",
+                            ConcurrencyStamp = "dd81da41-2b0b-46a0-a938-e8349b6583e4",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -281,9 +284,6 @@ namespace DataAccsessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId", "ProductId");

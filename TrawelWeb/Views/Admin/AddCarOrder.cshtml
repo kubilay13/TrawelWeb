@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="content-body">
+    <!-- Content types section start -->
+    <section id="content-types">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-8 col-md-8 mt-3 mb-1">
+                <h4 class="text-uppercase">Content Types</h4>
+                <p>
+                    Cards support a wide variety of content, including images, text, list groups, links, and more. Mix and match multiple
+                    content types to create the card you need.
+                </p>
+            </div>
+
+            <div class="col-12 col-xl-10 col-md-10">
+                <div class="card">
+                    <div class="card-content table align-middle table-row-dashed fs-6 gy-5" style="align-items: center;">
+                        <div class="card-body">
+                            <h4 class="card-title">Contact Form</h4>
+                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                        </div>
+                        <div class="card-body">
+                            <form class="form">
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Marka :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Brand" placeholder="Marka">
+                                    </div>
+                                </div>  
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Model :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Model" placeholder="Model">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Yıl :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="Year" placeholder="Yıl">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Yakıt Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="FuelType" placeholder="Yakıt">
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Vites Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="GearType" placeholder="Vites">
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Kilometre:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="KM" placeholder="KM">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Kasa Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="CaseType" placeholder="Kasa">
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Motor Gücü :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="EnginePower" placeholder="MotorGücü">
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Motor Hacmi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="EngineCapacity" placeholder="MotorHacmi">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Renk:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Color" placeholder="Renk">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions d-flex justify-content-end">
+                                    <a onclick="AddCarOrder()" class="btn btn-success text-black">Send</a>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content types section end -->
+</div>

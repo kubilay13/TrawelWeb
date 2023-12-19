@@ -783,12 +783,12 @@ function DeleteUser(userId) {
 
 //Start--Order--
 
-function GetOrder() {
+function GetCarOrder() {
     debugger
-    var table = $('#kt_table_OrderList');
+    var table = $('#kt_table_CarOrderList');
     var t = table.DataTable({
         ajax: {
-            url: '/Admin/GetOrder',
+            url: '/Admin/GetCarOrder',
             type: 'GET',
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -895,10 +895,10 @@ function GetOrder() {
                 "width": "20%",
                 render: function (data, type, full, meta) {
                     debugger
-                    result = `<a href="EditOrder(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
+                    result = `<a href="EditOrder(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
                                   <span class="fas fa-pencil-alt fa-2x"></span>
                                   </a>
-                                  <a onclick="DeleteOrder(` + full['userId'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <a onclick="DeleteOrder(` + full['Id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
                                   <span class="fas fa-trash-alt fa-2x"></span>
                                    </a>`;
                     return result;
@@ -912,7 +912,7 @@ function GetOrder() {
         "destroy": true,
     });
     t.on('draw.dt', function () {
-        var PageInfo = $('#kt_table_OrderList').DataTable().page.info();
+        var PageInfo = $('#kt_table_CarOrderList').DataTable().page.info();
         t.column(0, { page: 'current' }).nodes().each(function (cell, i) {
             cell.innerHTML = i + 1 + PageInfo.start;
         });
@@ -920,24 +920,66 @@ function GetOrder() {
 
 };
 
-function AddOrder() {
+function AddCarOrder() {
     debugger
     var Brand = $('#Brand').val();
+    var Model = $('#Model').val();
+    var Year = $('#Year').val();
+    var FuelType = $('#FuelType').val();
+    var GearType = $('#GearType').val();
+    var KM = $('#KM').val();
+    var CaseType = $('#CaseType').val();
+    var EnginePower = $('#EnginePower').val();
+    var EngineCapacity = $('#EngineCapacity').val();
+    var Color = $('#Color').val();
+
 
     if (Brand == "") {
-        swal.fire("Hata!", "İsmin Giriniz!", "error");
+        swal.fire("Hata!", "Marka Giriniz!", "error");
+    }
+    else if (Model == "") {
+        swal.fire("Hata!", "Model Giriniz!", "error");
+    }
+    else if (Year == "") {
+        swal.fire("Hata!", "Yıl Giriniz!", "error");
+    }
+    else if (FuelType == "") {
+        swal.fire("Hata!", "Yakıt Tipi Giriniz!", "error");
+    }
+    else if (GearType == "") {
+        swal.fire("Hata!", "Vites Tipi Giriniz!", "error");
+    }
+    else if (KM == "") {
+        swal.fire("Hata!", "Kilometre Giriniz!", "error");
     }
     else if (CaseType == "") {
-        swal.fire("Hata!", "Soyisim Giriniz.", "error");
+        swal.fire("Hata!", "Kasa Tipi Giriniz!", "error");
     }
-
+    else if (EnginePower == "") {
+        swal.fire("Hata!", "Motor Gücü Giriniz!", "error");
+    }
+    else if (EngineCapacity == "") {
+        swal.fire("Hata!", "Motor Hacmi Giriniz!", "error");
+    }
+    else if (Color == "") {
+        swal.fire("Hata!", "Renk Giriniz!", "error");
+    }
     else {
         var formData = new FormData();
         formData.append('Brand', Brand);
+        formData.append('Model', Model);
+        formData.append('Year', Year);
+        formData.append('FuelType', FuelType);
+        formData.append('GearType', GearType);
+        formData.append('KM', KM);
+        formData.append('CaseType', CaseType);
+        formData.append('EnginePower', EnginePower);
+        formData.append('EngineCapacity', EngineCapacity);
+        formData.append('Color', Color);
 
         $.ajax({
             type: "POST",
-            url: '/Admin/AddCars',
+            url: '/Admin/AddCarOrder',
             data: formData,
             processData: false,
             contentType: false,
@@ -974,445 +1016,144 @@ function AddOrder() {
     }
 };
 
-function EditOrder(userId) {
-    debugger
-    $.ajax({
-        type: "GET",
-        url: '/Admin/EditCar/?userId=' + userId,
-        success: function (data) {
-            debugger
-            $('#EditUserModal #UserID').val(data['data'][0]['userId']);
-            $('#EditUserModal #FirstName').val(data['data'][0]['firstName']);
-            $('#EditUserModal #LastName').val(data['data'][0]['lastName']);
-            $('#EditUserModal #UserName').val(data['data'][0]['userName']);
-            $('#EditUserModal #Email').val(data['data'][0]['email']);
-            $('#EditUserModal #PhoneNumber').val(data['data'][0]['phoneNumber']);
-            $('#EditUserModal #Adress').val(data['data'][0]['adress']);
-            $('#EditUserModal').modal();
 
-        },
-        error: function (xhr, status, error) {
-            var errorMessage = "Bir sorun ile karşılaşıldı!";
+//End--CarOrder--
 
-            try {
-                var response = JSON.parse(xhr.responseText);
-                if (response && response.error) {
-                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                }
-            } catch (e) {
-                // JSON hatası varsa varsayılan hatayı kullan
-            }
+//function EditOrderCategory(categoryId) {
+//    debugger
+//    $.ajax({
+//        type: "GET",
+//        url: '/Admin/EditOrderCategory/?categoryId=' + categoryId,
+//        success: function (data) {
+//            debugger
+//            $('#EditCategoryModal #ID').val(data['data'][0]['id']);
+//            if (data['data'][0]['orderCategory'] == 0) {
+//                $('#EditCategoryModal #Category').val("Araba");
+//            }
+//            else if (data['data'][0]['orderCategory'] == 1) {
+//                $('#EditCategoryModal #Category').val("Tekne");
+//            }
+           
+//            $('#EditCategoryModal').modal();
 
-            swal.fire("Hata!", errorMessage, "error");
-        }
+//        },
+//        error: function (xhr, status, error) {
+//            var errorMessage = "Bir sorun ile karşılaşıldı!";
 
-    });
-};
+//            try {
+//                var response = JSON.parse(xhr.responseText);
+//                if (response && response.error) {
+//                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
+//                }
+//            } catch (e) {
+//                // JSON hatası varsa varsayılan hatayı kullan
+//            }
 
-function UpdateOrder() {
-    debugger
-    var UserId = $('#EditUserModal #UserID').val();
-    var FirstName = $('#EditUserModal #FirstName').val().trim();
-    var LastName = $('#EditUserModal #LastName').val().trim();
-    var UserName = $('#EditUserModal #UserName').val().trim();
-    var Email = $('#EditUserModal #Email').val().trim();
-    var Password = $('#EditUserModal #EditPassword').val().trim();
-    var Passwordlenght = Password.length;//Metin uzunluğu sorgulama
-    var ConfirmPassword = $('#EditUserModal #EditConfirmPassword').val().trim();
-    var PhoneNumber = $('#EditUserModal #PhoneNumber').val();
-    var Adress = $('#EditUserModal #Adress').val();
-    var hasUpperCase = /[A-Z]/.test(Password);//Büyük harf sorgulama
-    var hasLowerCase = /[a-z]/.test(Password);//Küçük harf sorgulama
+//            swal.fire("Hata!", errorMessage, "error");
+//        }
 
-    if (FirstName == "") {
-        swal.fire("Hata!", "İsmin Giriniz!", "error");
-    }
-    else if (LastName == "") {
-        swal.fire("Hata!", "Soyisim Giriniz.", "error");
-    }
-    else {
-        var formData = new FormData();
-        formData.append('UserId', UserId);
-        formData.append('FirstName', FirstName);
-        formData.append('LastName', LastName);
-        formData.append('UserName', UserName);
-        formData.append('Email', Email);
-        formData.append('Password', Password);
-        formData.append('ConfirmPassword', ConfirmPassword);
-        formData.append('PhoneNumber', PhoneNumber);
-        formData.append('Adress', Adress);
-        $.ajax({
-            type: "POST",
-            url: '/Admin/UpdateCar',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                debugger
-                swal.fire({
-                    title: "Başarılı!",
-                    text: "Güncelleme işleminiz gerçekleşti.",
-                    icon: "success",
-                    buttonsStyling: true,
-                    confirmButtonText: "Tamam!",
-                    confirmButtonClass: "btn btn-brand"
-                }).then(function (result) {
-                    if (result.value) {
-                        location.reload();
-                    }
-                });
-            },
-            error: function (xhr, status, error) {
-                var errorMessage = "Bir sorun ile karşılaşıldı!";
+//    });
+//};
 
-                try {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response && response.error) {
-                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                    }
-                } catch (e) {
-                    // JSON hatası varsa varsayılan hatayı kullan
-                }
-
-                swal.fire("Hata!", errorMessage, "error");
-            }
-        });
-    }
-};
-
-function DeleteOrder(userId) {
-    swal.fire({
-        title: "Emin misiniz?",
-        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Evet, Sil",
-        cancelButtonText: "Hayır"
-    }).then(function (result) {
-        if (result.isConfirmed) {
-            // Kullanıcı evet dediyse silme işlemini başlat
-            $.ajax({
-                type: "POST",
-                url: '/Admin/DeleteOrder/?userId=' + userId,
-                success: function (data) {
-                    swal.fire({
-                        title: "Başarılı!",
-                        text: "Silme işlemi başarılı.",
-                        icon: "success",
-                        buttonsStyling: true,
-                        confirmButtonText: "Tamam!",
-                        confirmButtonClass: "btn btn-brand"
-                    }).then(function () {
-                        window.location.reload();
-                    });
-                },
-                error: function (xhr, status, error) {
-                    var errorMessage = "Bir sorun ile karşılaşıldı!";
-
-                    try {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response && response.error) {
-                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                        }
-                    } catch (e) {
-                        // JSON hatası varsa varsayılan hatayı kullan
-                    }
-
-                    swal.fire("Hata!", errorMessage, "error");
-                }
-            });
-        }
-    });
-}
-
-//End--Order--
-
-//Start--OrderCategory--
-function GetOrderCategory() {
-    debugger
-    var table = $('#kt_table_OrderCategoryList');
-    var t = table.DataTable({
-        ajax: {
-            url: '/Admin/GetOrderCategory',
-            type: 'GET',
-            contentType: 'application/json; charset=utf-8',
-            dataType: "json",
-            data: {
-                pagination: {
-                    perpage: 50,
-                },
-            },
-        },
-        "pageLength": 50,
-        'stripeClasses': ['stripe1', 'stripe2'],
-        dom: `<'row'<'col-sm-3 text-left'f'><'col-sm-9 text-right'B>>
-			<'row'<'col-sm-12'tr>>
-			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'l>>`,
-        language: {
-            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
-            "zeroRecords": "Eşleşen kayıt bulunamadı",
-            "info": "_PAGE_ / _PAGES_",
-            "infoEmpty": "Gösterilecek kayıt yok",
-            "infoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)",
-            "search": "Ara:",
-            "paginate": {
-                "first": "İlk",
-                "previous": "Önceki",
-                "next": "Sonraki",
-                "last": "Son"
-            },
-            "sInfo": "Toplam _TOTAL_ kayıttan _START_ ile _END_ arasındaki kayıtlar gösteriliyor",
-            "sInfoEmpty": "Toplam 0 kayıt",
-            "sInfoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)"
-        },
-
-
-        columns: [
-            {
-                data: 'SN',
-                searchable: false,
-                orderable: false,
-                width: '4%',
-                className: 'dt-center ml-3',
-            },
-            {
-                data: 'OrderCategory',
-                className: 'font-weight-bold ',
-            },
-            {
-                data: 'İşlemler',
-            },
-        ],
-
-        columnDefs: [
-            {
-                targets: 0,
-                render: function (data, type, full, meta) {
-                    debugger
-                    result = ``;
-                    return result;
-                }
-            },
-            {
-                targets: 1,
-                render: function (data, type, full, meta) {
-                    var result = full['orderCategory'];
-                    return result;
-                }
-            },
-            {
-                targets: -1,
-                title: 'İşlemler',
-                orderable: false,
-                "width": "20%",
-                render: function (data, type, full, meta) {
-                    debugger
-                    result = `<a onclick="EditOrderCategory(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle" data-bs-target="#EditCategoryModal" data-bs-toggle="modal">
-                                  <span class="fas fa-pencil-alt fa-2x"></span>
-                                  </a>
-                                  <a onclick="DeleteOrderCategory(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
-                                  <span class="fas fa-trash-alt fa-2x"></span>
-                                   </a>`;
-                    return result;
-                }
-            },
-        ],
-        order: [[1, 'asc']],
-        responsive: true,
-        "scrollX": true,
-        orderCellsTop: true,
-        "destroy": true,
-    });
-    t.on('draw.dt', function () {
-        var PageInfo = $('#kt_table_OrderCategoryList').DataTable().page.info();
-        t.column(0, { page: 'current' }).nodes().each(function (cell, i) {
-            cell.innerHTML = i + 1 + PageInfo.start;
-        });
-    });
-
-};
-
-function AddOrderCategory() {
-    debugger
-    var OrderCategory = $('#OrderCategory').val();
-
-    if (OrderCategory == "") {
-        swal.fire("Hata!", "Kategori Giriniz!", "error");
-    }
-    else {
-        var formData = new FormData();
-        formData.append('OrderCategory', OrderCategory);
-
-        $.ajax({
-            type: "POST",
-            url: '/Admin/AddOrderCategory',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                debugger
-                swal.fire({
-                    title: "Başarılı!",
-                    text: "Ekleme işleminiz gerçekleşti.",
-                    icon: "success",
-                    buttonsStyling: true,
-                    confirmButtonText: "Tamam!",
-                    confirmButtonClass: "btn btn-brand",
-                }).then(function (result) {
-                    if (result.value) {
-                        location.reload();
-                    }
-                });
-            },
-            error: function (xhr, status, error) {
-                var errorMessage = "Bir sorun ile karşılaşıldı!";
-
-                try {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response && response.error) {
-                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                    }
-                } catch (e) {
-                    // JSON hatası varsa varsayılan hatayı kullan
-                }
-
-                swal.fire("Hata!", errorMessage, "error");
-            }
-        });
-    }
-};
-
-function EditOrderCategory(categoryId) {
-    debugger
-    $.ajax({
-        type: "GET",
-        url: '/Admin/EditOrderCategory/?categoryId=' + categoryId,
-        success: function (data) {
-            debugger
-            $('#EditCategoryModal #ID').val(data['data'][0]['id']);
-            $('#EditCategoryModal #Category').val(data['data'][0]['orderCategory']);
-            $('#EditCategoryModal').modal();
-
-        },
-        error: function (xhr, status, error) {
-            var errorMessage = "Bir sorun ile karşılaşıldı!";
-
-            try {
-                var response = JSON.parse(xhr.responseText);
-                if (response && response.error) {
-                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                }
-            } catch (e) {
-                // JSON hatası varsa varsayılan hatayı kullan
-            }
-
-            swal.fire("Hata!", errorMessage, "error");
-        }
-
-    });
-};
-
-function UpdateOrderCategory() {
-    debugger
-    var Id = $('#EditCategoryModal #ID').val();
-    var Category = $('#EditCategoryModal #Category').val().trim();
+//function UpdateOrderCategory() {
+//    debugger
+//    var Id = $('#EditCategoryModal #ID').val();
+//    var Category = $('#EditCategoryModal #Category').val().trim();
     
 
-    if (Category == "") {
-        swal.fire("Hata!", "Kategori Giriniz!", "error");
-    }
+//    if (Category == "") {
+//        swal.fire("Hata!", "Kategori Giriniz!", "error");
+//    }
 
-    else {
-        var formData = new FormData();
-        formData.append('Id', Id);
-        formData.append('Category', Category);
+//    else {
+//        var formData = new FormData();
+//        formData.append('Id', Id);
+//        formData.append('Category', Category);
       
-        $.ajax({
-            type: "POST",
-            url: '/Admin/UpdateOrderCategory',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (data) {
-                debugger
-                swal.fire({
-                    title: "Başarılı!",
-                    text: "Güncelleme işleminiz gerçekleşti.",
-                    icon: "success",
-                    buttonsStyling: true,
-                    confirmButtonText: "Tamam!",
-                    confirmButtonClass: "btn btn-brand"
-                }).then(function (result) {
-                    if (result.value) {
-                        location.reload();
-                    }
-                });
-            },
-            error: function (xhr, status, error) {
-                var errorMessage = "Bir sorun ile karşılaşıldı!";
+//        $.ajax({
+//            type: "POST",
+//            url: '/Admin/UpdateOrderCategory',
+//            data: formData,
+//            processData: false,
+//            contentType: false,
+//            success: function (data) {
+//                debugger
+//                swal.fire({
+//                    title: "Başarılı!",
+//                    text: "Güncelleme işleminiz gerçekleşti.",
+//                    icon: "success",
+//                    buttonsStyling: true,
+//                    confirmButtonText: "Tamam!",
+//                    confirmButtonClass: "btn btn-brand"
+//                }).then(function (result) {
+//                    if (result.value) {
+//                        location.reload();
+//                    }
+//                });
+//            },
+//            error: function (xhr, status, error) {
+//                var errorMessage = "Bir sorun ile karşılaşıldı!";
 
-                try {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response && response.error) {
-                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                    }
-                } catch (e) {
-                    // JSON hatası varsa varsayılan hatayı kullan
-                }
+//                try {
+//                    var response = JSON.parse(xhr.responseText);
+//                    if (response && response.error) {
+//                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+//                    }
+//                } catch (e) {
+//                    // JSON hatası varsa varsayılan hatayı kullan
+//                }
 
-                swal.fire("Hata!", errorMessage, "error");
-            }
-        });
-    }
-};
+//                swal.fire("Hata!", errorMessage, "error");
+//            }
+//        });
+//    }
+//};
 
-function DeleteOrderCategory(categoryId) {
-    swal.fire({
-        title: "Emin misiniz?",
-        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Evet, Sil",
-        cancelButtonText: "Hayır"
-    }).then(function (result) {
-        if (result.isConfirmed) {
-            // Kullanıcı evet dediyse silme işlemini başlat
-            $.ajax({
-                type: "DELETE",
-                url: '/Admin/DeleteOrderCategory/?categoryId=' + categoryId,
-                success: function (data) {
-                    swal.fire({
-                        title: "Başarılı!",
-                        text: "Silme işlemi başarılı.",
-                        icon: "success",
-                        buttonsStyling: true,
-                        confirmButtonText: "Tamam!",
-                        confirmButtonClass: "btn btn-brand"
-                    }).then(function () {
-                        window.location.reload();
-                    });
-                },
-                error: function (xhr, status, error) {
-                    var errorMessage = "Bir sorun ile karşılaşıldı!";
+//function DeleteOrderCategory(categoryId) {
+//    swal.fire({
+//        title: "Emin misiniz?",
+//        text: "Bu işlemi gerçekleştirmek istediğinizden emin misiniz?",
+//        icon: "warning",
+//        showCancelButton: true,
+//        confirmButtonColor: "#3085d6",
+//        cancelButtonColor: "#d33",
+//        confirmButtonText: "Evet, Sil",
+//        cancelButtonText: "Hayır"
+//    }).then(function (result) {
+//        if (result.isConfirmed) {
+//            // Kullanıcı evet dediyse silme işlemini başlat
+//            $.ajax({
+//                type: "DELETE",
+//                url: '/Admin/DeleteOrderCategory/?categoryId=' + categoryId,
+//                success: function (data) {
+//                    swal.fire({
+//                        title: "Başarılı!",
+//                        text: "Silme işlemi başarılı.",
+//                        icon: "success",
+//                        buttonsStyling: true,
+//                        confirmButtonText: "Tamam!",
+//                        confirmButtonClass: "btn btn-brand"
+//                    }).then(function () {
+//                        window.location.reload();
+//                    });
+//                },
+//                error: function (xhr, status, error) {
+//                    var errorMessage = "Bir sorun ile karşılaşıldı!";
 
-                    try {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response && response.error) {
-                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
-                        }
-                    } catch (e) {
-                        // JSON hatası varsa varsayılan hatayı kullan
-                    }
+//                    try {
+//                        var response = JSON.parse(xhr.responseText);
+//                        if (response && response.error) {
+//                            errorMessage = response.error; // Sunucudan gelen hata mesajını al
+//                        }
+//                    } catch (e) {
+//                        // JSON hatası varsa varsayılan hatayı kullan
+//                    }
 
-                    swal.fire("Hata!", errorMessage, "error");
-                }
-            });
-        }
-    });
-}
+//                    swal.fire("Hata!", errorMessage, "error");
+//                }
+//            });
+//        }
+//    });
+//}
 
 //End--OrderCategory--

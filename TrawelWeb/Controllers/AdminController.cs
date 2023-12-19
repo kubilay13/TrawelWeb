@@ -301,196 +301,113 @@ namespace TrawelWeb.Controllers
         //--EndUser--
 
 
-        //--StartOrderCategory--
+        //--StartSeaVehicleOrder--
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult OrderCategory()
+        [Authorize(Roles = "Admin,Moderator")]
+        public IActionResult SeaVehicleOrder()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult GetOrderCategory()
-        {
 
-            var list = new
-            {
-                data = from OrderCategory in _db.OrderCategory.ToList()
-                       select new
-                       {
-                           Id = OrderCategory.ID,
-                           OrderCategory = OrderCategory.Name
-                       }
-            };
-            return Json(list);
-
-
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> AddOrderCategory(string OrderCategory)
-        {
-
-            var Admin = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (Admin != null)
-            {
-                OrderCategory orderType = new OrderCategory()
-                {
-                    Name = OrderCategory,
-                };
-                _db.OrderCategory.Add(orderType);
-                _db.SaveChanges();
-                return Ok("Ekleme işlemi başarılı");
-            }
-
-            else
-            {
-                return BadRequest("İlan ekleme işlemi başarısız.");
-            }
-
-            return View();
-        }
-
-        [Authorize(Roles = "Admin")]
-        [HttpGet]
-        public async Task<IActionResult> EditOrderCategory(int categoryId)
-        {
-            var list = new
-            {
-                data = from OrderCategory in _db.OrderCategory.Where(q => q.ID == categoryId)
-                       select new
-                       {
-                           Id = OrderCategory.ID,
-                           OrderCategory = OrderCategory.Name
-                       }
-            };
-            return Json(list);
-        }
-        [Authorize(Roles = "Admin")]
-        [HttpPost]
-        public async Task<IActionResult> UpdateOrderCategory(string Category, int Id)
-        {
-            if (Id != null)
-            {
-                var category = _db.OrderCategory.Where(q => q.ID == Id).FirstOrDefault();
-                if (category != null)
-                {
-                    category.Name= Category;
-                    _db.SaveChanges();
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest("Kategori bulunamamıştır!");
-                }
-            }
-            return View();
-        }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteOrderCategory(int categoryId)
-        {
-            if (categoryId != null)
-            {
-                var category = _db.OrderCategory.Where(q => q.ID == categoryId).FirstOrDefault();
-                if (category != null)
-                {
-                    _db.OrderCategory.Remove(category);
-                    await _db.SaveChangesAsync();
-                    return Ok();
-
-                }
-                else
-                {
-                    return BadRequest("Aradığınız kategori bulunamadı!");
-                }
-            }
-            else
-            {
-                return BadRequest("Hata! Tekrar deneyiniz.");
-            }
-
-            return View();
-        }
-
-        //--EndOrderCategory--
+        //--EndSeaVehicleOrder--
 
 
 
-        //--StartOrder--
+        //--StartCarOrder--
 
         [Authorize(Roles = "Moderator,Admin")]
-        public IActionResult Order()
+        public IActionResult CarOrder()
         {
             return View();
         }
-
+        [Authorize(Roles = "Moderator,Admin")]
         [HttpGet]
-        //public async Task<IActionResult> GetOrder()
-        //{
-        //    var list = new
-        //    {
-        //        data = from UserRoles in _db.UserRoles.Where(q => q.RoleId == 2)
-        //               join User in _db.Users
-        //               on UserRoles.UserId equals User.Id
-        //               select new
-        //               {
-        //                   UserId = User.Id,
-        //                   FirstName = User.FirstName,
-        //                   LastName = User.LastName,
-        //                   PhoneNumber = User.PhoneNumber,
-        //                   UserName = User.UserName,
-        //                   Email = User.Email,
-        //                   Adress = User.Adress
-        //               }
+        public async Task<IActionResult> GetCarOrder()
+        {
+            var list = new
+            {
+                data = from Order in _db.Order
+                       select new
+                       {
+                           Id = Order.ID,
+                           Brand = Order.Brand,
+                           Model = Order.Model,
+                           Year = Order.Year,
+                           Color = Order.Color,
+                           ModaretorId = Order.ModaretorId,
+                           Type = Order.Type,
 
-        //    };
-        //    var list = new
-        //    {
-        //        data = from Cars in _db.Cars
-        //               select new
-        //               {
-        //                   Id=Cars.ID,
-        //                   Brand = Cars.Brand,
-        //                   Model = Cars.Model,
-        //                   FuelType = Cars.FuelType,
-        //                   GearType = Cars.GearType,
-        //                   KM = Cars.KM,
-        //                   CaseType = Cars.CaseType,
-        //                   EnginePower = Cars.EnginePower,
-        //                   EngineCapacity = Cars.EngineCapacity,
-        //                   Color = Cars.Color,
-        //                   ModaretorId = Cars.ModaretorId,
-        //                   Year = Cars.Year,
-        //               }
-        //    };
+                       }
 
-        //    return Json(list);
+            };
 
-        //}
-        public async Task<IActionResult> AddOrder(CarsViewModel carsViewModel)
+            return Json(list);
+
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public IActionResult AddCarOrder()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpPost]
+        public async Task<IActionResult> AddCarOrder(CarsViewModel carsViewModel)
         {
 
-            var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (Modaretor != null)
-            {
-                Cars cars = new Cars()
+                var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
+                if (Modaretor != null)
                 {
-                    Brand = carsViewModel.Brand,
-                    CaseType = carsViewModel.CaseType,
-                    Color = carsViewModel.Color,
-                    EngineCapacity = carsViewModel.EngineCapacity,
-                    EnginePower = carsViewModel.EnginePower,
-                    FuelType = carsViewModel.FuelType,
-                    GearType = carsViewModel.GearType,
-                    KM = carsViewModel.KM,
-                    Model = carsViewModel.Model,
-                    Year = carsViewModel.Year,
 
-                };
-                _db.Cars.Add(cars);
-                _db.SaveChanges();
-                return Ok("İlan ekleme işlemi başarılı");
-            }
+                    Order order = new Order()
+                    {
+                        Brand = carsViewModel.Brand,
+                        Color = carsViewModel.Color,
+                        Year = carsViewModel.Year,
+                        ModaretorId = Modaretor.Id,
+                        Model = carsViewModel.Model,
+                    };
+                    var resultOrder = _db.Order.Add(order);
+                    _db.SaveChanges();
+                    if (resultOrder != null)
+                    {
+                        Cars cars = new Cars()
+                        {
+                            Brand = carsViewModel.Brand,
+                            CaseType = carsViewModel.CaseType,
+                            Color = carsViewModel.Color,
+                            EngineCapacity = carsViewModel.EngineCapacity,
+                            EnginePower = carsViewModel.EnginePower,
+                            FuelType = carsViewModel.FuelType,
+                            GearType = carsViewModel.GearType,
+                            KM = carsViewModel.KM,
+                            Model = carsViewModel.Model,
+                            Year = carsViewModel.Year,
+                        };
+                        var resultCarOrder = _db.Cars.Add(cars);
+                        _db.SaveChanges();
+                        if (resultCarOrder != null)
+                        {
+                            OrderCategory orderCategory = new OrderCategory()
+                            {
+                                OrderId = order.ID,
+                                ProductId = cars.ID,
+                                Type = Order.CategoryType.Car
+                            };
+                            _db.OrderCategory.Add(orderCategory);
+                            _db.SaveChanges();
+                            return Ok("Araba ilanı ekleme işlemi başarılı");
+                        }
+
+                    }
+                    else
+                    {
+                        return BadRequest("Ekleme işlemi başarısız!");
+                    }
+
+                }
+
 
             else
             {
@@ -500,8 +417,7 @@ namespace TrawelWeb.Controllers
             return View();
         }
 
-
-        //--EndOrder--
+        //--EndCarOrder--
     }
 
 

@@ -6,8 +6,8 @@
 
     var user = await userManager.GetUserAsync(User);
     // Kullanıcı bilgilerini al
-    var userRole = _db.UserRoles.Where(q=>q.UserId==user.Id).FirstOrDefault();
-    var a =  userRole.RoleId.ToString(); 
+    var userRole = _db.UserRoles.Where(q => q.UserId == user.Id).FirstOrDefault();
+    var a = userRole.RoleId.ToString();
     var roles = await roleManager.FindByIdAsync(a);
 }
 <html>
@@ -116,7 +116,8 @@
                             <div data-i18n="Analytics">Arabalarımız</div>
                         </a>
                     </li>
-                    @if (roles.Name == "Admin"){
+                    @if (roles.Name == "Admin")
+                    {
                         <li class="menu-item">
                             <a href="/Admin/ModaretorManagement" class="menu-link">
                                 <i class="fas fa-user-shield m-2"></i>
@@ -130,22 +131,18 @@
                             <div data-i18n="Analytics">Kullanıcı Yönetimi</div>
                         </a>
                     </li>
-                    @if (roles.Name == "Admin")
-                    {
-                        <li class="menu-item">
-                            <a href="/Admin/OrderCategory" class="menu-link">
-                                <i class="fas fa-chart-pie m-2"></i>
-                                <div data-i18n="Analytics">İlan Kategori</div>
-                            </a>
-                        </li>
-                    }
-
                     <li class="menu-item">
-                        <a href="/Admin/Order" class="menu-link">
-                            <i class="fa fa-shopping-basket m-2"></i>
-                            <div data-i18n="Analytics">İlan Yönetimi</div>
+                        <a href="/Admin/CarOrder" class="menu-link">
+                            <i class="fas fa-car m-2"></i>
+                            <div data-i18n="Analytics">Araba İLan</div>
                         </a>
-                    </li>        
+                    </li>
+                    <li class="menu-item">
+                        <a href="/Admin/SeaVehicleOrder" class="menu-link">
+                            <i class="fa fa-ship m-2"></i>
+                            <div data-i18n="Analytics">Deniz Araçları İlan</div>
+                        </a>
+                    </li>
                     <li class="menu-item">
                         <a href="/Home/Index" class="menu-link">
                             <i class="fas fa-arrow-left m-2"></i>

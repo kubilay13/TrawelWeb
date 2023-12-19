@@ -1,4 +1,6 @@
-﻿namespace TrawelWeb.Models
+﻿using static Entity.Order;
+
+namespace TrawelWeb.Models
 {
     public class CarsViewModel
     {
@@ -13,5 +15,7 @@
         public int EngineCapacity { get; set; } //Motor Hacmi
         public string Color { get; set; } //Renk
         public int ModaretorId { get; set; }//Hangi kullanıcının eklediğiyse
+        public CategoryType Type { get; set; }//1==Car +  Sonradan gelenler 2 3 diye eklenicek.+ Ekleme Admin tarafından yapılacak.
+
     }
 }

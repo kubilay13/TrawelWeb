@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    @*begin::Toolbar*@
+    <div class="toolbar py-2" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-fluid d-flex align-items-center">
+            <!--begin::Page title-->
+            <div class="flex-grow-1 flex-shrink-0 me-5">
+                <!--begin::Page title-->
+                <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                    <!--begin::Title-->
+                    <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">
+                       Deniz Araç İlanları Yönetimi
+                    </h1>
+                    <!--end::Title-->
+                </div>
+                <!--end::Page title-->
+            </div>
+            <!--end::Page title-->
+        </div>
+        <!--end::Container-->
+    </div>
+
+    @*end::Toolbar*@
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-xxl">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card header-->
+            <div class="card-header border-0 pt-6">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <a href="" class="btn btn-primary">İlan Ekle</a>
+                </div>
+                <!--begin::Card title-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0 mw-650px">
+                <!--begin::Table-->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_SeaVehicleOrderList">
+                    <!--begin::Table head-->
+                    <thead>
+                        <!--begin::Table row-->
+                        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                            <th class="min-w-150px">S/N</th>
+                            <th class="min-w-425px">Kategori</th>
+                            <th class="min-w-425px">İşlemler</th>
+                        </tr>
+                        <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <!--end::Table body-->
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+
+    </div>
+    <!--end::Container-->
+</div>
+
+
+
+
+<script src="~/js/jquery.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/jquery.datatables.min.js"></script>
+<script src="~/js/adminscript.js"></script>
+<script>
+    $(document).ready(function () {
+        GetSeaVehicleOrder();
+    }); 
+    function closeModal() {
+        $('.modal').modal('hide');
+    }
+</script>
