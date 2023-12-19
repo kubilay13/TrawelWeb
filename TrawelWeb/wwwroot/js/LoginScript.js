@@ -19,7 +19,7 @@ function SignUp() {
 
 
     if (Email == "") {
-        swal.fire("Hata!", "G Email giriniz!", "error");
+        swal.fire("Hata!", "Email giriniz!", "error");
     }
     else if (!isValidEmail(Email)) {
         swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
