@@ -366,6 +366,7 @@ namespace TrawelWeb.Controllers
                         Year = carsViewModel.Year,
                         ModaretorId = Modaretor.Id,
                         Model = carsViewModel.Model,
+                        Status=false
                     };
                     var resultOrder = _db.Order.Add(order);
                     _db.SaveChanges();
