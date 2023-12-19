@@ -90,7 +90,7 @@ function GetModaretor() {
                     result = ``;
                     return result;
                 }
-            },        
+            },
             {
                 targets: 1,
                 render: function (data, type, full, meta) {
@@ -99,7 +99,7 @@ function GetModaretor() {
                 }
             },
             {
-                targets:2,
+                targets: 2,
                 render: function (data, type, full, meta) {
                     var result = full['lastName'];
                     return result;
@@ -781,7 +781,7 @@ function DeleteUser(userId) {
 //End-User--
 
 
-//Start--Order--
+//Start--CarOrder--
 
 function GetCarOrder() {
     debugger
@@ -976,7 +976,6 @@ function AddCarOrder() {
         formData.append('EnginePower', EnginePower);
         formData.append('EngineCapacity', EngineCapacity);
         formData.append('Color', Color);
-
         $.ajax({
             type: "POST",
             url: '/Admin/AddCarOrder',
@@ -1055,7 +1054,6 @@ function GetEditCarOrder(Id) {
     });
 };
 
-
 function DeleteCarOrder(Id) {
     swal.fire({
         title: "Emin misiniz?",
@@ -1103,66 +1101,101 @@ function DeleteCarOrder(Id) {
     });
 }
 
+function UpdateCarOrder() {
+    debugger
+    var CarsId = $('#CarsId').val();
+    var OrderId = $('#OrderId').val();
+    var Brand = $('#Brand').val();
+    var Model = $('#Model').val();
+    var Year = $('#Year').val();
+    var FuelType = $('#FuelType').val();
+    var GearType = $('#GearType').val();
+    var KM = $('#KM').val();
+    var CaseType = $('#CaseType').val();
+    var EnginePower = $('#EnginePower').val();
+    var EngineCapacity = $('#EngineCapacity').val();
+    var Color = $('#Color').val();
 
+    if (Brand == "") {
+        swal.fire("Hata!", "Marka Giriniz!", "error");
+    }
+    else if (Model == "") {
+        swal.fire("Hata!", "Model Giriniz!", "error");
+    }
+    else if (Year == "") {
+        swal.fire("Hata!", "Yıl Giriniz!", "error");
+    }
+    else if (FuelType == "") {
+        swal.fire("Hata!", "Yakıt Tipi Giriniz!", "error");
+    }
+    else if (GearType == "") {
+        swal.fire("Hata!", "Vites Tipi Giriniz!", "error");
+    }
+    else if (KM == "") {
+        swal.fire("Hata!", "Kilometre Giriniz!", "error");
+    }
+    else if (CaseType == "") {
+        swal.fire("Hata!", "Kasa Tipi Giriniz!", "error");
+    }
+    else if (EnginePower == "") {
+        swal.fire("Hata!", "Motor Gücü Giriniz!", "error");
+    }
+    else if (EngineCapacity == "") {
+        swal.fire("Hata!", "Motor Hacmi Giriniz!", "error");
+    }
+    else if (Color == "") {
+        swal.fire("Hata!", "Renk Giriniz!", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('CarsId', CarsId);
+        formData.append('OrderId', OrderId);
+        formData.append('Brand', Brand);
+        formData.append('Model', Model);
+        formData.append('Year', Year);
+        formData.append('FuelType', FuelType);
+        formData.append('GearType', GearType);
+        formData.append('KM', KM);
+        formData.append('CaseType', CaseType);
+        formData.append('EnginePower', EnginePower);
+        formData.append('EngineCapacity', EngineCapacity);
+        formData.append('Color', Color);
+        $.ajax({
+            type: "POST",
+            url: '/Admin/UpdateCarOrder',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Güncelleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                        debugger
+                        window.location.href = "/Admin/CarOrder/";
+                    }
+                });
+            },
+            error: function (xhr, status, error) {
+                var errorMessage = "Bir sorun ile karşılaşıldı!";
 
-//End--CarOrder--
+                try {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response && response.error) {
+                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                    }
+                } catch (e) {
+                    // JSON hatası varsa varsayılan hatayı kullan
+                }
 
-
-
-//function UpdateOrderCategory() {
-//    debugger
-//    var Id = $('#EditCategoryModal #ID').val();
-//    var Category = $('#EditCategoryModal #Category').val().trim();
-    
-
-//    if (Category == "") {
-//        swal.fire("Hata!", "Kategori Giriniz!", "error");
-//    }
-
-//    else {
-//        var formData = new FormData();
-//        formData.append('Id', Id);
-//        formData.append('Category', Category);
-      
-//        $.ajax({
-//            type: "POST",
-//            url: '/Admin/UpdateOrderCategory',
-//            data: formData,
-//            processData: false,
-//            contentType: false,
-//            success: function (data) {
-//                debugger
-//                swal.fire({
-//                    title: "Başarılı!",
-//                    text: "Güncelleme işleminiz gerçekleşti.",
-//                    icon: "success",
-//                    buttonsStyling: true,
-//                    confirmButtonText: "Tamam!",
-//                    confirmButtonClass: "btn btn-brand"
-//                }).then(function (result) {
-//                    if (result.value) {
-//                        location.reload();
-//                    }
-//                });
-//            },
-//            error: function (xhr, status, error) {
-//                var errorMessage = "Bir sorun ile karşılaşıldı!";
-
-//                try {
-//                    var response = JSON.parse(xhr.responseText);
-//                    if (response && response.error) {
-//                        errorMessage = response.error; // Sunucudan gelen hata mesajını al
-//                    }
-//                } catch (e) {
-//                    // JSON hatası varsa varsayılan hatayı kullan
-//                }
-
-//                swal.fire("Hata!", errorMessage, "error");
-//            }
-//        });
-//    }
-//};
-
-
-
-//End--OrderCategory--
+                swal.fire("Hata!", errorMessage, "error");
+            }
+        });
+    }
+};

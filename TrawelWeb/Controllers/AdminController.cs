@@ -477,7 +477,7 @@ namespace TrawelWeb.Controllers
                        on OrderCategory.ProductId equals Cars.ID
                        select new
                        {
-                           CarsId = Order.ID,
+                           CarsId = Cars.ID,
                            OrderId = Order.ID,
                            Brand = Cars.Brand,
                            Model = Cars.Model,
@@ -496,7 +496,51 @@ namespace TrawelWeb.Controllers
             return Json(list);
         }
 
+        [Authorize(Roles = "Admin,Moderator")]
+        [HttpPost]
+        public async Task<IActionResult> UpdateCarOrder(CarsViewModel carsViewModel, string CarsId, string OrderId)
+        {
 
+            if (carsViewModel != null)
+            {
+                var carId = Convert.ToInt32(CarsId);
+                var orderId = Convert.ToInt32(OrderId);
+
+                var cars = _db.Cars.Where(q => q.ID == carId).FirstOrDefault();
+                var order = _db.Order.Where(q => q.ID == orderId).FirstOrDefault();
+
+                if (cars != null && order != null)
+                {
+                    cars.KM = carsViewModel.KM;
+                    cars.Color = carsViewModel.Color;
+                    cars.Brand = carsViewModel.Brand;
+                    cars.Model = carsViewModel.Model;
+                    cars.Year = carsViewModel.Year;
+                    cars.CaseType = carsViewModel.CaseType;
+                    cars.EngineCapacity = carsViewModel.EngineCapacity;
+                    cars.EnginePower = carsViewModel.EnginePower;
+                    cars.FuelType = carsViewModel.FuelType;
+                    cars.GearType = carsViewModel.GearType;
+
+                    order.Brand = carsViewModel.Brand;
+                    order.Model = carsViewModel.Model;
+                    order.Year = carsViewModel.Year;
+                    order.Color = carsViewModel.Color;
+                    _db.Order.Update(order);
+                    _db.Cars.Update(cars);
+                    _db.SaveChanges();
+                    return Ok();
+                }
+
+                else
+                {
+                    return BadRequest("Güncelleme Başarısız!");
+                }
+
+
+            }
+            return View();
+        }
         //--EndCarOrder--
     }
 
