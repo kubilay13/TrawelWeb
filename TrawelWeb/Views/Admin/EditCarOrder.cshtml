@@ -1,0 +1,149 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model Order
+<div class="content-body">
+    <!-- Content types section start -->
+    <section id="content-types">
+        <div class="row justify-content-center">
+            <div class="toolbar py-2" id="kt_toolbar">
+                <!--begin::Container-->
+                <div id="kt_toolbar_container" class="container-fluid d-flex align-items-center">
+                    <!--begin::Page title-->
+                    <div class="flex-grow-1 flex-shrink-0 me-5">
+                        <!--begin::Page title-->
+                        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                            <!--begin::Title-->
+                            <h1 class="d-flex align-items-center text-dark fw-bolder my-1 fs-3">
+                                İlan Ekle
+                            </h1>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Page title-->
+                    </div>
+                    <!--end::Page title-->
+                </div>
+                <!--end::Container-->
+            </div>
+
+            <div class="col-12 col-xl-12 col-md-12">
+                <div class="card">
+                    <div class="card-content table align-middle table-row-dashed fs-6 gy-5" style="align-items: center;">
+                        @*  <div class="card-body">
+                        <h4 class="card-title">Contact Form</h4>
+                        <h6 class="card-subtitle text-muted">Support card subtitle</h6>
+                        </div> *@
+                        <div class="card-body">
+                            <form class="form">
+                                <input type="hidden" id="CarsId" style="display:none;">
+                                <input type="hidden" id="OrderId" style="display:none;">
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Marka :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Brand" placeholder="Marka">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Model :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Model" placeholder="Model">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Yıl :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="Year" placeholder="Yıl">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Yakıt Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="FuelType" placeholder="Yakıt">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Vites Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="GearType" placeholder="Vites">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Kilometre:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="KM" placeholder="KM">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Kasa Tipi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="CaseType" placeholder="Kasa">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Motor Gücü :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="EnginePower" placeholder="MotorGücü">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Motor Hacmi :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="EngineCapacity" placeholder="MotorHacmi">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
+                                        <p class="mb-4">Renk:</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="Color" placeholder="Renk">
+                                    </div>
+                                </div>
+
+                                <div class="form-actions d-flex justify-content-end">
+                                    <a href="javascript:void(0);" onclick="history.back();" class="btn btn-danger text-white">Vazgeç</a>&nbsp;&nbsp;
+                                    <a onclick="UpdateCarOrder()" class="btn btn-success text-white">Kaydet</a>
+                                </div>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Content types section end -->
+</div>
+<script src="~/js/jquery.js"></script>
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/jquery.datatables.min.js"></script>
+<script src="~/js/adminscript.js"></script>
+<script>
+    var urlParams = new URLSearchParams(window.location.search);
+    var Id = urlParams.get('Id');
+
+    $(document).ready(function () {
+        GetEditCarOrder(Id)
+    });
+</script>

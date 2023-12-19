@@ -355,59 +355,58 @@ namespace TrawelWeb.Controllers
         public async Task<IActionResult> AddCarOrder(CarsViewModel carsViewModel)
         {
 
-                var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
-                if (Modaretor != null)
-                {
+            var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (Modaretor != null)
+            {
 
-                    Order order = new Order()
+                Order order = new Order()
+                {
+                    Brand = carsViewModel.Brand,
+                    Color = carsViewModel.Color,
+                    Year = carsViewModel.Year,
+                    ModaretorId = Modaretor.Id,
+                    Model = carsViewModel.Model,
+                    Status = false
+                };
+                var resultOrder = _db.Order.Add(order);
+                _db.SaveChanges();
+                if (resultOrder != null)
+                {
+                    Cars cars = new Cars()
                     {
                         Brand = carsViewModel.Brand,
+                        CaseType = carsViewModel.CaseType,
                         Color = carsViewModel.Color,
-                        Year = carsViewModel.Year,
-                        ModaretorId = Modaretor.Id,
+                        EngineCapacity = carsViewModel.EngineCapacity,
+                        EnginePower = carsViewModel.EnginePower,
+                        FuelType = carsViewModel.FuelType,
+                        GearType = carsViewModel.GearType,
+                        KM = carsViewModel.KM,
                         Model = carsViewModel.Model,
-                        Status=false
+                        Year = carsViewModel.Year,
                     };
-                    var resultOrder = _db.Order.Add(order);
+                    var resultCarOrder = _db.Cars.Add(cars);
                     _db.SaveChanges();
-                    if (resultOrder != null)
+                    if (resultCarOrder != null)
                     {
-                        Cars cars = new Cars()
+                        OrderCategory orderCategory = new OrderCategory()
                         {
-                            Brand = carsViewModel.Brand,
-                            CaseType = carsViewModel.CaseType,
-                            Color = carsViewModel.Color,
-                            EngineCapacity = carsViewModel.EngineCapacity,
-                            EnginePower = carsViewModel.EnginePower,
-                            FuelType = carsViewModel.FuelType,
-                            GearType = carsViewModel.GearType,
-                            KM = carsViewModel.KM,
-                            Model = carsViewModel.Model,
-                            Year = carsViewModel.Year,
+                            OrderId = order.ID,
+                            ProductId = cars.ID,
+                            Type = Order.CategoryType.Car
                         };
-                        var resultCarOrder = _db.Cars.Add(cars);
+                        _db.OrderCategory.Add(orderCategory);
                         _db.SaveChanges();
-                        if (resultCarOrder != null)
-                        {
-                            OrderCategory orderCategory = new OrderCategory()
-                            {
-                                OrderId = order.ID,
-                                ProductId = cars.ID,
-                                Type = Order.CategoryType.Car
-                            };
-                            _db.OrderCategory.Add(orderCategory);
-                            _db.SaveChanges();
-                            return Ok("Araba ilanı ekleme işlemi başarılı");
-                        }
-
-                    }
-                    else
-                    {
-                        return BadRequest("Ekleme işlemi başarısız!");
+                        return Ok("Araba ilanı ekleme işlemi başarılı");
                     }
 
                 }
+                else
+                {
+                    return BadRequest("Ekleme işlemi başarısız!");
+                }
 
+            }
 
             else
             {
@@ -428,7 +427,7 @@ namespace TrawelWeb.Controllers
                     {
                         var car = await _db.Cars.FirstOrDefaultAsync(q => q.ID == orderCategory.ProductId);
 
-                        if(car != null)
+                        if (car != null)
                         {
                             _db.Order.Remove(order);
                             _db.OrderCategory.Remove(orderCategory);
@@ -458,6 +457,46 @@ namespace TrawelWeb.Controllers
 
             return View();
         }
+        [Authorize(Roles = "Moderator,Admin")]
+        public IActionResult EditCarOrder(int Id)
+        {
+            return View();
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetEditCarOrder(int Id)
+        {
+            var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var list = new
+            {
+                data = from Order in _db.Order.Where(q => q.ID == Id && q.ModaretorId == Modaretor.Id)
+                       join OrderCategory in _db.OrderCategory.Where(q => q.Type == Order.CategoryType.Car)
+                       on Order.ID equals OrderCategory.OrderId
+                       join Cars in _db.Cars
+                       on OrderCategory.ProductId equals Cars.ID
+                       select new
+                       {
+                           CarsId = Order.ID,
+                           OrderId = Order.ID,
+                           Brand = Cars.Brand,
+                           Model = Cars.Model,
+                           Year = Cars.Year,
+                           Color = Cars.Color,
+                           ModaretorId = Order.ModaretorId,
+                           Type = Order.Type,
+                           FuelType = Cars.FuelType,
+                           GearType = Cars.GearType,
+                           KM = Cars.KM,
+                           CaseType = Cars.CaseType,
+                           EnginePower = Cars.EnginePower,
+                           EngineCapacity = Cars.EngineCapacity,
+                       }
+            };
+            return Json(list);
+        }
+
+
         //--EndCarOrder--
     }
 

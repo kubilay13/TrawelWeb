@@ -895,7 +895,7 @@ function GetCarOrder() {
                 "width": "20%",
                 render: function (data, type, full, meta) {
                     debugger
-                    result = `<a href="EditCarOrder(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
+                    result = `<a href="EditCarOrder?Id=` + full['id'] + `" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle">
                                   <span class="fas fa-pencil-alt fa-2x"></span>
                                   </a>
                                   <a onclick="DeleteCarOrder(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
@@ -1016,6 +1016,46 @@ function AddCarOrder() {
     }
 };
 
+function GetEditCarOrder(Id) {
+    debugger
+    $.ajax({
+        type: "GET",
+        url: '/Admin/GetEditCarOrder/?Id=' + Id,
+        success: function (data) {
+            debugger
+
+            $('#CarsId').val(data['data'][0]['carsId']);
+            $('#OrderId').val(data['data'][0]['orderId']);
+            $('#Brand').val(data['data'][0]['brand']);
+            $('#Model').val(data['data'][0]['model']);
+            $('#Year').val(data['data'][0]['year']);
+            $('#FuelType').val(data['data'][0]['fuelType']);
+            $('#GearType').val(data['data'][0]['gearType']);
+            $('#KM').val(data['data'][0]['km']);
+            $('#CaseType').val(data['data'][0]['caseType']);
+            $('#EnginePower').val(data['data'][0]['enginePower']);
+            $('#EngineCapacity').val(data['data'][0]['engineCapacity']);
+            $('#Color').val(data['data'][0]['color']);
+        },
+        error: function (xhr, status, error) {
+            var errorMessage = "Bir sorun ile karşılaşıldı!";
+
+            try {
+                var response = JSON.parse(xhr.responseText);
+                if (response && response.error) {
+                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
+                }
+            } catch (e) {
+                // JSON hatası varsa varsayılan hatayı kullan
+            }
+
+            swal.fire("Hata!", errorMessage, "error");
+        }
+
+    });
+};
+
+
 function DeleteCarOrder(Id) {
     swal.fire({
         title: "Emin misiniz?",
@@ -1064,43 +1104,10 @@ function DeleteCarOrder(Id) {
 }
 
 
+
 //End--CarOrder--
 
-//function EditOrderCategory(categoryId) {
-//    debugger
-//    $.ajax({
-//        type: "GET",
-//        url: '/Admin/EditOrderCategory/?categoryId=' + categoryId,
-//        success: function (data) {
-//            debugger
-//            $('#EditCategoryModal #ID').val(data['data'][0]['id']);
-//            if (data['data'][0]['orderCategory'] == 0) {
-//                $('#EditCategoryModal #Category').val("Araba");
-//            }
-//            else if (data['data'][0]['orderCategory'] == 1) {
-//                $('#EditCategoryModal #Category').val("Tekne");
-//            }
-           
-//            $('#EditCategoryModal').modal();
 
-//        },
-//        error: function (xhr, status, error) {
-//            var errorMessage = "Bir sorun ile karşılaşıldı!";
-
-//            try {
-//                var response = JSON.parse(xhr.responseText);
-//                if (response && response.error) {
-//                    errorMessage = response.error; // Sunucudan gelen hata mesajını al
-//                }
-//            } catch (e) {
-//                // JSON hatası varsa varsayılan hatayı kullan
-//            }
-
-//            swal.fire("Hata!", errorMessage, "error");
-//        }
-
-//    });
-//};
 
 //function UpdateOrderCategory() {
 //    debugger
