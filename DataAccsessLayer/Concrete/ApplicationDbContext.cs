@@ -26,6 +26,7 @@ namespace DataAccsessLayer.Concrete
         public DbSet<ContactUser> ContactUsers { get; set; }
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderCategory> OrderCategory { get; set; }
+        public DbSet<Photo> Photo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

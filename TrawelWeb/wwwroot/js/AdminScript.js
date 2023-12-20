@@ -932,8 +932,9 @@ function AddCarOrder() {
     var EnginePower = $('#EnginePower').val();
     var EngineCapacity = $('#EngineCapacity').val();
     var Color = $('#Color').val();
-
-
+    // Seçilen fotoğrafları al
+    var photoInput = $('#photoInput')[0];
+    var photos = photoInput.files;
     if (Brand == "") {
         swal.fire("Hata!", "Marka Giriniz!", "error");
     }
@@ -976,6 +977,10 @@ function AddCarOrder() {
         formData.append('EnginePower', EnginePower);
         formData.append('EngineCapacity', EngineCapacity);
         formData.append('Color', Color);
+        // Güncellenmiş fotoğrafları FormData'ya ekle
+        for (var i = 0; i < photos.length; i++) {
+            formData.append('Photos', photos[i]);
+        }
         $.ajax({
             type: "POST",
             url: '/Admin/AddCarOrder',
@@ -1014,7 +1019,6 @@ function AddCarOrder() {
         });
     }
 };
-
 function GetEditCarOrder(Id) {
     debugger
     $.ajax({
@@ -1035,6 +1039,7 @@ function GetEditCarOrder(Id) {
             $('#EnginePower').val(data['data'][0]['enginePower']);
             $('#EngineCapacity').val(data['data'][0]['engineCapacity']);
             $('#Color').val(data['data'][0]['color']);
+
         },
         error: function (xhr, status, error) {
             var errorMessage = "Bir sorun ile karşılaşıldı!";

@@ -1,5 +1,4 @@
 ﻿using DataAccsessLayer.Concrete;
-using DTOLayer.Dtos.AppUserDtos;
 using Entity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -15,14 +14,17 @@ namespace TrawelWeb.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ApplicationDbContext _db;
-        private readonly RoleManager<AppRole> _roleManager;
+        private readonly RoleManager<AppRole> _roleManager; 
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public AdminController(ApplicationDbContext db, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+
+        public AdminController(ApplicationDbContext db, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _userManager = userManager;
             _roleManager = roleManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Authorize(Roles = "Moderator,Admin")]
@@ -30,7 +32,6 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
-
 
         //--StartModerator--
 
@@ -352,7 +353,7 @@ namespace TrawelWeb.Controllers
         }
         [Authorize(Roles = "Moderator,Admin")]
         [HttpPost]
-        public async Task<IActionResult> AddCarOrder(CarsViewModel carsViewModel)
+        public async Task<IActionResult> AddCarOrder([FromForm] CarsViewModel carsViewModel)
         {
 
             var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -385,6 +386,50 @@ namespace TrawelWeb.Controllers
                         Model = carsViewModel.Model,
                         Year = carsViewModel.Year,
                     };
+
+                    //AddImage
+
+                    string wwwrootPath = _webHostEnvironment.WebRootPath;
+
+                    // wwwroot/order/cars klasörünün fiziksel yolu
+                    string orderCarsFolderPath = Path.Combine(wwwrootPath, "order", "cars");
+
+                    var orderId = order.ID;
+                    // orderId'ye özel bir klasör oluştur
+                    string orderSpecificFolderPath = Path.Combine(orderCarsFolderPath, orderId.ToString());
+
+                    // Eğer klasör yoksa oluştur
+                    if (!Directory.Exists(orderSpecificFolderPath))
+                    {
+                        Directory.CreateDirectory(orderSpecificFolderPath);
+                    }
+
+                    // Her bir fotoğrafı işleyin
+                    foreach (var item in carsViewModel.Photos)
+                    {
+                        // Dosya adını orderId ve benzersiz bir sıra numarasıyla oluşturun
+                        string uniqueFileName = $"{order.ID}_{Guid.NewGuid().ToString()}_{item.FileName}";
+                        string relativePath = Path.Combine("~\\wwwroot\\order\\cars", order.ID.ToString(), uniqueFileName);
+                        // Dosyanın tam yolu
+                        string filePath = Path.Combine(orderSpecificFolderPath, uniqueFileName);
+
+                        // Dosyayı kaydet
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+                            item.CopyTo(fileStream);
+                        }
+
+                        // Veritabanında bu dosyanın adını ve yolunu kaydedebilirsiniz
+                        // Örneğin: SaveToDatabase(filePath);
+                        Photo photo = new Photo()
+                        {
+                            OrderId = order.ID,
+                            Name = relativePath  // Dosya adı ve yolunu içeren bir dize
+                        };
+                        _db.Photo.Add(photo);
+                        _db.SaveChanges();
+                    }
+                  
                     var resultCarOrder = _db.Cars.Add(cars);
                     _db.SaveChanges();
                     if (resultCarOrder != null)

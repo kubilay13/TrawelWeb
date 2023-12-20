@@ -91,6 +91,15 @@ namespace TrawelWeb.Controllers
             // Temizleme işlemleri
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
             HttpContext.Session.Clear(); // Session'ı temizle
+            var user = await _userManager.GetUserAsync(User);
+            if (user != null)
+            {
+                // Kullanıcı bilgilerini kullan
+                // ...
+
+                // Kullanıcı bilgilerini temizle
+                await _userManager.UpdateSecurityStampAsync(user); // Güvenlik damgasını güncelleme
+            }
             return Ok("Çıkış Yapıldı");
         }
         [HttpGet]

@@ -55,21 +55,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "6f007100-696a-480b-8f23-0e29f53f5a49",
+                            ConcurrencyStamp = "c4bb391b-6688-41d5-981c-5f7e7fffeb5e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "01318f6e-10f7-49fe-94ae-d3c0dfc437b6",
+                            ConcurrencyStamp = "2056a9be-6bcd-4170-ac97-43f3090782bd",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "34bcde8b-4723-4ed5-b160-5ebe60763328",
+                            ConcurrencyStamp = "addfd38b-7b9d-4dd2-8457-8e3d9ae99a84",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -292,6 +292,26 @@ namespace DataAccsessLayer.Migrations
                     b.HasKey("OrderId", "ProductId");
 
                     b.ToTable("OrderCategory");
+                });
+
+            modelBuilder.Entity("Entity.Photo", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Photo");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
