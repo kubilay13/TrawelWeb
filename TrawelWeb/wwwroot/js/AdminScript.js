@@ -1026,7 +1026,7 @@ function GetEditCarOrder(Id) {
         url: '/Admin/GetEditCarOrder/?Id=' + Id,
         success: function (data) {
             debugger
-
+            document.getElementById("listItem").src = data['data'][0]['Photos'];
             $('#CarsId').val(data['data'][0]['carsId']);
             $('#OrderId').val(data['data'][0]['orderId']);
             $('#Brand').val(data['data'][0]['brand']);

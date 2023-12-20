@@ -38,6 +38,21 @@
                                 <input type="hidden" id="CarsId" style="display:none;">
                                 <input type="hidden" id="OrderId" style="display:none;">
                                 <div class="row">
+                                    <div class="col-sm-3 d-flex align-items-center justify-content-center mt-2">
+                                        <p class="mb-4">Fotoğraf :</p>
+                                    </div>
+                                    <div class="col-sm-9">
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="photoInput" aria-describedby="inputGroupFileAddon" multiple>
+                                            </div>
+                                        </div>
+                                        <!-- Eklenen fotoğrafları göstermek için bir liste -->
+                                        <ul id="photoList" class="list-group mt-3">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row">
                                     <div class="col-sm-3 d-flex align-items-center justify-content-center  mt-2">
                                         <p class="mb-4">Marka :</p>
                                     </div>
@@ -142,4 +157,96 @@
     $(document).ready(function () {
         GetEditCarOrder(Id)
     });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+<script>
+    var selectedPhotos = []; // Dosyaları temsil eden dizi
+
+    document.getElementById('photoInput').addEventListener('change', function (e) {
+        debugger
+        var files = e.target.files;
+        var photoList = document.getElementById('photoList');
+
+        // Önceki liste öğelerini temizle
+        //photoList.innerHTML = '';
+
+        // Bir div container oluşturun
+        var containerDiv = document.createElement('div');
+        containerDiv.className = 'd-flex flex-row flex-wrap';
+
+        // Dosyaları temsil eden diziyi güncelle
+        selectedPhotos = Array.from(files);
+
+        // Her bir dosyayı listeleyin
+        for (var i = 0; i < files.length; i++) {
+            // Dosyanın türü resimse önizleme yap
+            if (files[i].type.startsWith('image/')) {
+                var listItem = document.createElement('div');
+                listItem.className = 'position-relative p-2'; // position-relative sınıfını ekleyin
+
+                var img = document.createElement('img');
+                img.src = URL.createObjectURL(files[i]);
+                img.className = 'img-fluid img-thumbnail'; // img-fluid sınıfını ekleyin
+
+                // Özel stil ekleyin
+                img.style.maxWidth = '200px'; // Maksimum genişlik
+                img.style.height = 'auto'; // Yükseklik otomatik
+
+                // Silme butonunu oluşturun
+                var deleteBtn = createDeleteButton(listItem, i); // Her bir butonun kendi kapsamını alır
+                deleteBtn.className = 'btn btn-sm  position-absolute top-0 end-0 m-2'; // Butonun stilini ayarlayın
+                deleteBtn.innerHTML = '<i class="fas fa-times"></i>'; // FontAwesome çarpı ikonu
+                deleteBtn.title = 'Sil';
+
+                listItem.appendChild(img);
+                listItem.appendChild(deleteBtn);
+                containerDiv.appendChild(listItem);
+            }
+        }
+
+        photoList.appendChild(containerDiv);
+    });
+
+    function createDeleteButton(item, index) {
+        var deleteBtn = document.createElement('button');
+        deleteBtn.type = 'button';
+
+        // Silme butonuna tıklanınca resmi kaldırın
+        deleteBtn.addEventListener('click', function () {
+            if (item) {
+                // Fotoğraf listesinden o öğeyi kaldırın
+                //item.style.display = 'none'; // Görünürlüğü değiştirin veya devre dışı bırakın
+                item.parentNode.removeChild(item);
+
+                // Fotoğraf input alanından o öğeyi kaldırın
+                selectedPhotos.splice(index, 1);
+
+                // Dosyaları temsil eden diziyi kullanarak photoInput'ın files özelliğini güncelle
+                var photoInput = document.getElementById('photoInput');
+                if (photoInput) {
+                    // Dosyaları temsil eden FileList benzeri bir nesne oluşturun
+                    var newFiles = new ClipboardEvent('').clipboardData || new DataTransfer();
+                    for (var i = 0; i < selectedPhotos.length; i++) {
+                        newFiles.items.add(selectedPhotos[i]);
+                    }
+                    //console.log('Silinen öğe:', item);
+                    //console.log('Ebeveyn:', item.parentNode);
+                    // Güncellenmiş dosyaları kontrol et
+                    //console.log('Güncellenmiş Dosyalar:', newFiles.files);
+
+                    // photoInput'ın files özelliğini güncelle
+                    Object.defineProperty(photoInput, 'files', {
+                        value: newFiles.files,
+                        writable: true
+                    });
+                } else {
+                    console.error('Fotoğraf input alanı bulunamadı.');
+                }
+            } else {
+                console.error('Eleman bulunamadı.');
+            }
+        });
+
+        return deleteBtn;
+    }
 </script>

@@ -536,6 +536,7 @@ namespace TrawelWeb.Controllers
                            CaseType = Cars.CaseType,
                            EnginePower = Cars.EnginePower,
                            EngineCapacity = Cars.EngineCapacity,
+                           Photos = _db.Photo.Where(p => p.OrderId == Order.ID).ToList()
                        }
             };
             return Json(list);
