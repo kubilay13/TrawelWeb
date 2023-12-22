@@ -1026,7 +1026,6 @@ function GetEditCarOrder(Id) {
         url: '/Admin/GetEditCarOrder/?Id=' + Id,
         success: function (data) {
             debugger
-            document.getElementById("listItem").src = data['data'][0]['Photos'];
             $('#CarsId').val(data['data'][0]['carsId']);
             $('#OrderId').val(data['data'][0]['orderId']);
             $('#Brand').val(data['data'][0]['brand']);
@@ -1121,6 +1120,9 @@ function UpdateCarOrder() {
     var EngineCapacity = $('#EngineCapacity').val();
     var Color = $('#Color').val();
 
+    var photoInput = $('#photoInput')[0];
+    var photos = photoInput.files;
+
     if (Brand == "") {
         swal.fire("Hata!", "Marka Giriniz!", "error");
     }
@@ -1165,6 +1167,9 @@ function UpdateCarOrder() {
         formData.append('EnginePower', EnginePower);
         formData.append('EngineCapacity', EngineCapacity);
         formData.append('Color', Color);
+        for (var i = 0; i < photos.length; i++) {
+            formData.append('Photos', photos[i]);
+        }
         $.ajax({
             type: "POST",
             url: '/Admin/UpdateCarOrder',

@@ -14,7 +14,7 @@ namespace TrawelWeb.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ApplicationDbContext _db;
-        private readonly RoleManager<AppRole> _roleManager; 
+        private readonly RoleManager<AppRole> _roleManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
 
@@ -409,7 +409,7 @@ namespace TrawelWeb.Controllers
                     {
                         // Dosya adını orderId ve benzersiz bir sıra numarasıyla oluşturun
                         string uniqueFileName = $"{order.ID}_{Guid.NewGuid().ToString()}_{item.FileName}";
-                        string relativePath = Path.Combine("~\\wwwroot\\order\\cars", order.ID.ToString(), uniqueFileName);
+                        string relativePath = Path.Combine("\\order\\cars\\", order.ID.ToString(), uniqueFileName);
                         // Dosyanın tam yolu
                         string filePath = Path.Combine(orderSpecificFolderPath, uniqueFileName);
 
@@ -423,13 +423,14 @@ namespace TrawelWeb.Controllers
                         // Örneğin: SaveToDatabase(filePath);
                         Photo photo = new Photo()
                         {
+
                             OrderId = order.ID,
                             Name = relativePath  // Dosya adı ve yolunu içeren bir dize
                         };
                         _db.Photo.Add(photo);
                         _db.SaveChanges();
                     }
-                  
+
                     var resultCarOrder = _db.Cars.Add(cars);
                     _db.SaveChanges();
                     if (resultCarOrder != null)
@@ -470,16 +471,41 @@ namespace TrawelWeb.Controllers
                     var orderCategory = await _db.OrderCategory.FirstOrDefaultAsync(q => q.OrderId == order.ID);
                     if (orderCategory != null)
                     {
+                        var photos = _db.Photo.Where(q => q.OrderId == order.ID && orderCategory.Type == Order.CategoryType.Car).ToList();
                         var car = await _db.Cars.FirstOrDefaultAsync(q => q.ID == orderCategory.ProductId);
 
                         if (car != null)
                         {
+                            foreach (var item in photos)
+                            {
+                                var fileName = item.Name;
+                                //var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "order", item.Name);
+                                //var directoryPath = Path.GetDirectoryName(filePath);
+
+
+                                _db.Photo.Remove(item);
+                                //var filePath = Path.Combine(_webHostEnvironment.WebRootPath + fileName);
+                                //try
+                                //{
+                                //    using (var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.None))
+                                //    {
+                                //        // Dosya kullanımda değilse
+                                //        System.IO.File.Delete(filePath);
+                                //        Console.WriteLine("Dosya başarıyla silindi.");
+                                //    }
+                                //}
+                                //catch (Exception ex)
+                                //{
+                                //    Console.WriteLine("Dosya silme hatası: " + ex.Message);
+                                //}
+                            }
                             _db.Order.Remove(order);
                             _db.OrderCategory.Remove(orderCategory);
                             _db.Cars.Remove(car);
                             await _db.SaveChangesAsync();
                             return Ok();
                         }
+
                         else
                         {
                             return BadRequest("Silme işlemi başarısız!");
@@ -500,7 +526,6 @@ namespace TrawelWeb.Controllers
                 return BadRequest("Hata! Tekrar deneyiniz.");
             }
 
-            return View();
         }
         [Authorize(Roles = "Moderator,Admin")]
         public IActionResult EditCarOrder(int Id)
@@ -536,15 +561,38 @@ namespace TrawelWeb.Controllers
                            CaseType = Cars.CaseType,
                            EnginePower = Cars.EnginePower,
                            EngineCapacity = Cars.EngineCapacity,
-                           Photos = _db.Photo.Where(p => p.OrderId == Order.ID).ToList()
+                           Photos = (from Photo in _db.Photo.Where(p => p.OrderId == Order.ID)
+                                     select new
+                                     {
+                                         Id = Photo.ID,
+                                         Name = Photo.Name,
+                                     }).ToList()
                        }
+            };
+            return Json(list);
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetCarOrderImage(int Id)
+        {
+            var Modaretor = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            var list = new
+            {
+                data = (from Photo in _db.Photo.Where(p => p.OrderId == Id)
+                        select new
+                        {
+                            Id = Photo.ID,
+                            Name = Photo.Name,
+                        }).ToList()
+
             };
             return Json(list);
         }
 
         [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
-        public async Task<IActionResult> UpdateCarOrder(CarsViewModel carsViewModel, string CarsId, string OrderId)
+        public async Task<IActionResult> UpdateCarOrder([FromForm] CarsViewModel carsViewModel, string CarsId, string OrderId)
         {
 
             if (carsViewModel != null)
@@ -555,8 +603,10 @@ namespace TrawelWeb.Controllers
                 var cars = _db.Cars.Where(q => q.ID == carId).FirstOrDefault();
                 var order = _db.Order.Where(q => q.ID == orderId).FirstOrDefault();
 
+
                 if (cars != null && order != null)
                 {
+
                     cars.KM = carsViewModel.KM;
                     cars.Color = carsViewModel.Color;
                     cars.Brand = carsViewModel.Brand;
@@ -572,23 +622,83 @@ namespace TrawelWeb.Controllers
                     order.Model = carsViewModel.Model;
                     order.Year = carsViewModel.Year;
                     order.Color = carsViewModel.Color;
+
                     _db.Order.Update(order);
                     _db.Cars.Update(cars);
-                    _db.SaveChanges();
-                    return Ok();
-                }
+                    var photos = _db.Photo.Where(q => q.OrderId == order.ID && order.Type == Order.CategoryType.Car).ToList();
 
+                    if (photos != null)
+                    {
+                        foreach (var item in photos)
+                        {
+                            _db.Photo.Remove(item);
+                        }
+                        //AddImage
+
+                        string wwwrootPath = _webHostEnvironment.WebRootPath;
+
+                        // wwwroot/order/cars klasörünün fiziksel yolu
+                        string orderCarsFolderPath = Path.Combine(wwwrootPath, "order", "cars");
+                        // orderId'ye özel bir klasör oluştur
+                        string orderSpecificFolderPath = Path.Combine(orderCarsFolderPath, orderId.ToString());
+
+                        // Eğer klasör yoksa oluştur
+                        if (!Directory.Exists(orderSpecificFolderPath))
+                        {
+                            Directory.CreateDirectory(orderSpecificFolderPath);
+                        }
+                        foreach (var item in carsViewModel.Photos)
+                        {
+                            // Dosya adını orderId ve benzersiz bir sıra numarasıyla oluşturun
+                            string uniqueFileName = $"{order.ID}_{Guid.NewGuid().ToString()}_{item.FileName}";
+                            string relativePath = Path.Combine("\\order\\cars\\", order.ID.ToString(), uniqueFileName);
+                            // Dosyanın tam yolu
+                            string filePath = Path.Combine(orderSpecificFolderPath, uniqueFileName);
+
+                            // Dosyayı kaydet
+                            using (var fileStream = new FileStream(filePath, FileMode.Create))
+                            {
+                                item.CopyTo(fileStream);
+                            }
+
+                            // Veritabanında bu dosyanın adını ve yolunu kaydedebilirsiniz
+                            // Örneğin: SaveToDatabase(filePath);
+                            Photo photo = new Photo()
+                            {
+
+                                OrderId = order.ID,
+                                Name = relativePath  // Dosya adı ve yolunu içeren bir dize
+                            };
+                            _db.Photo.Add(photo);
+
+                            _db.SaveChanges();
+
+                        }
+
+                        return Ok();
+
+                    }
+
+                    else
+                    {
+                        return BadRequest("Güncelleme Başarısız!");
+                    }
+
+
+
+                }
                 else
                 {
                     return BadRequest("Güncelleme Başarısız!");
                 }
-
-
             }
-            return View();
+            else
+            {
+                return BadRequest("Güncelleme Başarısız!");
+            }
+            //--EndCarOrder--
         }
-        //--EndCarOrder--
+
+
     }
-
-
 }
