@@ -24,22 +24,31 @@
   font-family: Montserrat-Bold;
   src: url('../fonts/montserrat/Montserrat-Bold.ttf'); 
 }
-
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
-
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
-
 body, html {
-	height: 100%;
+	
 	font-family: Poppins-Regular, sans-serif;
+	background-size: cover;
+	min-height: 100vh;
+	overflow: hidden;
 }
-
+.video,
+video {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
 /*---------------------------------------------*/
+
 a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
@@ -48,19 +57,16 @@ a {
 	margin: 0px;
 	transition: all 0.4s;
 	-webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	-moz-transition: all 0.4s;
 }
-
 a:focus {
 	outline: none !important;
 }
-
 a:hover {
 	text-decoration: none;
   color: #57b846;
 }
-
 /*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
@@ -157,38 +163,36 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+	width: 100%;
+	min-height: 100vh;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	padding: 15px;
+	
+	
 }
 
 .wrap-login100 {
-  width: 960px;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 177px 130px 33px 95px;
+	width: 960px;
+	backdrop-filter: blur(20px);
+	border-radius: 20px;
+	overflow: hidden;
+	border: solid 2px white;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 177px 130px 33px 95px;
+	box-shadow: 5px 5px 10px rgba(0.5, 0, 0, 1);
 }
 
 /*------------------------------------------------------------------
@@ -199,6 +203,8 @@ iframe {
 
 .login100-pic img {
   max-width: 100%;
+  margin-left:40px;
+
 }
 
 
@@ -211,7 +217,7 @@ iframe {
 .login100-form-title {
   font-family: Poppins-Bold;
   font-size: 24px;
-  color: #333333;
+  color: #fff;
   line-height: 1.2;
   text-align: center;
 
@@ -258,6 +264,7 @@ iframe {
   box-shadow: 0px 0px 0px 0px;
   color: rgba(87,184,70, 0.8);
 }
+
 
 .input100:focus + .focus-input100 {
   -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
@@ -320,6 +327,7 @@ iframe {
   flex-wrap: wrap;
   justify-content: center;
   padding-top: 20px;
+  cursor:pointer;
 }
 
 .login100-form-btn {
@@ -328,7 +336,6 @@ iframe {
   line-height: 1.5;
   color: #fff;
   text-transform: uppercase;
-
   width: 100%;
   height: 50px;
   border-radius: 25px;
@@ -341,16 +348,16 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 0 25px;
-
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
-  background: #333333;
-}
+	.login100-form-btn:hover {
+		box-shadow: 2px 2px 5px rgba(0.5, 0, 0, 1);
+		transition:0.5s;
+	}
 
 
 

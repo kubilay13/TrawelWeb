@@ -5,9 +5,15 @@
 
 <div class="limiter">
     <div class="container-login100">
+      
         <div class="wrap-login100">
+            <div class="video">
+                <video autoplay loop muted>
+                    <source src="./images/UpscaleVideo_1_20231225.mp4" type="video/mp4" />
+                </video>
+            </div>
             <div class="login100-pic js-tilt" data-tilt="" style="will-change: transform; transform: perspective(300px) rotateX(0deg) rotateY(0deg);">
-                <img src="~/images/img-01.png" alt="IMG">
+                <img src="~/images/stratton-oakmont.png" alt="IMG" width="300px">
             </div>
 
             <form class="login100-form validate-form">
@@ -22,11 +28,11 @@
                         <i class="fa fa-user-circle"></i>
                     </span>
                 </div>
-
+            
                 <div class="wrap-input100 validate-input" data-validate="">
                     <input class="input100" id="Password" type="password" name="Password" placeholder="**********">
                     <i class="fa fa-eye" id="eyeIcon" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword('Password')"></i>
-
+                   
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>
@@ -64,7 +70,11 @@
         </div>
     </div>
 </div>
+
 <script>
+
+
+
     function togglePassword(inputId) {
         var x = document.getElementById(inputId);
         var eyeIcon = document.getElementById('eyeIcon');
