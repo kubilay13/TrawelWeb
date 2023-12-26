@@ -38,6 +38,9 @@ body, html {
 	min-height: 100vh;
 	overflow: hidden;
 }
+.strattonlogo:hover {
+	box-shadow: 10px,10px,10px,10px  #000000;
+}
 .video,
 video {
 	width: 100%;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231218083831_Order-OrderType")]
-    partial class OrderOrderType
+    [Migration("20231226121540_Initialize")]
+    partial class Initialize
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,21 +58,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "516928e8-1052-4c2b-bb20-6e4776148ab9",
+                            ConcurrencyStamp = "e087c6f9-8cb1-4686-b76e-0a85984e8802",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "7163dfb8-7285-45af-a730-3bcf70107889",
+                            ConcurrencyStamp = "36ddaa80-58d4-4e86-8ba8-ef45a2db3dbd",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "6914bc51-57a5-4a39-b8f9-dac259e68dee",
+                            ConcurrencyStamp = "92ca255c-9bae-40cb-b441-f116f9ad4208",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -256,9 +256,6 @@ namespace DataAccsessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -270,7 +267,10 @@ namespace DataAccsessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderTypeId")
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.Property<int>("Year")
@@ -281,7 +281,23 @@ namespace DataAccsessLayer.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("Entity.OrderType", b =>
+            modelBuilder.Entity("Entity.OrderCategory", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "ProductId");
+
+                    b.ToTable("OrderCategory");
+                });
+
+            modelBuilder.Entity("Entity.Photo", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -293,9 +309,34 @@ namespace DataAccsessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
 
-                    b.ToTable("OrderType");
+                    b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("Entity.UserOrder", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserOrder");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
