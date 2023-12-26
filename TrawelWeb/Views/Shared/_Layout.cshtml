@@ -40,6 +40,25 @@
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto">
+                        @if (user == null)
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Login/Index/">Giriş Yap <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
+                        else if (userRole.Name == "User")
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/User/Index">Portal <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/Admin/Index">Portal <span class="sr-only">(current)</span></a>
+                            </li>
+                        }
+
                         <li class="nav-item active">
                             <a class="nav-link" href="/Home/Index/">Anasayfa <span class="sr-only">(current)</span></a>
                         </li>
@@ -49,27 +68,16 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/Order/List">İlanlarımız</a>
                         </li>
+                        @if (user != null)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="javascript:void(0);" onclick="SignOut()">
+                                    <span class="align-middle">Çıkış Yap</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
-                @if (user == null)
-                {
-                    <div class="d-lg-block d-none">
-                        <a href="/Login/Index" class="btn btn-style btn-secondary">Giriş Yap</a>
-                    </div>
-                }
-                else if (userRole.Name == "User")
-                {
-                    <div class="d-lg-block d-none">
-                        <a href="/User/Index" class="btn btn-style btn-success">Portal</a>
-                    </div>
-                }
-                else
-                {
-                    <div class="d-lg-block d-none">
-                        <a href="/Admin/Index" class="btn btn-style btn-info">Portal</a>
-                    </div>
-                }
-
                 <!-- toggle switch for light and dark theme -->
                 <div class="mobile-position">
                     <nav class="navigation">
@@ -204,6 +212,8 @@
     <!--//MENU-JS-->
     <script src="~/js/theme-change.js"></script>
     <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/loginscript.js"></script>
+
 </body>
 
 </html>

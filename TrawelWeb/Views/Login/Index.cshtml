@@ -11,7 +11,7 @@
             </video>
         </div>
         <div class="wrap-login100">
-            
+
             <div class="login100-pic js-tilt" data-tilt="" style="will-change: transform; transform: perspective(300px) rotateX(0deg) rotateY(0deg);">
                 <img src="~/images/stratton-oakmont.png" alt="IMG" width="300px">
             </div>
@@ -28,19 +28,18 @@
                         <i class="fa fa-user-circle"></i>
                     </span>
                 </div>
-            
+
                 <div class="wrap-input100 validate-input" data-validate="">
                     <input class="input100" id="Password" type="password" name="Password" placeholder="**********">
                     <i class="fa fa-eye" id="eyeIcon" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); cursor: pointer;" onclick="togglePassword('Password')"></i>
-                   
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
                 </div>
-              @*   <div class="text-left pl-3">
-                    <input type="checkbox" id=" remember_me">
-                    <label class="" style=" font-size: 12px;" for="brand1"><span></span>Beni Hatırla</label>
+                @*   <div class="text-left pl-3">
+                <input type="checkbox" id=" remember_me">
+                <label class="" style=" font-size: 12px;" for="brand1"><span></span>Beni Hatırla</label>
                 </div> *@
                 <div class="container-login100-form-btn">
                     <a class="btn btn-style btn-success" style="color:white;" onclick="SignIn()">Onayla</a>
@@ -72,9 +71,6 @@
 </div>
 
 <script>
-
-
-
     function togglePassword(inputId) {
         var x = document.getElementById(inputId);
         var eyeIcon = document.getElementById('eyeIcon');
