@@ -25,13 +25,18 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin,User,Moderator")]
+        [Authorize(Roles = "User")]
         [HttpGet]
         public  IActionResult MyProfil()
         {
             return View();
         }
-        [Authorize(Roles = "Admin,User,Moderator")]
+        [Authorize(Roles = "User")]
+        public IActionResult MyOrder()
+        {
+            return View();
+        }
+        [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<IActionResult> GetMyProfil()
         {
@@ -45,7 +50,7 @@ namespace TrawelWeb.Controllers
             appUserEditDto.Email = value.Email;
             return Ok(value);
         }
-        [Authorize(Roles = "Admin,User,Moderator")]
+        [Authorize(Roles = "User")]
         [HttpPost]
         public async Task<IActionResult> SaveProfile(AppUserEditDto appUserEditDto)
         {

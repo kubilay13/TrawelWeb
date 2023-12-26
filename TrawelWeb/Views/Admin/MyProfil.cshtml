@@ -1,0 +1,117 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col">
+                <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="#">Kullanıcı</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profilim</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3" id="FullName"></h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">İsim</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="FirstName" placeholder="İsim">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Soyisim</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="LastName" placeholder="Soyisim">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Kullanıcı Adı</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="UserName" placeholder="KullanıcıAdı">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="Email" placeholder="example@example.com">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Şifre</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="Password" placeholder="**********">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Şifre Tekrarı</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="password" class="form-control" id="ConfirmPassword" placeholder="**********">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Telefon</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="PhoneNumber" pattern="[0-9]{11}" maxlength="11" placeholder="05**">
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0">Adres</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="Adress" placeholder="Adresiniz">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a class="btn btn-success text-white float-right" onclick="SaveProfile()"><b>Kaydet</b></a>
+    </div>
+</section>
+<script src="~/js/userscript.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    $(document).ready(function () {
+        GetMyProfileAdmin();
+    });
+</script>

@@ -1,3 +1,21 @@
 ﻿@{
     Layout = "_Layout";
+    @inject ApplicationDbContext _db
+    var userManager = Context.RequestServices.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = Context.RequestServices.GetRequiredService<RoleManager<AppRole>>();
+
+    var user = await userManager.GetUserAsync(User);
+    // Kullanıcı bilgilerini al
+    if(user!= null)
+    {
+        var userRole = _db.UserRoles.Where(q => q.UserId == user.Id).FirstOrDefault();
+        var roleId = userRole?.RoleId;
+        var role = roleId != null ? await roleManager.FindByIdAsync(roleId.ToString()) : null;
+        // Bu bilgileri global bir değişkene atayarak diğer view'lerde kullanabilirsiniz
+        Context.Items["CurrentUserRole"] = role;
+        Context.Items["CurrentUser"] = user;
+    }
+
+
+
 }

@@ -2,7 +2,7 @@
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
-function GetMyProfile() {
+function GetMyProfileUser() {
     debugger
     $.ajax({
         type: "GET",
