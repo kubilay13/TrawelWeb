@@ -54,9 +54,24 @@
 *::after {
   box-sizing: border-box;
 }
+#userImage{
+    margin-top:8px;
+}
+.layout-navbar {
+    align-items:center;
+}
+.strattonHeader {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+    margin-top: 10px;
+}
+.logo {
+    margin-left: 20px;
+}
 
 :root {
-  font-size: var(--bs-root-font-size);
+    font-size: var(--bs-root-font-size);
 }
 @media (prefers-reduced-motion: no-preference) {
   :root {

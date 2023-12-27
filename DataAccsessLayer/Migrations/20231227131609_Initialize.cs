@@ -90,7 +90,8 @@ namespace DataAccsessLayer.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,9 +271,9 @@ namespace DataAccsessLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "9b63bd29-4ff0-40ff-ba1a-8cd8c92d4850", "Admin", "ADMIN" },
-                    { 2, "e8002a9a-69ec-4598-8296-24803357404c", "Moderator", "MODERATOR" },
-                    { 3, "91cac58c-31de-4b44-8b13-ad4d67a1f140", "User", "USER" }
+                    { 1, "0c7c826a-8dd5-4b00-bc76-144a69847120", "Admin", "ADMIN" },
+                    { 2, "91451b5b-e3a2-4388-84b5-be6a28edf144", "Moderator", "MODERATOR" },
+                    { 3, "6a4052dd-ab14-48c1-9cd2-2a05bb2a8d6c", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
