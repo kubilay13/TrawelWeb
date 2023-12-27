@@ -35,7 +35,9 @@ namespace TrawelWeb.Controllers
                     LastName = contactUserDto.LastName,
                     Email = contactUserDto.Email,
                     Message = contactUserDto.Message,
-                    Subject = contactUserDto.Subject
+                    Subject = contactUserDto.Subject,
+                    Status= ContactUser.Type.Failure
+                    
                 };
                 _context.Add(contact);
                 _context.SaveChanges();

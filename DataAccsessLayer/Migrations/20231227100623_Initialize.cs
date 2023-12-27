@@ -109,6 +109,7 @@ namespace DataAccsessLayer.Migrations
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModaretorId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
+                    PromoPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -269,9 +270,9 @@ namespace DataAccsessLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "e087c6f9-8cb1-4686-b76e-0a85984e8802", "Admin", "ADMIN" },
-                    { 2, "36ddaa80-58d4-4e86-8ba8-ef45a2db3dbd", "Moderator", "MODERATOR" },
-                    { 3, "92ca255c-9bae-40cb-b441-f116f9ad4208", "User", "USER" }
+                    { 1, "9b63bd29-4ff0-40ff-ba1a-8cd8c92d4850", "Admin", "ADMIN" },
+                    { 2, "e8002a9a-69ec-4598-8296-24803357404c", "Moderator", "MODERATOR" },
+                    { 3, "91cac58c-31de-4b44-8b13-ad4d67a1f140", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

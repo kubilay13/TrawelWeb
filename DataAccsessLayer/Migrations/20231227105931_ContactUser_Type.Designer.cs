@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccsessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231226121540_Initialize")]
-    partial class Initialize
+    [Migration("20231227105931_ContactUser_Type")]
+    partial class ContactUser_Type
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,21 +58,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "e087c6f9-8cb1-4686-b76e-0a85984e8802",
+                            ConcurrencyStamp = "fd00a2d4-b427-4d30-9307-3e3a9f4a874f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "36ddaa80-58d4-4e86-8ba8-ef45a2db3dbd",
+                            ConcurrencyStamp = "e620fc35-842c-4683-90a0-0cbe7989fe02",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "92ca255c-9bae-40cb-b441-f116f9ad4208",
+                            ConcurrencyStamp = "b0b6f230-ca9e-40ba-bffa-3d397efc1568",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -235,6 +235,9 @@ namespace DataAccsessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Subject")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -264,6 +267,10 @@ namespace DataAccsessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PromoPhoto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

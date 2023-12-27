@@ -406,6 +406,7 @@ namespace TrawelWeb.Controllers
                     Year = carsViewModel.Year,
                     ModaretorId = Modaretor.Id,
                     Model = carsViewModel.Model,
+                    PromoPhoto="0",
                     Status = false
                 };
                 var resultOrder = _db.Order.Add(order);
@@ -469,7 +470,11 @@ namespace TrawelWeb.Controllers
                         _db.Photo.Add(photo);
                         _db.SaveChanges();
                     }
+                    var orderx = _db.Order.Find(order.ID);
+                    var photox=_db.Photo.Where(q=>q.OrderId==orderx.ID).FirstOrDefault();
 
+                    orderx.PromoPhoto = photox.Name;
+                    _db.Order.Update(orderx);
                     var resultCarOrder = _db.Cars.Add(cars);
                     _db.SaveChanges();
                     if (resultCarOrder != null)
@@ -760,7 +765,8 @@ namespace TrawelWeb.Controllers
                            Email=ContactUser.Email,
                            Subject=ContactUser.Subject,
                            Message=ContactUser.Message,
-                       
+                           Status=ContactUser.Status,
+
                        }
 
             };
@@ -768,8 +774,52 @@ namespace TrawelWeb.Controllers
             return Json(list);
 
         }
+        public async Task<IActionResult> UpdateStatusForContactUser(int ID,int Status)
+        {
+            var Contact = _db.ContactUsers.Find(ID);
+            if (Status==0)
+            {
+                Contact.Status = Entity.ContactUser.Type.Failure;
+                _db.ContactUsers.Update(Contact);
+                _db.SaveChanges();
+                return Ok();
+            }
+            else if (Status == 1)
+            {
+                Contact.Status = Entity.ContactUser.Type.Success;
+                _db.ContactUsers.Update(Contact);
+                _db.SaveChanges();
+                return Ok();    
+            }
+
+            return View();
+        }
         //--EndContactUser--
 
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteContact(int Id)
+        {
+            if (Id != null)
+            {
+                var contact = _db.ContactUsers.Where(q=>q.ID==Id).FirstOrDefault();
+                if (contact != null)
+                {
+                    _db.ContactUsers.Remove(contact);
+                    _db.SaveChanges();
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Aradığınız bulunamadı!");
+                }
+            }
+            else
+            {
+                return BadRequest("Hata! Tekrar deneyiniz.");
+            }
 
+            return View();
+        }
     }
 }

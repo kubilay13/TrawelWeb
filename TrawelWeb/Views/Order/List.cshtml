@@ -21,15 +21,20 @@
                                 <div class="maghny-gd-1 col-3 mt-4">
                                     <div class="maghny-grid">
                                         <figure class="effect-lily border-radius">
-                                            <img class="img-fluid" src="/images/g7.jpg" alt="">
+                                            <img class="img-fluid" src="@item.PromoPhoto" style="height:300px; width:300px;" alt="">
+                                            @* <img class="img-fluid" src="/images/g7.jpg" alt=""> *@
                                             <figcaption>
                                                 <div>
                                                     <h4>@item.Brand</h4>
                                                     <p>@item.Model,@item.Color,@item.Year</p>
                                                 </div>
                                             </figcaption>
+                                        
                                         </figure>
                                     </div>
+                                        <div class="d-flex justify-content-center">
+                                            <a onclick="BuyCar(@item.ID)" class="btn btn-success mt-2" style="color:white;">Satın Al</a>
+                                        </div>
                                 </div>
                             }
                         }

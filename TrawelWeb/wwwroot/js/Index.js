@@ -1,4 +1,9 @@
-﻿function SendMessage() {
+﻿function isValidEmail(email) {
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function SendMessage() {
     debugger
     var FirstName = $('#FirstName').val();
     var LastName = $('#LastName').val();
@@ -9,6 +14,9 @@
 
 
     if (Email == "") {
+        swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
+    }
+    else if (!isValidEmail(Email)) {
         swal.fire("Hata!", "Geçerli bir Email giriniz!", "error");
     }
     else if (FirstName == "") {
@@ -41,13 +49,15 @@
                 debugger
                 swal.fire({
                     title: "Başarılı!",
-                    text: "Mesajınız yollandı",
-                    type: "success",
-                    buttonsStyling: false,
+                    text: "Güncelleme işleminiz gerçekleşti.",
+                    icon: "success",
+                    buttonsStyling: true,
                     confirmButtonText: "Tamam!",
                     confirmButtonClass: "btn btn-brand"
                 }).then(function (result) {
-                    
+                    if (result.value) {
+                        location.reload();
+                    }
                 });
             },
             error: function (request, status, error) {
