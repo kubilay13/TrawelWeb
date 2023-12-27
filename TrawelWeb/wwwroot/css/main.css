@@ -39,7 +39,8 @@ body, html {
 	overflow: hidden;
 }
 .strattonlogo:hover {
-	box-shadow: 10px,10px,10px,10px  #000000;
+	box-shadow: 10px,10px,10px,10px #000000;
+	backdrop-filter: blur(20px);
 }
 .video,
 video {
