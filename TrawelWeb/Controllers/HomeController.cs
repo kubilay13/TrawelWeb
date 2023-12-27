@@ -39,7 +39,7 @@ namespace TrawelWeb.Controllers
                 };
                 _context.Add(contact);
                 _context.SaveChanges();
-
+                return Ok();
             }
             return View();
         }

@@ -1311,3 +1311,155 @@ function UpdateCarOrder() {
         });
     }
 };
+
+
+//Start-ContactUser
+
+function GetContactUser() {
+    debugger
+    var table = $('#kt_table_ContactUserList');
+    var t = table.DataTable({
+        ajax: {
+            url: '/Admin/GetContactUser',
+            type: 'GET',
+            contentType: 'application/json; charset=utf-8',
+            dataType: "json",
+            data: {
+                pagination: {
+                    perpage: 50,
+                },
+            },
+        },
+        "pageLength": 50,
+        'stripeClasses': ['stripe1', 'stripe2'],
+        dom: `<'row'<'col-sm-3 text-left'f'><'col-sm-9 text-right'B>>
+			<'row'<'col-sm-12'tr>>
+			<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7 dataTables_pager'l>>`,
+        language: {
+            "lengthMenu": "Sayfa başına _MENU_ kayıt göster",
+            "zeroRecords": "Eşleşen kayıt bulunamadı",
+            "info": "_PAGE_ / _PAGES_",
+            "infoEmpty": "Gösterilecek kayıt yok",
+            "infoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)",
+            "search": "Ara:",
+            "paginate": {
+                "first": "İlk",
+                "previous": "Önceki",
+                "next": "Sonraki",
+                "last": "Son"
+            },
+            "sInfo": "Toplam _TOTAL_ kayıttan _START_ ile _END_ arasındaki kayıtlar gösteriliyor",
+            "sInfoEmpty": "Toplam 0 kayıt",
+            "sInfoFiltered": "(toplam _MAX_ kayıt içinden filtrelendi)"
+        },
+
+
+        columns: [
+            {
+                data: 'SN',
+                searchable: false,
+                orderable: false,
+                width: '4%',
+                className: 'dt-center ml-3',
+            },
+            {
+                data: 'FirstName',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'LastName',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'Email',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'Konu',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'Mesaj',
+                className: 'font-weight-bold ',
+            },
+            {
+                data: 'İşlemler',
+            },
+        ],
+
+        columnDefs: [
+            {
+                targets: 0,
+                render: function (data, type, full, meta) {
+                    debugger
+                    result = ``;
+                    return result;
+                }
+            },
+            {
+                targets: 1,
+                render: function (data, type, full, meta) {
+                    var result = full['firstName'];
+                    return result;
+                }
+            },
+            {
+                targets: 2,
+                render: function (data, type, full, meta) {
+                    var result = full['lastName'];
+                    return result;
+                }
+            },
+            {
+                targets: 3,
+                render: function (data, type, full, meta) {
+                    var result = full['email'];
+                    return result;
+                }
+            },
+            {
+                targets: 4,
+                render: function (data, type, full, meta) {
+                    var result = full['subject'];
+                    return result;
+                }
+            },
+            {
+                targets: 5,
+                "width": "25%",
+                render: function (data, type, full, meta) {
+                    var result = full['message'];
+                    return result;
+                }
+            },
+            {
+                targets: -1,
+                title: 'İşlemler',
+                orderable: false,
+                "width": "10%",
+                render: function (data, type, full, meta) {
+                    debugger
+                    result = `<a onclick="EditUser(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Düzenle" data-bs-target="#EditUserModal" data-bs-toggle="modal">
+                                  <span class="fas fa-pencil-alt fa-2x"></span>
+                                  </a>
+                                  <a onclick="DeleteContact(` + full['id'] + `)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm" title="Sil">
+                                  <span class="fas fa-trash-alt fa-2x"></span>
+                                   </a>`;
+                    return result;
+                }
+            },
+        ],
+        order: [[1, 'asc']],
+        responsive: true,
+        "scrollX": true,
+        orderCellsTop: true,
+        "destroy": true,
+    });
+    t.on('draw.dt', function () {
+        var PageInfo = $('#kt_table_ContactUserList').DataTable().page.info();
+        t.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+            cell.innerHTML = i + 1 + PageInfo.start;
+        });
+    });
+
+};

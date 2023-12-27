@@ -41,7 +41,7 @@
                 debugger
                 swal.fire({
                     title: "Başarılı!",
-                    text: data,
+                    text: "Mesajınız yollandı",
                     type: "success",
                     buttonsStyling: false,
                     confirmButtonText: "Tamam!",

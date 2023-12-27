@@ -12,13 +12,13 @@
         <div class="container py-md-5">
 
             <div class="ban-content-inf row">
-                <div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
+                <div class="maghny-gd-1 col-lg-12 mt-lg-0 mt-4">
                     <div class="row">
                         @if(Model!= null)
                         {
                             @foreach (var item in Model)
                             {
-                                <div class="maghny-gd-1 col-6 mt-4">
+                                <div class="maghny-gd-1 col-3 mt-4">
                                     <div class="maghny-grid">
                                         <figure class="effect-lily border-radius">
                                             <img class="img-fluid" src="/images/g7.jpg" alt="">
@@ -26,14 +26,11 @@
                                                 <div>
                                                     <h4>@item.Brand</h4>
                                                     <p>@item.Model,@item.Color,@item.Year</p>
-
                                                 </div>
-
                                             </figcaption>
                                         </figure>
                                     </div>
                                 </div>
-
                             }
                         }
                     </div>

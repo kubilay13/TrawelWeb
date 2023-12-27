@@ -738,6 +738,38 @@ namespace TrawelWeb.Controllers
             //--EndCarOrder--
         }
 
+        //--StartContactUser--
+        [Authorize(Roles = "Admin,Moderator")]
+        [HttpGet]
+        public IActionResult ContactUser()
+        {
+            return View();
+        }
+        [Authorize(Roles = "Moderator,Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetContactUser()
+        {
+            var list = new
+            {
+                data = from ContactUser in _db.ContactUsers
+                       select new
+                       {
+                           Id = ContactUser.ID,
+                           FirstName=ContactUser.FirstName,
+                           LastName=ContactUser.LastName,
+                           Email=ContactUser.Email,
+                           Subject=ContactUser.Subject,
+                           Message=ContactUser.Message,
+                       
+                       }
+
+            };
+
+            return Json(list);
+
+        }
+        //--EndContactUser--
+
 
     }
 }
