@@ -98,6 +98,67 @@ namespace DataAccsessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Brand = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Year = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModaretorId = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderCategory",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderCategory", x => new { x.OrderId, x.ProductId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Photo",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Photo", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserOrder",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserOrder", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -208,9 +269,9 @@ namespace DataAccsessLayer.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "1ab3f13e-8bc0-455c-a559-03ea504a81e9", "Admin", "ADMIN" },
-                    { 2, "c1860b39-4119-4e6f-9bcf-4d9ffd66d922", "Moderator", "MODERATOR" },
-                    { 3, "31731f95-f6e3-4b65-991e-fb127006fc6f", "User", "USER" }
+                    { 1, "e087c6f9-8cb1-4686-b76e-0a85984e8802", "Admin", "ADMIN" },
+                    { 2, "36ddaa80-58d4-4e86-8ba8-ef45a2db3dbd", "Moderator", "MODERATOR" },
+                    { 3, "92ca255c-9bae-40cb-b441-f116f9ad4208", "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -276,6 +337,18 @@ namespace DataAccsessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "ContactUsers");
+
+            migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "OrderCategory");
+
+            migrationBuilder.DropTable(
+                name: "Photo");
+
+            migrationBuilder.DropTable(
+                name: "UserOrder");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
