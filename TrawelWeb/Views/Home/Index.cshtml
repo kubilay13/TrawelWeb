@@ -1,4 +1,4 @@
-﻿@model List<Cars>
+﻿@model Tuple<List<Cars>, List<Order>>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -60,7 +60,7 @@
         <div class="row bottom-ab-grids">
             @if (Model != null)
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.Item1)
                 {
                     <!--/row-grids-->
                     <div class="col-lg-6 subject-card mt-lg-0 mt-4">

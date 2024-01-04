@@ -17,7 +17,9 @@ namespace TrawelWeb.Controllers
         public IActionResult Index()
         {
             List<Cars> carsList = _context.Cars.ToList();
-            return View(carsList);
+            List<Order> orderList = _context.Order.ToList();
+            Tuple<List<Cars>, List<Order>> combinedData = new Tuple<List<Cars>, List<Order>>(carsList, orderList);
+            return View(combinedData);
         }
         public IActionResult Contact()
         {
