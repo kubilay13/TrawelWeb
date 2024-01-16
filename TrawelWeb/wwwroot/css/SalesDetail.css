@@ -1,0 +1,71 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap");
+
+body {
+    background-color: white;
+    margin: 0;
+    top: 0;
+    font-family: "Exo 2", sans-serif;
+}
+
+img {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+span {
+    background-color: black;
+}
+
+.Line {
+    width: 800px;
+    background-color: black;
+    height: 2px;
+    margin-top: 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+#container {
+    margin-right: 100px;
+    margin-top:500px;
+}
+.CarBtn{
+    max-width:800px;
+    width:80%
+}
+.CarDetail {
+    margin-top: 10px;
+    display: flex;
+    min-width:800px;
+    width:80%;
+}
+
+.carDetailIcon {
+    margin-left: 40px;
+    max-width: 40px;
+    width:4%;
+}
+
+#carouselExampleIndicators {
+    max-width: 800px;
+    width:80%;
+}
+
+.btn {
+    margin-bottom: 120px;
+}
+
+.KiralaBtn {
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: goldenrod;
+    display: flex;
+     margin-left:50px;
+    font-size: 13px;
+    margin-right: 15px;
+    margin-top: 5px;
+    cursor: pointer;
+    border: solid 2px hsl(158, 89%, 30%);
+    justify-content: center;
+    justify-self: center;
+    font-size: small;
+}

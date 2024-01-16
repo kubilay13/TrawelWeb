@@ -24,6 +24,10 @@ namespace TrawelWeb.Controllers
         public IActionResult Contact()
         {
             return View();
+        }  
+        public IActionResult SalesDetail()
+        {
+            return View();
         }
         [HttpPost]
         public async Task<IActionResult> SendMessage(ContactUserDto contactUserDto)
