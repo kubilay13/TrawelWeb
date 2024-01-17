@@ -1,0 +1,77 @@
+﻿@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@600&display=swap");
+
+body {
+    background-color: white;
+    margin: 0;
+    top: 0;
+    font-family: "Exo 2", sans-serif;
+}
+span {
+ 
+    width: 100px;
+}
+
+.Line {
+    width: 800px;
+    background-color: black;
+    height: 2px;
+    margin-top: 10px;
+   
+}
+
+#container {
+    margin-right: 100px;
+    margin-bottom: 100px;
+}
+
+.CarBtn {
+    max-width: 800px;
+    width: 80%
+}
+
+.CarDetail {
+    margin-top: 10px;
+    display: flex;
+    min-width: 800px;
+    width: 80%;
+}
+
+.carDetailIcon {
+    margin-left: 40px;
+    max-width: 40px;
+    width: 4%;
+}
+
+#carouselExampleIndicators {
+    max-width: 800px;
+    width: 80%;
+}
+button {
+    outline:  none;
+}
+
+.btn1 {
+    margin-bottom: 120px;
+    margin-left: 20px;
+    width: 30px;
+    background-color: white;
+    border: solid 2px white;
+    border-radius: 20px;
+ 
+}
+
+.KiralaBtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left:70px;
+}
+.KiralaBtn:hover {
+    background-color: dodgerblue;
+    transition:1s;
+}
+
