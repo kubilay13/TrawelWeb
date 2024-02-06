@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrawelWeb", "TrawelWeb\Traw
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entity", "Entity\Entity.csproj", "{E936660E-CBB3-4312-AE05-5E346FA0BC9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{DF52AA16-1ED2-4A76-A816-4E150060E66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTOLayer", "DTOLayer\DTOLayer.csproj", "{DF52AA16-1ED2-4A76-A816-4E150060E66A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccsessLayer", "DataAccsessLayer\DataAccsessLayer.csproj", "{6CA0917F-5E30-4C4B-A65F-C52B83466218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccsessLayer", "DataAccsessLayer\DataAccsessLayer.csproj", "{6CA0917F-5E30-4C4B-A65F-C52B83466218}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{BDB2B58B-ECDE-49BB-BAC9-A9B4B97557F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{BDB2B58B-ECDE-49BB-BAC9-A9B4B97557F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

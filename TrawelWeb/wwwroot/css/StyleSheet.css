@@ -8,11 +8,11 @@ body {
 }
 span {
  
-    width: 100px;
+    max-width: 100px;
 }
 
 .Line {
-    width: 800px;
+    max-width: 800px;
     background-color: black;
     height: 2px;
     margin-top: 10px;
@@ -26,20 +26,20 @@ span {
 
 .CarBtn {
     max-width: 800px;
-    width: 80%
+    min-width: 80%
 }
 
 .CarDetail {
     margin-top: 10px;
     display: flex;
     min-width: 800px;
-    width: 80%;
+    max-width: 1000px;
 }
 
 .carDetailIcon {
     margin-left: 40px;
     max-width: 40px;
-    width: 4%;
+    max-width: 28px;
 }
 
 #carouselExampleIndicators {
@@ -54,7 +54,7 @@ button {
 .btn1 {
     margin-bottom: 120px;
     margin-left: 20px;
-    width: 30px;
+    min-width: 30px;
     background-color: white;
     border: solid 2px white;
     border-radius: 20px;
@@ -75,4 +75,9 @@ button {
     background-color: dodgerblue;
     transition:1s;
 }
+.btn1{
+    min-width:20px;
+}
+
+
 
