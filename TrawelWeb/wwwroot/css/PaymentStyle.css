@@ -3,12 +3,13 @@
 }
 
 body {
-    background-image: url("../images/sanalpos.png");
+   
+    background-image: url('../images/card-image/sanal-pos2.jpg');
     background-size: cover;
     background-position: center;
     align-items: center;
     justify-content: center;
-    justify-items:center;
+    justify-items: center;
     height: 100vh;
     align-items: center;
     color: white;

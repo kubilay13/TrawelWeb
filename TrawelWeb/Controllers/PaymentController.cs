@@ -7,6 +7,14 @@ namespace TrawelWeb.Controllers
         public IActionResult Index()
         {
             return View();
+        } 
+        public IActionResult Card()
+        {
+            return View();
+        }
+        public IActionResult SalesDetail()
+        {
+            return View();
         }
     }
 }
