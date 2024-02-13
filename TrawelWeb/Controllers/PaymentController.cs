@@ -16,5 +16,9 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
+        public IActionResult BTC()
+        {
+            return View();
+        }
     }
 }

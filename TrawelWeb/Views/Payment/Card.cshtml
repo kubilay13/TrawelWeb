@@ -7,28 +7,30 @@
     function resimDegistir() {
         var rakam = document.getElementById("rakam").value;
         var resim = document.getElementById("resim");
-
+        console.log(resim)
         if (rakam == "1") {
-            resim.src = "img/creditcard.png";
+            resim.src = "/images/card-image/mastercard.svg";
             resim.alt = "Resim 1";
         } else if (rakam === "2") {
-            resim.src = "img/creditcard.png";
+            resim.src = "/images/card-image/paypal.png";
             resim.alt = "Resim 2";
-        } else if (rakam === "3") {
-            resim.src = "img/creditcard.png";
+        } else if (rakam === "3") { 
+            resim.src = "/images/card-image/Troy-logo-sloganli.png";
             resim.alt = "Resim 3";
-        } else {
-            resim.src = "img/creditcard.png";
+        }
+        else {
+            resim.src = "/images/card-image/mastercard.svg";
             resim.alt = "Resim";
         }
     }
 </script>
+@* <img src="~/images/card-image/mastercard.svg" /> *@
 <div class="container">
     <div class="card-container">
         <div class="front">
             <div class="image">
                 <img src="~/images\card-image\chip.png" />
-                <img id="resim" src="~/images\Card-Image/Visa.png" alt="Resim" />
+                <img id="resim" src=""  />
             </div>
             <div class="card-number-box">Card Number</div>
             <div class="flexbox">
@@ -37,7 +39,7 @@
                 </div>
                 <div class="box">
                     <span>expires</span>
-                    <div class="expiration">
+                    <div class="expiration"> 
                         <span class="exp-month">mm</span>
                         <span class="exp-year">yy</span>
                     </div>
@@ -49,7 +51,7 @@
             <div class="box">
                 <span>cvv</span>
                 <div class="cvv-box"></div>
-                <img src="~/images\Card-Image/Visa.png"  />
+                <img id="resim" src="" />
             </div>
         </div>
     </div>
@@ -60,9 +62,8 @@
                    maxlength="16"
                    class="card-number-input"
                    id="rakam"
-                 
                    name="rakam"
-                   oninput="resimDegistir()" />
+                   onchange="resimDegistir()" />
         </div>
         <div class="inputBox">
             <span style="color: rgb(40, 102, 196)">card holder</span>

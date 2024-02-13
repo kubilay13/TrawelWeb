@@ -1,0 +1,10 @@
+﻿body{
+    background-color:burlywood;
+    margin:0;
+    padding:0;
+}
+.container{
+    border: 2px solid black;
+    max-width:1500px;
+
+}
