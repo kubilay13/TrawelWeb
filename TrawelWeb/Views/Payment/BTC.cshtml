@@ -1,8 +1,162 @@
-﻿
-<link  href="~/css/BTC.css"  rel="stylesheet"/>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<div class="container">
-    <div class="">
+﻿@{
+    Layout = null;
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+<link href="~/css/BTC.css" rel="stylesheet" />
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="SelectPaymentMethot">
+                <h1>Select Payment Methot</h1>
+                <div class="CoinSelect">
+                    <div class="inputBox">
+                        <img class="img" id="displayedImage" src="">
+                        <select id="imageSelector" class="coin-input">
+                            <option value="coin" selected disabled> Bitcoin Select</option>
+                            <option value="image1">Bitcoin</option>
+                            <option value="image2">Etherium</option>
+                            <option value="image3">Litecoin</option>
+                            <option value="image4">Tether</option>
+                        </select>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="btc" id="targetDiv1">
+                            <img src="/images/BTC/Bitcoin.svg.png" width="30"> Bitcoin
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btc" id="targetDiv2">
+                            <img src="/images/BTC/Ethereum-icon-purple.svg.png"
+                                 width="30">Etherium
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btc" id="targetDiv3"> <img src="/images/BTC/litecoin.png" width="30"> Litecoin</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="btc" id="targetDiv4"> <img src="/images/BTC/tether.png" width="30"> Tether</div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="E-mail">
+                <h2>Send notification E-mail</h2>
+                <label class="switch">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="Pay ">
+                <div class="Project">
+                    <img src="/images/BTC/basket.png" width="40">
+                    <h3>Project Name:</h3>
+                </div>
+                <div class="line"></div>
+                <div class="Project">
+                    <h3>Total</h3>
+                    <h3>50USD</h3>
+                </div>
+                <div class="line"></div>
+                <div class="paybtn-container">
+                    <button class="paybtn">Pay</button>
+                </div>
+
+
+            </div>
+        </div>
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<script>
+    document.getElementById('imageSelector').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var imageElement = document.getElementById('displayedImage');
+
+        switch (selectedValue) {
+            case 'image1':
+                imageElement.src = "/images/BTC/Bitcoin.svg.png";
+                break;
+            case 'image2':
+                imageElement.src = "/images/BTC/Ethereum-icon-purple.svg.png";
+
+                break;
+            case 'image3':
+                imageElement.src = "/images/BTC/litecoin.png";
+                break;
+            case 'image4':
+                imageElement.src = "/images/BTC/tether.png";
+                break;
+            default:
+
+                break;
+        }
+    });
+
+    document.getElementById('imageSelector').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var targetDiv1 = document.getElementById('targetDiv1');
+
+        switch (selectedValue) {
+            case 'image1':
+                targetDiv1.style.boxShadow = '0px 2px 2px 1px #7362D4';
+                targetDiv1.style.transition = '0.5s';
+                targetDiv4.style.boxShadow = 'none';
+                break;
+
+        }
+    });
+    document.getElementById('imageSelector').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var targetDiv2 = document.getElementById('targetDiv2');
+
+        switch (selectedValue) {
+            case 'image2':
+                targetDiv2.style.boxShadow = '0px 2px 2px 1px #7362D4';
+                targetDiv2.style.transition = '0.5s';
+                targetDiv1.style.boxShadow = 'none';
+                break;
+
+        }
+    });
+    document.getElementById('imageSelector').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var targetDiv3 = document.getElementById('targetDiv3');
+
+        switch (selectedValue) {
+            case 'image3':
+                targetDiv3.style.boxShadow = '0px 2px 2px 1px #7362D4';
+                targetDiv3.style.transition = '0.5s';
+                targetDiv2.style.boxShadow = 'none';
+                break;
+
+        }
+    });
+    document.getElementById('imageSelector').addEventListener('change', function () {
+        var selectedValue = this.value;
+        var targetDiv4 = document.getElementById('targetDiv4');
+
+        switch (selectedValue) {
+            case 'image4':
+                targetDiv4.style.boxShadow = '0px 2px 2px 1px #7362D4';
+                targetDiv4.style.transition = '0.5s';
+                targetDiv3.style.boxShadow = 'none';
+                break;
+
+        }
+    });
+</script>

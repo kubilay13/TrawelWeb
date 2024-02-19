@@ -11,12 +11,7 @@ span {
  
     max-width: 100px;
 }
-.CarFeatures{
-    border:1px solid black;
-    height:100px;
-    padding:22px;
 
-}
 
 
 .Line {
@@ -115,14 +110,22 @@ button {
     height: 600px;
   
 }
+.CarFeatures {
+    
+    height: 100px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .LamboBtn {
-
-    width: 180px;
+    width: 200px;
     height: 40px;
     cursor: pointer;
     color: white;
     background-color: gray;
     border: 1px solid black;
+  
 }
 .LamboBtn:hover {
  border: 1px solid white;
@@ -136,14 +139,12 @@ button {
 .ImgLogo {
     max-width: 1150px;
     margin-bottom: 400px;
- 
-    
 }
 .cardLogo {
  float:right;
  margin-right:-40px;
  max-width:170px;
-   
+ 
 }
 
 @keyframes dj {

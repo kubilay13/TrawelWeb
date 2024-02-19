@@ -1,10 +1,220 @@
-﻿body{
-    background-color:burlywood;
-    margin:0;
-    padding:0;
+﻿body {
+    background-color: #BAB6E8;
+    margin: 0;
+    padding: 0;
 }
-.container{
-    border: 2px solid black;
-    max-width:1500px;
 
+h1 {
+    color: #BAB6E8;
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-right: 20px;
+}
+
+h3 {
+    color: white;
+    padding: 5px;
+    font-size: 25px;
+    margin-right: 200px;
+}
+
+.E-mail {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+.pay {
+    padding: 20px;
+}
+
+.line {
+    margin: 5px;
+    max-width: 410px;
+    margin-left: 10px;
+    background-color: white;
+    height: 2px;
+}
+
+.CoinSelect {
+    margin-left: 50px;
+    max-width: 800px;
+    border: 2px solid #7362D4;
+    height: 160px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    height: 750px;
+    max-width: 1500px;
+    padding: 50px;
+   
+}
+
+.SelectPaymentMethot {
+    border-radius: 30px;
+    background-color: #FFFFFF;
+    padding: 20px;
+    box-shadow: 0px 2px 2px 1px black;
+}
+
+.E-mail {
+    background-color: #FFFFFF;
+    max-width: 900px;
+    height: 100px;
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: 0px 2px 2px 1px black;
+}
+
+.Pay {
+    min-width:490px;
+    min-height:300px;
+    margin-top: 60px;
+    height: 400px;
+    background-color: #7362D4;
+    border-radius: 30px;
+    box-shadow: 0px 2px 2px 1px black;
+}
+
+.img {
+    margin-right: 40px;
+    max-width: 80px;
+}
+
+.coin-input {
+    min-width: 200px;
+    height: 50px;
+    background-color: white;
+    border: 2px solid #7362D4;
+    border-radius: 10px;
+    margin-right: 100px;
+    font-size: 20px;
+    align-items: center;
+}
+
+.pay {
+    border: 1px solid white;
+    max-width: 80px;
+    height: 30px;
+}
+
+.btc-container {
+    max-width: 1200px;
+    height: 200px;
+    display: flex;
+    padding-left: 80px;
+    margin-top: 30px;
+}
+
+.btc {
+    padding: 5px;
+    max-width: 110px;
+    height: 60px;
+    border: 1px solid rgb(190, 180, 180);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+    .btc:hover {
+        border: 1px solid #7362D4;
+        transition: 0.5s;
+        box-shadow: 0px 2px 2px 1px #7362D4;
+    }
+
+.Project {
+    display: flex;
+    padding: 10px;
+}
+
+.paybtn {
+    background-color: white;
+    width: 400px;
+    height: 50px;
+    margin: 10px;
+    color: #7362D4;
+    font-size: 20px;
+    border: none;
+    border-radius: 40px;
+}
+
+    .paybtn:hover {
+        box-shadow: 0px 2px 2px 1px black;
+        transition: 0.5s;
+    }
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #BAB6E8;
+}
+
+
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+option {
+    color: #BAB6E8;
+}
+
+.row {
+    margin-top: 20px;
+    margin-left: 20px;
 }
