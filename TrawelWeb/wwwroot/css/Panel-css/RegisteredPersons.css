@@ -1,0 +1,55 @@
+﻿body {
+    margin:0;
+    padding:0;
+}
+.container{
+    border:1px solid black;
+    padding:10px;
+    display:grid;
+    align-items:center;
+
+}
+#btn-add-person {
+    border-radius: 4px;
+    background-color: #17CEC4;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 20px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+#btn-add-person span {
+ cursor: pointer;
+ display: inline-block;
+ position: relative;
+transition: 0.5s;
+}
+
+btn-add-person span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+btn-add-person:hover span {
+    padding-right: 25px;
+}
+
+ btn-add-person:hover span:after {
+  opacity: 1;
+  right: 0;
+ }
+.capture-small{
+    font-size:20px;
+}
+input{
+    height:30px;
+    
+}

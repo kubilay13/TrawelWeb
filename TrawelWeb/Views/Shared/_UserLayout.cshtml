@@ -9,7 +9,7 @@
     <title>@ViewBag.Title</title>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="~/sneat-1.0.0/assets/img/favicon/favicon.ico" />
-
+    <link href="~/css/Panel-css/UserLayout.css" rel="stylesheet" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,17 +41,17 @@
             <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
                 <div class="app-brand demo">
-                    <a href="/Admin/Index" class="app-brand-link">
+                    <a href="/Home/Index" class="app-brand-link">
                         <span class="app-brand-logo demo">
 
                             <img src="/images/stratton-oakmont.png" width="60" />
                         </span>
-                        <span class="app-brand-text demo menu-text fw-bolder ms-2" id="PanelHeader">
+                       
+                            <span class="app-brand-text demo menu-text fw-bolder ms-2" id="PanelHeader">
                              User Panel
                             <br /> 
                         </span>
                     </a>
-                            
                                 <defs>
                                     <path d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
                                           id="path-1"></path>
@@ -91,9 +91,7 @@
                         <i class="bx bx-chevron-left bx-sm align-middle"></i>
                     </a>
                 </div>
-
                 <div class="menu-inner-shadow"></div>
-
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
                     <li class="menu-item">
@@ -103,15 +101,27 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/User/MyOrder" class="menu-link">
+                        <a href="/User/MyReservation" class="menu-link">
                             <i class="fas fa-shopping-cart m-2"></i>
-                            <div data-i18n="Analytics">Siparişlerim</div>
+                            <div data-i18n="Analytics">Rezervasyonlarım</div>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="/Home/Index" class="menu-link">
-                            <i class="fas fa-arrow-left m-2"></i>
-                            <div data-i18n="Analytics">Siteye Dön</div>
+                        <a href="/User/MyRegisteredPersons" class="menu-link">
+                            <i class="fas fa-user-friends" style="font-size: 15px;"></i>
+                            <div data-i18n="Analytics">Kayıtlı Kişiler</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/User/MyLikes" class="menu-link">
+                            <i class="fas fa-heart" style=" font-size: 15px;"></i>
+                            <div data-i18n="Analytics">Beğendiklerim </div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/User/MySavedSearches" class="menu-link">
+                            <i class="fas fa-phone" style="font-size: 15px;"></i>
+                            <div data-i18n="Analytics">Kayıtlı Aramalarım </div>
                         </a>
                     </li>
                     <li class="menu-item">
@@ -120,10 +130,15 @@
                             <div data-i18n="Analytics">Çıkış Yap</div>
                         </a>
                     </li>
+                    <li class="menu-item">
+                        <a href="/Home/Index" class="menu-link">
+                            <i class="fas fa-arrow-left m-2"></i>
+                            <div data-i18n="Analytics">Siteye Dön</div>
+                        </a>
+                    </li>
                 </ul>
             </aside>
             <div class="layout-page">
-
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
                      id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -131,7 +146,6 @@
                             <i class="bx bx-menu bx-sm"></i>
                         </a>
                     </div>
-
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                         <!-- Search -->
                         <div class="navbar-nav align-items-center">
@@ -194,7 +208,6 @@
 
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-
                         @RenderBody()
                     </div>
 

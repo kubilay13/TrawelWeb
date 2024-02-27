@@ -1,0 +1,86 @@
+﻿body {
+    margin:0;
+    padding:0;
+}
+
+h4{
+    font-size:30px;
+}
+
+.p {
+    font-size: 20px;
+}
+
+.container {
+    border: 2px solid #17CEC4;
+    border-radius:10px;
+    max-width: 1500px;
+    padding:20px;
+}
+
+.search-reservation-area {
+    margin-top: 20px;
+}
+
+.search-reservation-area input, .search-reservation-area button {
+ margin-right: 10px;
+ font-size: 16px;
+ padding: 5px;
+ min-width: 400px;
+ height: 50px;
+ font-size: 16px;
+ border: none;
+}
+.togglebutton {
+    border-radius: 4px;
+    background-color: #17CEC4;
+    border: none;
+    color: #FFFFFF;
+    font-size: 10px;
+    padding: 20px;
+    width: 250px;
+    cursor: pointer;
+    
+}
+.button {
+    border-radius: 4px;
+    background-color: #17CEC4;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+ 
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.search-reservation-input:focus {
+  border:2px solid #17CEC4;
+}
+

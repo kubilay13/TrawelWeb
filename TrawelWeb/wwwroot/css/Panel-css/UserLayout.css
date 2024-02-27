@@ -1,0 +1,8 @@
+﻿body {
+    padding:0;
+    margin:0;
+}
+.Panel-logo-name{
+    border:1px solid black;
+    max-width:500px;
+}

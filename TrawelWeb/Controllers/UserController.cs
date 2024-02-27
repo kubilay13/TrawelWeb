@@ -36,6 +36,23 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
+        public IActionResult MyLikes()
+        {
+            return View();
+        }
+        public IActionResult MyReservation()
+        {
+            return View();
+        }
+        public IActionResult MySavedSearches()
+        {
+            return View();
+        }
+        public IActionResult MyRegisteredPersons()
+        {
+            return View();
+        }
+        
         [Authorize(Roles = "User")]
         [HttpGet]
         public async Task<IActionResult> GetMyProfil()
