@@ -41,10 +41,22 @@ Author URL: http://w3layouts.com
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.navbar-nav {
+    padding: 10px;
+    display: grid;
+    align-items: center;
+    min-width: 800px;
+    align-content: center;
+    justify-content: center;
+}
+#bosluk{
+    margin-left:30px;
+}
+
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {

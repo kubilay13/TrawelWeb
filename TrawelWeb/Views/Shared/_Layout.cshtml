@@ -40,10 +40,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active" id="bosluk">
+                            <a class="nav-link" href="/Home/Index/">Anasayfa <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item" id="bosluk">
+                            <a class="nav-link" href="/Home/Contact">İletişim</a>
+                        </li>
+                        <li class="nav-item" id="bosluk">
+                            <a class="nav-link" href="/Order/List" id="bosluk">İlanlarımız</a>
+                        </li>
+                       
                         @if (user == null)
                         {
-                            <li class="nav-item active">
-                                <a class="nav-link" href="/Login/Index/">Giriş Yap <span class="sr-only">(current)</span></a>
+                            <li class="nav-item active" id="bosluk">
+                                <a class="nav-link" href="/Login/Index/">Giriş Yap@* <i class="fa fa-user" aria-hidden="true"   ></i> *@ <span class="sr-only">(current)</span></a>
                             </li>
                         }
                         else if (userRole.Name == "User")
@@ -55,19 +65,9 @@
                         else
                         {
                             <li class="nav-item active">
-                                <a class="nav-link" href="/Admin/Index">Portal <span class="sr-only">(current)</span></a>
+                                <a class="nav-link" href="/Admin/Index"  id="" >Portal <span class="sr-only">(current)</span></a>
                             </li>
                         }
-
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/Home/Index/">Anasayfa <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Home/Contact">İletişim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Order/List">İlanlarımız</a>
-                        </li>
                         @if (user != null)
                         {
                             <li class="nav-item">
@@ -77,21 +77,22 @@
                             </li>
                         }
                     </ul>
+                    <div class="mobile-position">
+                        <nav class="navigation">
+                            <div class="theme-switch-wrapper">
+                                <label class="theme-switch" for="checkbox">
+                                    <input type="checkbox" id="checkbox">
+                                    <div class="mode-container">
+                                        <i class="gg-sun"></i>
+                                        <i class="gg-moon"></i>
+                                    </div>
+                                </label>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
                 <!-- toggle switch for light and dark theme -->
-                <div class="mobile-position">
-                    <nav class="navigation">
-                        <div class="theme-switch-wrapper">
-                            <label class="theme-switch" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
-                                    <i class="gg-sun"></i>
-                                    <i class="gg-moon"></i>
-                                </div>
-                            </label>
-                        </div>
-                    </nav>
-                </div>
+               
                 <!-- //toggle switch for light and dark theme -->
             </nav>
         </div>
