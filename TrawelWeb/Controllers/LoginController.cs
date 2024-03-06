@@ -107,6 +107,10 @@ namespace TrawelWeb.Controllers
         {
             return View();
         }
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
         [HttpPost]
         public async Task<IActionResult> SignUp(AppUserSignUpDto appUserSignUpDto)
         {
