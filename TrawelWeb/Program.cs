@@ -1,3 +1,5 @@
+using BusinessLayer.Abstract;
+using BusinessLayer.Services;
 using DataAccsessLayer.Concrete;
 using Entity;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -15,6 +17,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddSession();
 builder.Services.AddMvcCore();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<SessionFilter>();
 builder.Services.AddAuthentication("YourAuthenticationScheme")
         .AddCookie("YourAuthenticationScheme", options =>

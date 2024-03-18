@@ -55,21 +55,21 @@ namespace DataAccsessLayer.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "67a7c175-8b2b-4c55-a105-38655fd4fd69",
+                            ConcurrencyStamp = "65c67835-b02c-4819-954a-ad5eaec32d19",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "6bf4258c-2993-4694-9a3e-97aefa237d9f",
+                            ConcurrencyStamp = "6f981e42-dde5-45e1-8ba2-c469d63b8c94",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "3cdb02d5-b000-4fe3-abc3-888bb4cf53f6",
+                            ConcurrencyStamp = "f51d2ccf-f07b-40f3-afc1-8aa9f8c14a98",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -98,7 +98,6 @@ namespace DataAccsessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 

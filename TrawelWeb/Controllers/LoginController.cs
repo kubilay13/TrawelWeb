@@ -1,4 +1,5 @@
-﻿using DataAccsessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using DataAccsessLayer.Concrete;
 using DTOLayer.Dtos.AppUserDtos;
 using Entity;
 using MailKit.Net.Smtp;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
 using TrawelWeb.Models;
+using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
 namespace TrawelWeb.Controllers
 {
@@ -19,12 +21,14 @@ namespace TrawelWeb.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly RoleManager<AppRole> _roleManager;
         private readonly ApplicationDbContext _Context;
-        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context, RoleManager<AppRole> roleManager)
+        private readonly IEmailService _emailService;
+        public LoginController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ApplicationDbContext context, RoleManager<AppRole> roleManager, IEmailService emailService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _Context = context;
             _roleManager = roleManager;
+            _emailService = emailService;
         }
         [HttpGet]
         public IActionResult Index(LoginViewModel loginView)
@@ -193,5 +197,24 @@ namespace TrawelWeb.Controllers
             return View();
         }
 
+        public async Task<IActionResult> SendResetPassword(string Email)
+        {
+            if (Email != null)
+            {
+
+                var user =  _Context.Users.Where(q=>q.Email==Email!).FirstOrDefault();
+
+                if (user != null)
+                {
+
+                    var passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var emailBody = $"Sayın {user.FirstName} {user.LastName}, '{passwordResetToken}' kodunu kullanarak giriş yapabilirsiniz.";
+                    await _emailService.SendEmailAsync(user.Email, "Şifre Sıfırlama Kodu", emailBody);
+                    return Ok("Şifre sıfırlama bağlantısı gönderildi.");
+
+                }
+            }
+            return BadRequest();
+        }
     }
 }

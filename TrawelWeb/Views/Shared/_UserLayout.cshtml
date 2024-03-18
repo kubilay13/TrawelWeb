@@ -255,5 +255,43 @@
     <!-- Page JS -->
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+    <script>
+        function uploadProfileImage() {
+            var profileImageInput = document.getElementById('profileImageInput');
+            var profileImage = profileImageInput.files[0];
+
+            var formData = new FormData();
+            formData.append('profileImage', profileImage);
+
+            $.ajax({
+                type: "POST",
+                url: '/User/UploadProfileImage',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    // Yükleme başarılı olduğunda yapılacak işlemler
+                    swal.fire({
+                        title: "Başarılı!",
+                        text: "Profil resminiz başarıyla güncellendi.",
+                        icon: "success",
+                        buttonsStyling: true,
+                        confirmButtonText: "Tamam!",
+                        confirmButtonClass: "btn btn-brand"
+                    }).then(function (result) {
+                        if (result.value) {
+                            location.reload();
+                        }
+                    });
+                },
+                error: function (request, status, error) {
+                    swal.fire("Hata!", "Profil resmi yüklenirken bir sorun oluştu!", "error");
+                }
+            });
+        }
+    </script>
+
 </body>
 </html>

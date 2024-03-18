@@ -225,3 +225,41 @@ function SignOut() {
         }
     });
 }
+
+function SendRememberPassword() {
+    debugger    
+    var Email = $('#Email').val();
+
+    if (Email == "") {
+        swal.fire("Hata!", "Email giriniz!", "error");
+    }
+    else {
+        var formData = new FormData();
+        formData.append('Email', Email);
+        $.ajax({
+            type: "POST",
+            url: '/Login/SendResetPassword',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (data) {
+                debugger
+                swal.fire({
+                    title: "Başarılı!",
+                    text: "Mail Onaylama Başarılı",
+                    icon: "success",
+                    buttonsStyling: true,
+                    confirmButtonText: "Tamam!",
+                    confirmButtonClass: "btn btn-brand"
+                }).then(function (result) {
+                    if (result.value) {
+                       // window.location.href = "/Login/Index";
+                    }
+                });
+            },
+            error: function (request, status, error) {
+                swal.fire("Hata!", "Bir sorun ile karşılaşıldı!", "error");
+            }
+        });
+    }
+};

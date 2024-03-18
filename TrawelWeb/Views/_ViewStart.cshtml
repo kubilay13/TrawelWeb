@@ -6,7 +6,7 @@
 
     var user = await userManager.GetUserAsync(User);
     // Kullanıcı bilgilerini al
-    if(user!= null)
+    if (user != null)
     {
         var userRole = _db.UserRoles.Where(q => q.UserId == user.Id).FirstOrDefault();
         var roleId = userRole?.RoleId;

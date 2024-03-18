@@ -95,7 +95,6 @@ function SaveProfile() {
                 }).then(function (result) {
                     if (result.value) {
                         location.reload();
-
                     }
                 });
             },

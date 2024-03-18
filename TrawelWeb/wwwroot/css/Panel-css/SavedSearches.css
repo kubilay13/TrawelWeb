@@ -1,4 +1,17 @@
 ﻿body {
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
+}
+.container{
+  border:1px solid black;
+  border-radius:50px;
+  height:500px;
+  box-shadow:0px 1px 1px 0.5px black;
+  padding:20px;
+}
+.capture-big{
+    font-size:30px;
+}
+.capture-small{
+    font-size:20px;
 }

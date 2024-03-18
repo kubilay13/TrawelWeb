@@ -37,13 +37,13 @@ namespace TrawelWeb.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMyProfil()
         {
-            var value = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = await _userManager.FindByNameAsync(User.Identity!.Name!);
             AppUserEditDto appUserEditDto = new AppUserEditDto();
-            appUserEditDto.FirstName = value.FirstName;
+            appUserEditDto.FirstName = value!.FirstName;
             appUserEditDto.LastName = value.LastName;
             appUserEditDto.Adress = value.Adress;
-            appUserEditDto.PhoneNumber = value.PhoneNumber;
-            appUserEditDto.UserName = value.UserName;
+            appUserEditDto.PhoneNumber = value.PhoneNumber!;
+            appUserEditDto.UserName = value.UserName!;
             appUserEditDto.Email = value.Email;
             return Ok(value);
         }
@@ -81,7 +81,7 @@ namespace TrawelWeb.Controllers
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> GetModaretor()
+        public IActionResult GetModaretor()
         {
             var list = new
             {
@@ -107,7 +107,7 @@ namespace TrawelWeb.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
-        public async Task<IActionResult> EditModaretor(int userId)
+        public IActionResult EditModaretor(int userId)
         {
             var list = new
             {
@@ -239,7 +239,7 @@ namespace TrawelWeb.Controllers
         }
         [Authorize(Roles = "Moderator,Admin")]
         [HttpGet]
-        public async Task<IActionResult> GetUser()
+        public IActionResult GetUser()
         {
             var list = new
             {
@@ -636,7 +636,7 @@ namespace TrawelWeb.Controllers
 
         [Authorize(Roles = "Admin,Moderator")]
         [HttpPost]
-        public async Task<IActionResult> UpdateCarOrder([FromForm] CarsViewModel carsViewModel, string CarsId, string OrderId)
+        public IActionResult UpdateCarOrder([FromForm] CarsViewModel carsViewModel, string CarsId, string OrderId)
         {
 
             if (carsViewModel != null)
