@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
 using MimeKit;
+using System.Text;
 using TrawelWeb.Models;
 using static Org.BouncyCastle.Crypto.Engines.SM2Engine;
 
@@ -207,9 +209,16 @@ namespace TrawelWeb.Controllers
                 if (user != null)
                 {
 
-                    var passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
-                    var emailBody = $"Sayın {user.FirstName} {user.LastName}, '{passwordResetToken}' kodunu kullanarak giriş yapabilirsiniz.";
-                    await _emailService.SendEmailAsync(user.Email, "Şifre Sıfırlama Kodu", emailBody);
+                   var passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(passwordResetToken));
+
+                    var emailBody = $"Sayın {user.FirstName} {user.LastName}," +
+                    $"\"https://localhost:44389/api/Account/ConfirmEmail?userId={user.Id}&token={encodedToken}\" linkine tıklayarak mailinizi onaylayabilirsiniz.";
+                    await _emailService.SendEmailAsync(user.Email, "Advert Email Onay Kodu", emailBody);
+
+
+                    //var emailBody = $"Sayın {user.FirstName} {user.LastName}, '{passwordResetToken}' kodunu kullanarak giriş yapabilirsiniz.";
+                    //await _emailService.SendEmailAsync(user.Email, "Şifre Sıfırlama Kodu", emailBody);
                     return Ok("Şifre sıfırlama bağlantısı gönderildi.");
 
                 }
