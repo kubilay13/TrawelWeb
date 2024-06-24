@@ -98,11 +98,8 @@ namespace TrawelWeb.Controllers
                            Email = User.Email,
                            Adress = User.Adress
                        }
-
             };
-
             return Json(list);
-
         }
 
         [Authorize(Roles = "Admin")]
